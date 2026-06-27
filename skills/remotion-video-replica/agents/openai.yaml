@@ -1,0 +1,4 @@
+interface:
+  display_name: "Remotion Video Replica"
+  short_description: "Stepwise high-similarity video-to-Remotion recreation workflow."
+  default_prompt: "Use $remotion-video-replica to recreate this video in Remotion with step-by-step confirmation."

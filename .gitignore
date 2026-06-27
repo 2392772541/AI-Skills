@@ -1,0 +1,45 @@
+﻿# 系统文件
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 密钥、密码、环境变量
+.env
+*.env
+*.key
+*.pem
+*.p12
+*.crt
+*.sqlite
+*.db
+
+# 日志
+*.log
+
+# 临时文件
+tmp/
+temp/
+.cache/
+__pycache__/
+
+# Node / 前端依赖
+node_modules/
+dist/
+build/
+
+# 压缩包和安装包
+*.zip
+*.rar
+*.7z
+*.exe
+*.msi
+*.iso
+
+# 大型视频和工程文件
+*.mp4
+*.mov
+*.avi
+*.mkv
+*.psd
+*.aep
+*.prproj

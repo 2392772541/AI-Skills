@@ -1,0 +1,4 @@
+interface:
+  display_name: "飞书插图生成插入"
+  short_description: "Generate illustrations and insert them into Feishu docs"
+  default_prompt: "Use $lark-illustration-inserter to generate article illustrations and insert them into the right Feishu document positions."
