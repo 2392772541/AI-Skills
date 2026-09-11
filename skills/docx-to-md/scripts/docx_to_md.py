@@ -187,7 +187,7 @@ def docx_to_markdown(input_path: str, output_path: str = None) -> str:
 
             # 检查是否是图片段落
             pics = element.findall(f'.//{qn("w:drawing")}') or \
-                   element.findall(f'.//{qn("v:imagedata")}')
+                   element.findall('.//{urn:schemas-microsoft-com:vml}imagedata')
             if pics:
                 lines.append("[图片]")
                 last_was_empty = False

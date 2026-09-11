@@ -1,0 +1,314 @@
+{
+  "name": "讲解增强-20卡展示",
+  "width": 960,
+  "height": 540,
+  "fps": 30,
+  "tracks": [
+    {
+      "id": "explain-kit",
+      "name": "讲解增强",
+      "clips": [
+        {
+          "id": "kit-0",
+          "cardId": "kit-bullet",
+          "start": 0,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-1",
+          "cardId": "kit-decision",
+          "start": 180,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-2",
+          "cardId": "kit-donut",
+          "start": 360,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-3",
+          "cardId": "kit-evidence",
+          "start": 540,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-4",
+          "cardId": "kit-feedback",
+          "start": 720,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-5",
+          "cardId": "kit-flow-split",
+          "start": 900,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-6",
+          "cardId": "kit-funnel",
+          "start": 1080,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-7",
+          "cardId": "kit-gantt",
+          "start": 1260,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-8",
+          "cardId": "kit-heatmap",
+          "start": 1440,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-9",
+          "cardId": "kit-hierarchy",
+          "start": 1620,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-10",
+          "cardId": "kit-histogram",
+          "start": 1800,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-11",
+          "cardId": "kit-interval",
+          "start": 1980,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-12",
+          "cardId": "kit-layers",
+          "start": 2160,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-13",
+          "cardId": "kit-object-continuity",
+          "start": 2340,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-14",
+          "cardId": "kit-pareto",
+          "start": 2520,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-15",
+          "cardId": "kit-quadrant",
+          "start": 2700,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-16",
+          "cardId": "kit-rank",
+          "start": 2880,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-17",
+          "cardId": "kit-slope",
+          "start": 3060,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-18",
+          "cardId": "kit-venn",
+          "start": 3240,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        },
+        {
+          "id": "kit-19",
+          "cardId": "kit-waterfall",
+          "start": 3420,
+          "duration": 180,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {
+            "pace": 1.5
+          }
+        }
+      ]
+    }
+  ]
+}

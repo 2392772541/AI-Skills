@@ -1,0 +1,4 @@
+interface:
+  display_name: "视频课程转 Obsidian 笔记"
+  short_description: "抽帧、转写、OCR并生成含截图和避坑指南的课程笔记"
+  default_prompt: "Use $build-video-course-notes to turn my uploaded course videos into a verified Obsidian learning guide with screenshots."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Remotion Video Builder"
+  short_description: "Build and refine Remotion videos, animations, and renders"
+  default_prompt: "Create or improve a Remotion composition and render a preview or video."

@@ -1,0 +1,44 @@
+﻿{
+  "policyVersion": 1,
+  "allowed": [
+    "TitleScene",
+    "LowerThird",
+    "TextOverlay",
+    "Counter",
+    "BarChart",
+    "HorizontalBarChart",
+    "LineChart",
+    "DonutChart",
+    "BrowserFrame",
+    "DeviceFrame",
+    "SplitScreen",
+    "PiP",
+    "OverTheShoulder",
+    "Container",
+    "ImageContent",
+    "LayoutEntrance"
+  ],
+  "reviewRequired": [
+    "TypewriterText",
+    "GlitchText",
+    "BlurText",
+    "FlipWords"
+  ],
+  "disabled": [
+    "WavyText",
+    "FuzzyText",
+    "DecryptedText",
+    "PixelTransition",
+    "SlotMachine",
+    "VHSGlitch",
+    "RGBSplit"
+  ],
+  "hardRules": {
+    "maxObviousAnimationsPerMinute": 8,
+    "maxSimultaneousComponents": 3,
+    "captionsAppliedLast": true,
+    "forbidRandomFonts": true,
+    "forbidRandomColors": true,
+    "forbidUnapprovedComponents": true
+  }
+}

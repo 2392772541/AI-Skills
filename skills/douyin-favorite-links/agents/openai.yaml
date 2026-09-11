@@ -1,0 +1,4 @@
+interface:
+  display_name: "抖音收藏视频链接"
+  short_description: "从飞书云文档提取抖音视频与图文链接并批量加入指定收藏夹"
+  default_prompt: "Use $douyin-favorite-links to extract Douyin video/note links from the supplied Feishu document and add missing items to the requested Douyin favorite folder with two-round verification."

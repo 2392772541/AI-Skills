@@ -10,7 +10,7 @@ description: "This skill routes tasks to the correct Agent Skills. For visual re
 
 ## 📥 输入任务识别与分类规则
 
-当面临以下用户的 16 大工作场景之一时，必须优先启动本 Router 按照**固定格式**进行决策响应：
+当面临以下用户的 17 大工作场景之一时，必须优先启动本 Router 按照**固定格式**进行决策响应：
 
 1. **Remotion 动画制作** -> 关联：`remotion-video`, `remotion-best-practices`, `remotion-bits`
 2. **Remotion 页面/视觉复刻** -> 关联：`remotion-video-replica`, `remotion-video`, `remotion-best-practices`, `remotion-bits`, `gsap-core` / `gsap-react`
@@ -28,6 +28,7 @@ description: "This skill routes tasks to the correct Agent Skills. For visual re
 14. **技能安装、技能检索、技能创建** -> 关联：`find-skills`, `skill-installer`, `skill-creator`
 15. **代码审查、安全审查、PR 拆分** -> 关联：`review-bugbot`, `review-security`, `split-to-prs`
 16. **子 Agent 创建和工作流拆解** -> 关联：`create-subagent`, `create-skill`
+17. **深度研究 / 系统性调研 / 竞品分析** -> 关联：`hv-analysis` + `agent-reach`
 
 ---
 
@@ -130,3 +131,8 @@ Remotion 视觉复刻 / 静态图转动态视频
 
 ### 【是否需要新建 Skill】
 否
+
+
+## Generated capability catalog
+
+Before routing broad or ambiguous tasks, consult `references/generated-catalog.md`, which is generated from the local Skill registry. For requests to find, evaluate, create, upgrade, merge, import, or govern Skills, route first to `skill-product-manager` rather than directly creating or installing a Skill.

@@ -1,0 +1,8 @@
+interface:
+  display_name: "音频素材库整理"
+  short_description: "批量识别歌曲、完善情绪用途标签并自动生成可播放的本地筛选器"
+  default_prompt: "Use $audio-library-organizer to identify, tag, organize, and verify the new audio files in this media library."
+
+policy:
+  allow_implicit_invocation: true
+

@@ -1,0 +1,6 @@
+interface:
+  display_name: "转录文档学习系统"
+  short_description: "将中文培训转录稿整理为可复习的 Obsidian 学习系统"
+  default_prompt: "使用 $transcript-learning-system 将这份中文转录稿整理成系统学习笔记，并生成自测题与闪卡。"
+policy:
+  allow_implicit_invocation: true

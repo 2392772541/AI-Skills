@@ -1,0 +1,4 @@
+interface:
+  display_name: "技能管家"
+  short_description: "帮你查找、评估、组合、创建和升级本机 Skills"
+  default_prompt: "技能管家，先检查本机已有能力，再决定复用、组合、升级、引入或新建。"

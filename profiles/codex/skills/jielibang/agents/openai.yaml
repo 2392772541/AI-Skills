@@ -1,0 +1,4 @@
+interface:
+  display_name: "接力棒"
+  short_description: "自动保存任务进度，并在会话中断后从本地检查点恢复继续工作"
+  default_prompt: "接力棒，读取当前工作区最近的任务进度，核对真实文件后继续执行。"

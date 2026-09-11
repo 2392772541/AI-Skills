@@ -1,0 +1,475 @@
+{
+  "00-skill-router": [
+    "83a3f9a8e433181204d62a3ffaf88c0b4476d368901b3d39b0459aa99e82c1bd"
+  ],
+  "agent-reach": [
+    "fdbe79b006a23bde0ce7b3f34f518ee52003b4f951495a3dacff6e3b579d5414",
+    "2317c67729875671fe14ef33da5fb8e5a25c74ce91e6b0c96d402ce2e7234ec7"
+  ],
+  "automate": [
+    "0a0aadc25417c7cd16fc968a31f04011509b1d3946c29a09887f39a5f194c9e7"
+  ],
+  "babysit": [
+    "b46766ed302c34e7b2b52a03b5df706ec6fcaffeed4df2e68b7607939a79d602"
+  ],
+  "bggg-creator-image2psd": [
+    "dbcac3129942b9f92086a7e19c6f2ec825b9c28944402cd041e901d824028992",
+    "dbcac3129942b9f92086a7e19c6f2ec825b9c28944402cd041e901d824028992"
+  ],
+  "bilibili-upload": [
+    "0a864a6b0358393483b3f336816b198fad4f93ef01687a2fc9d8a4eb11a6aeb6"
+  ],
+  "canvas": [
+    "85d0dfeafa70a870d92608252bb18dc47ad74d341e1f95a7cf28cfa0e1ef1a49"
+  ],
+  "codex-ppt": [
+    "8b49b9fa83e1ad524b56eaf7f705bba1c7e62dde6ba9a329d9e55b7441da850f",
+    "8b49b9fa83e1ad524b56eaf7f705bba1c7e62dde6ba9a329d9e55b7441da850f"
+  ],
+  "codex-theme-installer": [
+    "f074146ecae06bfb8730393b46bc584e3357a257d25be62f42da8dc0e670df1f"
+  ],
+  "codex-theme-switcher": [
+    "34f34008edc0d2f2327280d9889e4f36dc9183a0288e821fb7af01cf0bae172a"
+  ],
+  "create-hook": [
+    "28bfa0c6cd13fa0167c72512fca0da2c6fc24b6eea67c5307bf1ef2bedca61a6"
+  ],
+  "create-rule": [
+    "fe8499dfe93edbf8306df70498a7ea3572e0c8b340607137cbc836051520263c"
+  ],
+  "create-skill": [
+    "f3df382ea9cf2119ee8f121143b2ec0cacbd8bbc6dc3a15fd981ea547cef42f8"
+  ],
+  "create-subagent": [
+    "ab46a80f90cb3810c3182a55b975b13bcf72e00e7fa907cf49fb3a30a02a3922"
+  ],
+  "defuddle": [
+    "cb702b754dd340ad7c7db4f34e1953277eb64601201ce96515b00786a1088a26",
+    "cb702b754dd340ad7c7db4f34e1953277eb64601201ce96515b00786a1088a26",
+    "dd54e6aeb863b99a57e0f5603b8a92ca8fbf70cff35b000d9ddc44faab5a0e37"
+  ],
+  "diagram-design": [
+    "9b2cc3fb58d69d0518e86a728439d27622dd156472b3529fa31661faa06e050f"
+  ],
+  "docx-to-md": [
+    "c4ea09a7fcb1b1ae1c96810f9f442b37ea756fa2cda72906864b74e483fdfca2"
+  ],
+  "douyin-favorite-links": [
+    "7ee94c60977e120cab1490768bf45fc18e6ec6058823e7a204937624c035ca83"
+  ],
+  "douyin-upload": [
+    "bc6ef39946302bfcecb5824adaa7103a7a7165bfb778a3c4c1a16a69a6a10574"
+  ],
+  "find-skills": [
+    "1e85f6f9686e145aca4a124e3b704b9bbea9aa87e08515c1e352eee70f6e6e7a"
+  ],
+  "gsap-core": [
+    "3887b47e050ab5afbe2a9a820f23d39fa02ab785e06a343be44c6f91d84d12b3"
+  ],
+  "gsap-performance": [
+    "cb5408d6fba707aabcbfe3320317a14c1f8fca6070074e5261047930f50d441e"
+  ],
+  "gsap-react": [
+    "88e2a5312b45e8cc7b3c496637ff5bc9af2ae9c925b555c8b235b34cbc989d74"
+  ],
+  "gsap-scrolltrigger": [
+    "9351b6666a4749c0740406ea363aaccb99a087ff45cc5e8b99a0f367facf3ef4"
+  ],
+  "gsap-timeline": [
+    "1a8b0f39cc4be3ed3d834b89672e4ae2f151b901dc3450bebf10bbc45379fe02"
+  ],
+  "guizang-ppt-skill": [
+    "f92c0d497b6315eb3c8a7998855e024852c8f57bfaa44610cf88f6524c42b4ed",
+    "f92c0d497b6315eb3c8a7998855e024852c8f57bfaa44610cf88f6524c42b4ed"
+  ],
+  "hv-analysis": [
+    "1d12398f5c069be1ba62697ce60baf2bf3d48bf443e0c8f172400ee88fafcc40"
+  ],
+  "hyperframes": [
+    "bc2d51fb408a9867e7fd06c7016282f78e85c89204c77938cc2f89e099a0a817",
+    "bc2d51fb408a9867e7fd06c7016282f78e85c89204c77938cc2f89e099a0a817"
+  ],
+  "hyperframes-animation": [
+    "69a9903796e65c66edbe9ec9621eca8953c7cc2a93a718687306891daf0463d4",
+    "69a9903796e65c66edbe9ec9621eca8953c7cc2a93a718687306891daf0463d4"
+  ],
+  "hyperframes-cli": [
+    "08b9e0f3b37bad52b353b8256ffb34a33e8ec01fbc2e042fa6b48e67b6b29340",
+    "08b9e0f3b37bad52b353b8256ffb34a33e8ec01fbc2e042fa6b48e67b6b29340"
+  ],
+  "hyperframes-core": [
+    "4b710ea43ded213525c1101bb39116898085ec8031f1d28a2a1e0ea39aa54d68",
+    "4b710ea43ded213525c1101bb39116898085ec8031f1d28a2a1e0ea39aa54d68"
+  ],
+  "hyperframes-creative": [
+    "c6023035afc137ac5261a9b6d9fd2917278fae13c19666c67f5d30d84253b295",
+    "c6023035afc137ac5261a9b6d9fd2917278fae13c19666c67f5d30d84253b295"
+  ],
+  "hyperframes-keyframes": [
+    "4577193cca207a6812904953d278af739255a7a88d44c214ffe5aa6f0d896bff",
+    "4577193cca207a6812904953d278af739255a7a88d44c214ffe5aa6f0d896bff"
+  ],
+  "hyperframes-registry": [
+    "ef608419290432f54d5f447c68bebee2b0ed4c77af2c91ed211321e81cb7401e",
+    "ef608419290432f54d5f447c68bebee2b0ed4c77af2c91ed211321e81cb7401e"
+  ],
+  "ian-xiaohei-illustrations": [
+    "54ff046da98d9a0a4a3b6c3ddf5b9fb3c832bdee41baa97abeac0cc9c402d60b",
+    "c2080f5a13e8ed9f048d68584173709e96db19c22140d24427bc4d1f627d30c3"
+  ],
+  "imagegen": [
+    "613f892ba9259cbfcb44ee74e81587cc7ce288de86ae2f1eab5eacb190e34f58"
+  ],
+  "json-canvas": [
+    "97d1ae0728955c4203922753d5656890e5e4dd371b8306ea11884f9b510f1b85",
+    "97d1ae0728955c4203922753d5656890e5e4dd371b8306ea11884f9b510f1b85",
+    "788535277bc5f460bec97d467615a2ce97e2957dad1b1fc961e645f64c827128"
+  ],
+  "khazix-writer": [
+    "8683276199a350ddb5195a9a2a00704a4ef10c0cc8de9b9fab43d328ade41d7a",
+    "081bfbf5bc0f0c9a2c5a6410eaaa9de18a0cc50f932a1195f45df04e30018602"
+  ],
+  "kuaishou-upload": [
+    "4e33658ea4e642e6265885613ee585a85e7a086e8a2156aa08b3284b50af1fa3"
+  ],
+  "lark-approval": [
+    "fee377eca410dcda36b0bbbd632aab085b2e26e8232bb2ff88d394a1571d5ae2"
+  ],
+  "lark-apps": [
+    "4bd8d41467b40f1aa1d0e115a36d9c7115d5bb79d31e0809f0f1b48ec85e4bd9"
+  ],
+  "lark-attendance": [
+    "a0ea5f3fa176496dda31d912f7e55ad7cfed5243b30567d16e7f9dc96eebbe8b"
+  ],
+  "lark-base": [
+    "09b7fc7bc4d3feb6d6101205f8d0425e3c740c7f56b7a8fe41c86e8530838c96"
+  ],
+  "lark-calendar": [
+    "355b07f024fb3f31fb07fadb8ab14b2eb1e7a62725e1139277aa420084c7d513"
+  ],
+  "lark-contact": [
+    "3f8cd36b6dfddfc4974ec3f796b4163d6511aafabd46f7eeacb2798c647f8f06"
+  ],
+  "lark-doc": [
+    "249110f21116d2e1eb09cc1b9b266889f290be57944975236254945dada65c0c"
+  ],
+  "lark-drive": [
+    "8869ae2de23150bef3d4d763cee7b1dff5ae0140e544a59b515b4f24810222be"
+  ],
+  "lark-event": [
+    "37a53e919b24d494624a519c7d34b40f2fd6613d080ada8cc90bf59fd3442aea"
+  ],
+  "lark-illustration-inserter": [
+    "fc805c17ae2d15a362bdb9b2d9930a5614c8faec5335855185f0815b0f163a3c",
+    "fc805c17ae2d15a362bdb9b2d9930a5614c8faec5335855185f0815b0f163a3c"
+  ],
+  "lark-im": [
+    "44ff428da51d3e0e8417f897db6beea4368623d0c37f0b104e12c730f3cca762"
+  ],
+  "lark-mail": [
+    "bee1da98483c1dfc1d6dc3b5a4ac6403279dad6f6a8bde77f7fdb5b1f4725d38"
+  ],
+  "lark-markdown": [
+    "50024d5e506a95f122fb818011b7624c1948342ea8617089a102fcd72bab0a1b"
+  ],
+  "lark-minutes": [
+    "00d8955b0e5326bf1d7c5c2149ecc8a8b73bed7c9609797a9e8576aeb024e535"
+  ],
+  "lark-note": [
+    "51ce47948e5ea9361dd0ecc6633519b01dfa8ae86729874217d08a0b0831df48"
+  ],
+  "lark-okr": [
+    "072c5d3133c8869cedd1380995bc3c8b8ae20974191409a85100d86ee220dd09"
+  ],
+  "lark-openapi-explorer": [
+    "ae89debc3f807f9947831b4525e1c118bc14544877c14c14aaa47298b1e863b4"
+  ],
+  "lark-shared": [
+    "036e6fe4f45ee16dfd9271d4f4bfcaa97069de1e96a8e19a28b0bb9f45193296"
+  ],
+  "lark-sheets": [
+    "8c470db8e85b38ff81de56255f878f63ba4822bc892ba3355386435eca41e2fa"
+  ],
+  "lark-skill-maker": [
+    "8591158289a3cb003c7ac18001ce6b42837c780d2567492cea87bf98982b3678"
+  ],
+  "lark-slides": [
+    "e3fbe82fd389931bf50b2a8d2156650ddddabfaac0c5948f39f3ddd096930919"
+  ],
+  "lark-task": [
+    "d25f0a89674748d08363e2baf0aa6ef654a63745befc44ce6986a20718a2e4e1"
+  ],
+  "lark-vc": [
+    "07663b7ba87a5ab97e6b23f453ceb619b4de365720998d143fabe9b57c0ecb76"
+  ],
+  "lark-vc-agent": [
+    "1d6d57b68e23e965d7f7b6510414dce04d5dcaa6efcf51e9a80db3f6bf27f973"
+  ],
+  "lark-whiteboard": [
+    "155baac37e4b3d865e7ed91e42b1ed72914a6e8d8f35bf00ae48714903396400"
+  ],
+  "lark-wiki": [
+    "b399ba7c566021bec853285c60df1ace7037cc91b9d48f81ec0ea22d0533d2be"
+  ],
+  "lark-workflow-meeting-summary": [
+    "ad3db979a2e6d8932ab33058967e1dab82090f8d8d82b16c59ee2955eb967d61"
+  ],
+  "lark-workflow-standup-report": [
+    "a283de746e65f97d7d25c3b9e351c2e5c16702be81c0f004d5be718c50994690"
+  ],
+  "loop": [
+    "e04f220748ab4aa7cfc8d905185b6f009ab92c04936bd6dd06aadb013443cc27"
+  ],
+  "media-use": [
+    "1301ea7cb53a0a44f5c7d62c34cba7e00b9e69b31bed57dc8d645417cea0da7c",
+    "1301ea7cb53a0a44f5c7d62c34cba7e00b9e69b31bed57dc8d645417cea0da7c"
+  ],
+  "migrate-to-skills": [
+    "78c0483cc96ea3dc833f344ed928d425aff0c64cfcb02759fe5efe4a913a5b6b"
+  ],
+  "mrcarlsama-social-transcriber": [
+    "c3facbdfdef31fc226aa088c506f9e09ca4c04ade033e6caccbb4a33a48657e6",
+    "c3facbdfdef31fc226aa088c506f9e09ca4c04ade033e6caccbb4a33a48657e6"
+  ],
+  "obsidian-bases": [
+    "1785f37a2b00d900d259ed57faac6a3f9c589f9fb40ec5ccdeba83daa850452c",
+    "1785f37a2b00d900d259ed57faac6a3f9c589f9fb40ec5ccdeba83daa850452c",
+    "6a579ea3baaafd27256d347090a9cc0d81809832d629622006238d4889a8ebe7"
+  ],
+  "obsidian-cli": [
+    "b54257cdc0e5d04488b35b0c797bfe427b24359f0848d3c73924dcacf8da6358",
+    "b54257cdc0e5d04488b35b0c797bfe427b24359f0848d3c73924dcacf8da6358",
+    "b4d398c64e086d84cfd51bed896b9bdc243a5fd8a9ea2815a261cd9cb4da3155"
+  ],
+  "obsidian-markdown": [
+    "7ad72e1f0a9081ed325e76b6402ad5de50a00e63e2341fd403a92f147234a007",
+    "7ad72e1f0a9081ed325e76b6402ad5de50a00e63e2341fd403a92f147234a007",
+    "ef409b7eeda59e2e0c5cdead334dcc997dc9459d689859b3a610ffa9af5cabc5"
+  ],
+  "openai-docs": [
+    "23edb0ee401944da55c6d57a88e4ae00c77e2ff3e3f79ac31c2741234a858b59"
+  ],
+  "plugin-creator": [
+    "40354d99ca66f16a8bd92b0e6b315b4cd773ebcb8a6348a70398a4b787b86213"
+  ],
+  "quarkclouddrive": [
+    "a0e044d33b824c505709837d5dadff12bdf72508bed6c78f00ca334d76148cde"
+  ],
+  "remotion": [
+    "7147fc5a627081fceb7b6ab6191426643747e738bb857587de1d3c1b6eecd755",
+    "7147fc5a627081fceb7b6ab6191426643747e738bb857587de1d3c1b6eecd755"
+  ],
+  "remotion-best-practices": [
+    "2461d2bcaf838175d5f54167b6a894a294a5c3541cadaed53fd77e07554513ba"
+  ],
+  "remotion-bits": [
+    "741bb134ccb8f990b476836b58288f71e7978936fcb85d029da6350f4bc81915",
+    "741bb134ccb8f990b476836b58288f71e7978936fcb85d029da6350f4bc81915"
+  ],
+  "remotion-to-hyperframes": [
+    "dc0a7aaab6a90514c741a98afa93f6eda254162074793d4b5045f256de47f9f2",
+    "dc0a7aaab6a90514c741a98afa93f6eda254162074793d4b5045f256de47f9f2"
+  ],
+  "remotion-video": [
+    "aa9599ef02a34361e65660f4c15f8bf0b288edbd45ed0a242b54ea53da2c32ed"
+  ],
+  "remotion-video-builder": [
+    "d6ab37226b858d774ccf1897420294bc0e20983fb13b49c9e99b71b043d7b609",
+    "d6ab37226b858d774ccf1897420294bc0e20983fb13b49c9e99b71b043d7b609"
+  ],
+  "remotion-video-replica": [
+    "9c3fef0b3628191fd3b2c03c19b084f5db092102904aad8bd448f9cf25f100b2",
+    "9c3fef0b3628191fd3b2c03c19b084f5db092102904aad8bd448f9cf25f100b2"
+  ],
+  "review": [
+    "bd00601823f73cce6a20acc3996e7d2ea3c2a366143da12eafd0d94b98d88ece"
+  ],
+  "review-bugbot": [
+    "9f97dcdbab60fe6fb52a889535b464cd234d069b7906cd5bb7a309bb407d9294"
+  ],
+  "review-security": [
+    "482fe80be0f69eb6e84b79d9c41567d9ab694a1473cd3eb9de75335321c94f60"
+  ],
+  "sdk": [
+    "0db41158a6b4fd16983ee178649204e98c2f57d182cdec30941a22d866e27435"
+  ],
+  "shell": [
+    "b354ce28c70af1d5c05bb6bf070a1823fadd470530993ab271a1cfcbe57ad4fe"
+  ],
+  "shuorenhua": [
+    "c638a408cbda0bfbb63bc2c41843232b996ac77fe916a1f2f2a4284f2e8ca146"
+  ],
+  "skill-creator": [
+    "2940e08d49e5197453e58a4387d14cb07101b97911c992ef75c8289e0a1734c0"
+  ],
+  "skill-installer": [
+    "2d3be2289274cbffb9eb632b25a1038aa7f369df6aaa0964077c77648547e01d"
+  ],
+  "skill-product-manager": [
+    "bcec52b4b3666ceaba57134522f7ec92a0c4fc43a04786ecb062df2b82b9b880"
+  ],
+  "split-to-prs": [
+    "61e3b94b54457e0f8a850cccf64936a0f5a686f6ad22016d17d30958d2f2b328"
+  ],
+  "statusline": [
+    "9ce07cefc16faf737ad58fb8f09ac6d34ff457382daf90ff6a06d402f4688d73"
+  ],
+  "talking-head-production": [
+    "88cfe93f6e15f6af2ad4bab1bb3223190841a58f8e68320be3c1c4dffc94207f"
+  ],
+  "talking-head-recut": [
+    "ec91591f991fdb6f6ffcfbc4b8fa9756c9700197e0e03a14047bdc99d7972241",
+    "ec91591f991fdb6f6ffcfbc4b8fa9756c9700197e0e03a14047bdc99d7972241"
+  ],
+  "update-cli-config": [
+    "a5cf57527b424e0263c251ae56542f257650602db2312c2f33621f0687a3087b"
+  ],
+  "update-cursor-settings": [
+    "8b5ee1a74dc964f5c240a18e0b7402051e0d1f688e7db3037048207213a0e78d"
+  ],
+  "video-doc-weekly-orchestrator": [
+    "d402415b052dd49d253ae4e5ed15ace084b5635b48ae9525cedffe548c3b1200"
+  ],
+  "xiaohongshu-upload": [
+    "c6ceab6e9be651338842f956e369f5d3ddfce7057765a99b4129c6ef67310a78"
+  ],
+  "article-to-knowledge-map": [
+    "a544d0b857dc9955697cba823441a915d5ac830503435183c1985c0091b804ad"
+  ],
+  "animation": [
+    "a6afdc663d17368b124204092b6885498047b53a7ca0a96ddba70e4b0288ffa7"
+  ],
+  "blender-assembly": [
+    "43d474a62ff9d0397b1956b454180adb75ae4ddb86f3bdd95bf593360a98a122"
+  ],
+  "blender-director": [
+    "46a0c1cf5020dc46dc073691ca85a40e86af8aafc7e51057b2a965c068a05fe2"
+  ],
+  "camera-cinematography": [
+    "7d743ca9732942c95e545a82a204d9a4dff9312bb1ced8698911382dcb364dd8"
+  ],
+  "compositing": [
+    "20a0e8ecea5e57a3af0b43bbc288b217744f994931a2779e7977794f25bbccf3"
+  ],
+  "geometry-nodes": [
+    "713b224ee6e218af53d2727f698e61272d01b3038778f2cc2c9f1aa24c1f2c76"
+  ],
+  "lighting": [
+    "31963d3326c704a34be1ecdae8564f2e9b32e0b999573be362c11806f5601d93"
+  ],
+  "materials": [
+    "3f9d37fe0585c64bbd123f4e45fff7807909d28237a29917afa0de4eaff005dd"
+  ],
+  "qa-review": [
+    "8ad6cafc2accb4b39d81954c5fedfa5d7f1136523f0ca0de9c729644a29482ca"
+  ],
+  "rendering": [
+    "a7fe5f15bd1274adcb9d4cc93142f47aa8bf6a81cc6d25b48e3e4ecb264ace71"
+  ],
+  "scene-assembly": [
+    "cd005adc8424c8dae7688a39647af7c880276ee0747d8287bad7d1b94d6a2723"
+  ],
+  "build-video-course-notes": [
+    "28a4a2be470e9d2733bd6578a91c770ab169f30f77465a38be569ef1e7f162b2"
+  ],
+  "code-review": [
+    "6a65cc61114f96db07ec41e3920e67c9c5bf70dd6e0901eb9460ebcb2bdc209f"
+  ],
+  "commerce-material-archive": [
+    "70067d000865f920aba85f46247e22e9c8163213e4d6a7db343097588dcc7bdf"
+  ],
+  "diagnosing-bugs": [
+    "7a0779480f323a66d109404646bcc1a14bf0232b45b3e3ea93b652a035718acb"
+  ],
+  "domain-modeling": [
+    "152e2c97239affb12a60c5f4a7e74ab546a49ae169688c81f4e2ccc42dafa579"
+  ],
+  "ecom-details-image": [
+    "dc45342a9548b0e7dcaada17ef6544dca7e07e9b0ddb8d59495ff34183505f48"
+  ],
+  "ecommerce-visual-copywriting": [
+    "eba6b45b67afb069cce85e723b4cdf94ae93daa2557c38817e59fd24693d20ab"
+  ],
+  "excalidraw-diagram": [
+    "f737a9720455fddca9532fbaeb148e49e2746fd37250fa4cf54aa48a807ce1a5"
+  ],
+  "figma-code-connect": [
+    "206d6db8304704019ee64e23128428af8f8815e2a114a99087ec2a300c194e9f"
+  ],
+  "figma-create-new-file": [
+    "82e0a018692d3d009b5d2c83ecce9203a4ce7dfbdb98b7b13a4f7e5b11832bc2"
+  ],
+  "figma-generate-design": [
+    "2915993a955d4684ea3ae3ce98af4e673134870f2b412e661d9114387980fa42"
+  ],
+  "figma-generate-diagram": [
+    "7297638dbf2130d1b37bfd85df65d290a4dd0b11a11b54abafcf7d07565922b5"
+  ],
+  "figma-generate-library": [
+    "38d9381d4fb089233eec0a9af829a6444fbe7c8413cfcfbb89d1992a5f08b7fc"
+  ],
+  "figma-implement-motion": [
+    "115e37a86d0528cc7674b9f94efa9e87f7d61d2a8b4569d3cab1c8459efd84a6"
+  ],
+  "figma-swiftui": [
+    "868c4defe2c0854f5a3e27594d3fa0f20347c86a9b15d103483b7488bfa8affe"
+  ],
+  "figma-use": [
+    "6845635c0c79717feae41f1cd372cafbe9596a982d2aade18f2a7dac4c127a96"
+  ],
+  "figma-use-figjam": [
+    "16b15da304f777e6bdc79bf425da73fa1ce0ea41af726cab8ddd6f40180acd74"
+  ],
+  "figma-use-motion": [
+    "d1aeb004f2fccd74b368a5ce6d30775ef3d9c17a28a4d68ff8a36a47b71ac2ec"
+  ],
+  "figma-use-slides": [
+    "f317b2f08ba1015f7255eca631ebddfe209c70e3046967f4ac6ce6102ad56f79"
+  ],
+  "grill-me": [
+    "b00e256691e917abab094bba4122019e17a70712e8cbba8057d0a9ae2ad982b2"
+  ],
+  "grill-with-docs": [
+    "8f96c41f21bfa9852284e17d732e348f6a750d7d1ef2334162dfd05e48696cc4"
+  ],
+  "grilling": [
+    "5a35925d03a391bcfa46940868b649b72dba89ec9c19525e785bbb6bd3a7f478"
+  ],
+  "jielibang": [
+    "50dec112e00e0f8a78ded842ce4d4a320601d7fbd1cfa7fb5a2111e39561e8ff"
+  ],
+  "lecture-notes": [
+    "57134672a4983e817714ff7907e3e21cffa69369bc4090f08bd707f16a9de866"
+  ],
+  "media-library-organizer": [
+    "e3d829347aa4b44b49208a1740b1d5f7b098d9ec5b4ad8bc1d96afc5bb131fdd"
+  ],
+  "oracle": [
+    "c2cbe8b94b435f3ccd972e1eaedb83b829f8802b3db3b9b893d666871b67ec21"
+  ],
+  "ppt-master": [
+    "35fa50f793f1342001ccada5f6c4890f66ce84ddd7b3169ccf2bae2119bab8f1"
+  ],
+  "tdd": [
+    "5363bb2775679fe9311fbb67947f95359169c6e7f1fac77c0f25e190bca6cf2f"
+  ],
+  "to-spec": [
+    "8fe699e2b6e3ab487609ed38f6236dd77820595549beee6d3c6e632fd9307e5f"
+  ],
+  "to-tickets": [
+    "fd2fc3d3e2792ed81b1107cfd4ff2676f14842b01d1388c803f70702122a4e9c"
+  ],
+  "transcript-learning-system": [
+    "84bc8a9659f4b0f3517f91bfbaa13089793eaa3e98537d2e95048493a3b7d179"
+  ],
+  "video-doc-weekly-ocr": [
+    "749664a1603a6839c9a95ede45449017856ecb5b4855b50876ca49ea38affb3a"
+  ],
+  "video-learning-notes-cn": [
+    "7376ecdf5f2c85db867fc15be9d5fe71f838cdb57502cb21395df1b5858d9cc9"
+  ],
+  "video-talkcraft": [
+    "90f134c392e7f95f8f1be57214fa0d9e406da3ad6597e39383f39172ee038638"
+  ]
+}

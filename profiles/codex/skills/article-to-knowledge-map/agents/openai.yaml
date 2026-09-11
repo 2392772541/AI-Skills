@@ -1,0 +1,4 @@
+interface:
+  display_name: "文章转知识全景图"
+  short_description: "把文章、课程或视频笔记自动转成可编辑的高密度中文知识全景图"
+  default_prompt: "Use $article-to-knowledge-map to turn this article or video note into an editable Chinese knowledge panorama."

@@ -1,0 +1,18 @@
+{
+  "deviceId": "8e87efd2a7edfcc5226e06d377fb3b46",
+  "platform": "Gigabyte Technology Co., Ltd.",
+  "currentUserId": "b70e1fb6f8384bb4bf80a377f3676f69",
+  "agent_auth": {
+    "codex": {
+      "userId": "b70e1fb6f8384bb4bf80a377f3676f69",
+      "login_time": 1788849205001
+    }
+  },
+  "b70e1fb6f8384bb4bf80a377f3676f69": {
+    "accessToken": "~1xrilK2FdSDWAIIYYNes0jXe9UfuKB2Fcqd1RWGtkHp-_S3NkaLWwbFucJbO2E1D9xahT7xZwfOsWfhxuN-dcIuxHHqz8gILGKoHimNthYQALH2mHLBJEoRfjIC27oCO8jBhNZRfBNLjyPyqEOWwN_QVqFovcfqKfOybBiaCurA7lN9NSIWkuOZibNi7kVN1uLuwb8eIYizr_fhjN9PemrMklLZg3RuD3483oSTGGZJy7LQ31vGGMzBXQdjdIGH8mDnUyL_K0YApuDl7vbFCZf3XzW4VyN8q_rnoavEOewLF7-mUJo36zjJl2ydlh7p4PPg1zs3nLeoG4LPXlmVAEwSx0HYzKeheyRDwEMblchW1pC3isCRc0yAq4bDJzRpzLDLbD1FQOcu1abrVFOpZvO8SS5BlotNFtGrxjT3UX5DJD9kBhC2TNsqxDVu-cR0FMxeeiee9gbXGDnW9Q2uLOrpxfF4llYKuby_lxq_ovCJ-JXeSwECh7",
+    "refreshToken": "eyJhbGciOiJIUzI1NiIsIlR5cGUiOiJKd3QiLCJ0eXAiOiJKV1QifQ.eyJvcGVuSWQiOiJiNzBlMWZiNmY4Mzg0YmI0YmY4MGEzNzdmMzY3NmY2OSIsImV4cCI6MTgwNDQwMTIwNCwidG9rZW4iOiIyNTU5ZTZhNjY4MzI0ZmFlYTk2YWQxNzk4MjUzZjk4YiJ9.uqtSS3hpO7C3SIq_mO5Fn1Ltj_xkNZGlgYJsy0nXYwM",
+    "clientToken": "",
+    "userId": "b70e1fb6f8384bb4bf80a377f3676f69",
+    "update_time": 1788849205001
+  }
+}

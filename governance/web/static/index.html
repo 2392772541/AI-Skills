@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>技能管家 · 本机控制台</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">技</div><div><strong>技能管家</strong><span>LOCAL CONTROL</span></div></div>
+      <nav>
+        <button class="nav-item active" data-target="overview"><span>01</span>总览</button>
+        <button class="nav-item" data-target="library"><span>02</span>技能库</button>
+        <button class="nav-item" data-target="route"><span>03</span>任务路由</button>
+        <button class="nav-item" data-target="issues"><span>04</span>治理问题</button>
+      </nav>
+      <div class="side-status"><i id="sideDot"></i><div><b id="sideState">正在连接</b><span>127.0.0.1:8765</span></div></div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div><p class="eyebrow">AI SKILLS GOVERNANCE</p><h1 id="pageTitle">技能系统总览</h1></div>
+        <div class="actions"><button class="btn ghost" id="refreshData">刷新数据</button><button class="btn primary" id="runVerify">完整自检</button></div>
+      </header>
+
+      <section id="overview" class="view active">
+        <div class="hero">
+          <div><span class="tag">本机运行</span><h2>所有 Skill，<br><em>一个入口。</em></h2><p>查看、搜索、路由和审计你的 Agent Skills。数据直接来自本机注册表，不上传云端。</p></div>
+          <div class="pulse-card"><div class="pulse"><span></span></div><b id="governanceState">读取中</b><small id="governanceTime">—</small></div>
+        </div>
+        <div class="metrics">
+          <article><span>扫描条目</span><strong id="mEntries">—</strong><small>两个本机目录</small></article>
+          <article><span>唯一技能</span><strong id="mUnique">—</strong><small>去重后的名称</small></article>
+          <article><span>重复名称</span><strong id="mDuplicates">—</strong><small>等待治理</small></article>
+          <article><span>严重问题</span><strong id="mCritical">—</strong><small>必须先处理</small></article>
+        </div>
+        <div class="grid two">
+          <article class="panel"><div class="panel-head"><div><span class="kicker">CATEGORY MAP</span><h3>能力分布</h3></div></div><div id="categoryBars" class="bars"></div></article>
+          <article class="panel"><div class="panel-head"><div><span class="kicker">QUICK ROUTE</span><h3>我该用哪个 Skill？</h3></div></div><form id="quickRoute" class="route-form"><textarea id="quickQuery" placeholder="例如：把课程视频整理成带插图的学习笔记"></textarea><button class="btn primary" type="submit">开始匹配</button></form><div id="quickResults" class="route-results compact"></div></article>
+        </div>
+      </section>
+
+      <section id="library" class="view">
+        <div class="section-intro"><div><span class="kicker">SKILL LIBRARY</span><h2>技能库</h2></div><p id="skillCount">正在读取…</p></div>
+        <div class="filterbar"><input id="skillSearch" type="search" placeholder="搜索名称、描述、触发词…"><select id="categoryFilter"><option value="">全部分类</option></select></div>
+        <div id="skillGrid" class="skill-grid"></div>
+      </section>
+
+      <section id="route" class="view">
+        <div class="section-intro"><div><span class="kicker">TASK ROUTER</span><h2>任务路由</h2></div><p>用自然语言描述任务，查看系统会选择哪些 Skill。</p></div>
+        <div class="route-workbench"><textarea id="routeQuery" placeholder="把你真正想完成的工作写在这里…"></textarea><button id="routeButton" class="btn primary large">分析并推荐</button></div>
+        <div id="routeResults" class="route-results"></div>
+      </section>
+
+      <section id="issues" class="view">
+        <div class="section-intro"><div><span class="kicker">AUDIT FINDINGS</span><h2>治理问题</h2></div><p id="issueSummary">正在读取…</p></div>
+        <div class="issue-tabs"><button class="chip active" data-severity="">全部</button><button class="chip" data-severity="critical">严重</button><button class="chip" data-severity="warning">警告</button></div>
+        <div id="issueList" class="issue-list"></div>
+      </section>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

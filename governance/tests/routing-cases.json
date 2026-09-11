@@ -1,0 +1,109 @@
+[
+  {
+    "query": "帮我创建一个新 Skill 来处理电子书",
+    "expected_top1": "skill-product-manager",
+    "forbidden_top1": [
+      "skill-creator"
+    ]
+  },
+  {
+    "query": "升级现有 Skill，把视频笔记流程加上插图",
+    "expected_top1": "skill-product-manager"
+  },
+  {
+    "query": "帮我找一个 Skill 做 React 性能优化",
+    "expected_top1": "find-skills"
+  },
+  {
+    "query": "我应该用哪个 Skill 来处理这项任务",
+    "expected_top1": "00-skill-router"
+  },
+  {
+    "query": "把这个课程视频整理成视频学习笔记",
+    "expected_top1": "video-learning-notes-cn"
+  },
+  {
+    "query": "清洗转写稿并整理成结构化内容",
+    "expected_top1": "transcript-learning-system"
+  },
+  {
+    "query": "给这篇笔记生成六张小黑解释图",
+    "expected_top1": "ian-xiaohei-illustrations"
+  },
+  {
+    "query": "根据这张截图复刻动态视频",
+    "expected_top1": "remotion-video-replica",
+    "forbidden_top1": [
+      "imagegen"
+    ]
+  },
+  {
+    "query": "用代码程序化生成视频",
+    "expected_top1": "remotion-video"
+  },
+  {
+    "query": "整理 Obsidian 知识库并写入 Obsidian",
+    "expected_top1": "obsidian-markdown"
+  },
+  {
+    "query": "帮我做一个 PPT 商业演示文稿",
+    "expected_top1": "codex-ppt",
+    "forbidden_top1": [
+      "hv-analysis"
+    ]
+  },
+  {
+    "query": "对当前代码做安全审查 PR",
+    "expected_top1": "review-security"
+  },
+  {
+    "query": "分析 ELF 逆向并恢复校验算法",
+    "expected_top1": "seagull-reverse"
+  },
+  {
+    "query": "把这个 DOCX 转 Markdown",
+    "expected_top1": "docx-to-md",
+    "forbidden_top1": [
+      "hv-analysis"
+    ]
+  },
+  {
+    "query": "把成片上传到 B 站",
+    "expected_top1": "bilibili-upload"
+  },
+  {
+    "query": "把短视频上传到抖音",
+    "expected_top1": "douyin-upload"
+  },
+  {
+    "query": "把图文发布到小红书",
+    "expected_top1": "xiaohongshu-upload"
+  },
+  {
+    "query": "技能管家，帮我看看这个工作流程值不值得做成 Skill",
+    "expected_top1": "skill-product-manager"
+  },
+  {
+    "query": "帮我深度研究 dzhng/deep-research 这个项目",
+    "expected_top1": "hv-analysis"
+  },
+  {
+    "query": "对这个 GitHub 仓库做系统性研究并输出报告",
+    "expected_top1": "hv-analysis"
+  },
+  {
+    "query": "用 deep-research 研究这个项目",
+    "expected_top1": "hv-analysis"
+  },
+  {
+    "query": "每周用本周两个视频制作周报，联网补全链接，写入飞书指定目录，并避免重复文档",
+    "expected_top1": "video-doc-weekly-orchestrator",
+    "forbidden_top1": [
+      "video-doc-weekly-ocr"
+    ]
+  },
+  {
+    "query": "??????????????????????????????",
+    "expected_top1": "talking-head-production"
+  }
+]

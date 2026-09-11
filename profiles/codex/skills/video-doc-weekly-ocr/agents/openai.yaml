@@ -1,0 +1,3 @@
+display_name: Video Doc Weekly OCR
+short_description: Recover, re-audit, complete, and publish weekly docs from video OCR.
+default_prompt: Use this skill to reconstruct a weekly report from current Feishu/Lark-style screen recordings, run mandatory outline/body/report completeness diffs, recover links from source frames and preview cards, supplement only exact public matches, detect duplicates, use screenshot fallback for local attachments, generate clean Markdown and hierarchical Feishu XML, place the document in the requested Drive folder, and verify headings, links, images, and destination after publishing.

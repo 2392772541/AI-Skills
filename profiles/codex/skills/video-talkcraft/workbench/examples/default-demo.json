@@ -1,0 +1,14 @@
+{
+  "name": "未命名工程", "fps": 30, "width": 960, "height": 540,
+  "tracks": [
+    {"id":"demo-text", "name":"文字层", "clips":[
+      {"id":"demo-caption","cardId":"text-basic","start":333,"duration":60,"inOffset":0,"speed":1,"opacity":1,"scale":1,"x":0,"y":-170,"props":{"content":"关键结论","transparentBg":true,"fontSize":44,"color":"#e8720c","anim":"slam","delay":0.5}}
+    ]},
+    {"id":"demo-main", "name":"主轨", "clips":[
+      {"id":"demo-open","cardId":"impact-open-title","start":0,"duration":97,"inOffset":0,"speed":1,"opacity":1,"scale":1,"x":0,"y":0,"props":{}},
+      {"id":"demo-chapter","cardId":"chapter-title-card","start":105,"duration":100,"inOffset":0,"speed":1,"opacity":1,"scale":1,"x":0,"y":0,"props":{}},
+      {"id":"demo-count","cardId":"count-badge-title","start":213,"duration":112,"inOffset":0,"speed":1,"opacity":1,"scale":1,"x":0,"y":0,"props":{}},
+      {"id":"demo-highlight","cardId":"highlighter-sweep","start":333,"duration":60,"inOffset":0,"speed":1,"opacity":1,"scale":1,"x":0,"y":0,"props":{}}
+    ]}
+  ]
+}

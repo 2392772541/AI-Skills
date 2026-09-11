@@ -1,0 +1,4 @@
+interface:
+  display_name: "音频素材分段与整理"
+  short_description: "识别歌曲、划分片段、完善用途标签并验证本地素材筛选播放"
+  default_prompt: "Use $audio-library-organizer to identify, segment, tag, rebuild, and verify the new audio in this portable media library."

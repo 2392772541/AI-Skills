@@ -1,0 +1,61 @@
+﻿project:
+  name: personal-talking-head
+  language: zh-CN
+
+paths:
+  video_use: D:/AI-Skills/incoming/video-use
+  chuk_motion: D:/AI-Skills/incoming/chuk-motion
+
+output:
+  default_format: vertical
+  width: 1080
+  height: 1920
+  fps: 30
+  preview_height: 720
+  video_codec: h264
+  audio_loudness_lufs: -14
+
+editing:
+  remove_long_pauses: true
+  pause_threshold_ms: 700
+  remove_fillers: conservative
+  remove_repeated_takes: true
+  preserve_natural_breathing: true
+  cut_padding_ms: 120
+  audio_fade_ms: 30
+  require_plan_confirmation: true
+  preserve_originals: true
+
+visual:
+  system: carbon-productive
+  theme: minimal-dark
+  animation_density: low
+  productive_ratio: 0.90
+  expressive_ratio: 0.10
+  max_components_per_scene: 3
+  clean_talking_head_min_seconds: 5
+  grid_columns: 12
+  base_spacing_px: 8
+  side_margin_px: 72
+  max_scale: 1.04
+  max_translate_px: 48
+  allow_bounce: false
+  allow_stretch: false
+  allow_rotation: false
+
+captions:
+  enabled: true
+  font: MiSans
+  fallback_font: Source Han Sans SC
+  font_weight: 600
+  color: '#FFFFFF'
+  accent: '#5B8CFF'
+  max_lines: 2
+  max_chinese_chars_per_line: 16
+  highlight_keywords: true
+  apply_last: true
+
+workflow:
+  generate_contact_sheet: true
+  render_preview_before_final: true
+  final_requires_preview_approval: true

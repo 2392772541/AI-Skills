@@ -43,3 +43,9 @@ build/
 *.psd
 *.aep
 *.prproj
+_logs/
+.local/
+**/portable-local.json
+**/__pycache__/
+**/*.pyc
+restore-*/

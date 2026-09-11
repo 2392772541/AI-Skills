@@ -1,0 +1,30 @@
+{
+  "skills/media-use/scripts/lib/telemetry.mjs": {
+    "sha256": "72311f34e16050dc153341bb982514f61c175b50d8219fa658380b25c47fdaf7",
+    "rules": [
+      "credential-literal"
+    ],
+    "reason": "Reviewed vendor public browser/telemetry identifiers and localStorage key names; not user credentials. Re-review required on any file change."
+  },
+  "profiles/codex/skills/media-use/scripts/lib/telemetry.mjs": {
+    "sha256": "72311f34e16050dc153341bb982514f61c175b50d8219fa658380b25c47fdaf7",
+    "rules": [
+      "credential-literal"
+    ],
+    "reason": "Reviewed vendor public browser/telemetry identifiers and localStorage key names; not user credentials. Re-review required on any file change."
+  },
+  "profiles/cursor/skills/media-use/scripts/lib/telemetry.mjs": {
+    "sha256": "72311f34e16050dc153341bb982514f61c175b50d8219fa658380b25c47fdaf7",
+    "rules": [
+      "credential-literal"
+    ],
+    "reason": "Reviewed vendor public browser/telemetry identifiers and localStorage key names; not user credentials. Re-review required on any file change."
+  },
+  "profiles/codex/skills/excalidraw-diagram/references/render_bundle.js": {
+    "sha256": "2904bd75d4d6dbca6458db63fa59c7d9e4bf4c31a71968c1b0936059e880c292",
+    "rules": [
+      "credential-literal"
+    ],
+    "reason": "Reviewed vendor public browser/telemetry identifiers and localStorage key names; not user credentials. Re-review required on any file change."
+  }
+}

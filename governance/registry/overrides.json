@@ -1,0 +1,340 @@
+{
+  "skill-product-manager": {
+    "categories": [
+      "skill-management",
+      "workflow"
+    ],
+    "triggers": [
+      "创建一个新 Skill",
+      "创建新 Skill",
+      "做一个 Skill",
+      "升级现有 Skill",
+      "升级 Skill",
+      "合并 Skill",
+      "评估 Skill",
+      "技能产品经理",
+      "管理技能库",
+      "技能管家",
+      "帮我管理 Skill"
+    ],
+    "patterns": [
+      "创建.*Skill",
+      "升级.*Skill",
+      "合并.*Skill",
+      "评估.*Skill"
+    ],
+    "aliases": [
+      "skill product manager",
+      "skill manager"
+    ],
+    "priority": 30
+  },
+  "find-skills": {
+    "categories": [
+      "skill-management"
+    ],
+    "triggers": [
+      "找一个 Skill",
+      "查找 Skill",
+      "搜索 Skill",
+      "有没有适合",
+      "寻找技能",
+      "发现技能"
+    ],
+    "patterns": [
+      "(找|查找|搜索).*Skill"
+    ],
+    "priority": 20
+  },
+  "skill-creator": {
+    "categories": [
+      "skill-management"
+    ],
+    "triggers": [
+      "初始化 Skill 脚手架",
+      "编写 SKILL.md"
+    ],
+    "priority": 5
+  },
+  "00-skill-router": {
+    "categories": [
+      "skill-management",
+      "routing"
+    ],
+    "triggers": [
+      "应该用哪个 Skill",
+      "路由任务",
+      "选择技能"
+    ],
+    "patterns": [
+      "用哪个.*Skill"
+    ],
+    "priority": 5
+  },
+  "video-learning-notes-cn": {
+    "categories": [
+      "video",
+      "knowledge"
+    ],
+    "triggers": [
+      "视频学习笔记",
+      "课程视频整理",
+      "视频做成学习笔记",
+      "课程总结"
+    ],
+    "priority": 20
+  },
+  "transcript-learning-system": {
+    "categories": [
+      "knowledge",
+      "documents"
+    ],
+    "triggers": [
+      "转写稿整理",
+      "转录稿学习笔记",
+      "清洗转写稿"
+    ],
+    "priority": 15
+  },
+  "ian-xiaohei-illustrations": {
+    "categories": [
+      "design",
+      "knowledge"
+    ],
+    "triggers": [
+      "小黑插图",
+      "小黑解释图",
+      "正文配图"
+    ],
+    "priority": 20
+  },
+  "remotion-video-replica": {
+    "categories": [
+      "video",
+      "design"
+    ],
+    "triggers": [
+      "截图复刻动态视频",
+      "视觉复刻",
+      "页面复刻成视频",
+      "图片转 Remotion",
+      "参考图做动画"
+    ],
+    "priority": 25
+  },
+  "remotion-video": {
+    "categories": [
+      "video",
+      "development"
+    ],
+    "triggers": [
+      "Remotion 视频",
+      "程序化生成视频",
+      "代码生成视频"
+    ],
+    "priority": 10
+  },
+  "obsidian-markdown": {
+    "categories": [
+      "knowledge",
+      "documents"
+    ],
+    "triggers": [
+      "整理 Obsidian 知识库",
+      "写入 Obsidian",
+      "Obsidian 笔记",
+      "编辑 Obsidian Markdown"
+    ],
+    "priority": 20
+  },
+  "codex-ppt": {
+    "categories": [
+      "design",
+      "documents"
+    ],
+    "triggers": [
+      "做一个 PPT",
+      "制作 PPT",
+      "商业演示文稿",
+      "生成演示文稿"
+    ],
+    "priority": 20
+  },
+  "review-security": {
+    "categories": [
+      "development",
+      "security"
+    ],
+    "triggers": [
+      "安全审查 PR",
+      "检查 PR 安全",
+      "代码安全审查",
+      "安全漏洞审查"
+    ],
+    "priority": 20
+  },
+  "seagull-reverse": {
+    "categories": [
+      "security",
+      "development"
+    ],
+    "triggers": [
+      "分析 ELF 逆向",
+      "逆向二进制",
+      "APK 逆向",
+      "脱壳",
+      "协议逆向"
+    ],
+    "priority": 20
+  },
+  "docx-to-md": {
+    "categories": [
+      "documents"
+    ],
+    "triggers": [
+      "Word 转 Markdown",
+      "DOCX 转 Markdown",
+      "docx 转 md"
+    ],
+    "priority": 15
+  },
+  "bilibili-upload": {
+    "categories": [
+      "video",
+      "automation"
+    ],
+    "triggers": [
+      "上传到 B 站",
+      "发布到哔哩哔哩",
+      "B站上传"
+    ],
+    "priority": 20
+  },
+  "douyin-upload": {
+    "categories": [
+      "video",
+      "automation"
+    ],
+    "triggers": [
+      "上传到抖音",
+      "发布抖音视频"
+    ],
+    "priority": 20
+  },
+  "douyin-favorite-links": {
+    "categories": [
+      "video",
+      "documents",
+      "automation"
+    ],
+    "triggers": [
+      "抖音收藏视频链接",
+      "抖音收藏",
+      "批量收藏抖音",
+      "飞书内刊抖音链接",
+      "Douyin favorite links"
+    ],
+    "patterns": [
+      "(?:飞书|内刊).{0,20}(?:抖音|douyin).{0,20}(?:收藏|favorite)",
+      "(?:抖音|douyin).{0,20}(?:收藏夹|favorite folder)"
+    ],
+    "aliases": [
+      "douyin favorite links",
+      "douyin收藏视频链接"
+    ],
+    "priority": 35
+  },
+  "xiaohongshu-upload": {
+    "categories": [
+      "automation"
+    ],
+    "triggers": [
+      "上传到小红书",
+      "发布小红书",
+      "发布到小红书"
+    ],
+    "priority": 20
+  },
+  "hv-analysis": {
+    "categories": [
+      "documents",
+      "research",
+      "skill-management"
+    ],
+    "triggers": [
+      "横纵分析",
+      "横纵分析法",
+      "深度研究",
+      "系统性研究",
+      "深入调研",
+      "竞品分析",
+      "研究一下这个",
+      "调研一下",
+      "做个研究",
+      "deep research",
+      "deep-research",
+      "hv-analysis"
+    ],
+    "patterns": [
+      "(?i)\\bdeep[- ]research\\b",
+      "(?i)\\bhv[- ]analysis\\b",
+      "(?:深度|系统性|深入|全面|专题|横向|纵向)(?:地)?(?:研究|调研|分析)",
+      "(?:研究|调研|分析).{0,12}(?:产品|公司|项目|概念|技术|人物|竞品|仓库|GitHub|github)"
+    ],
+    "aliases": [
+      "deep research",
+      "deep-research",
+      "hv analysis",
+      "横纵分析法"
+    ],
+    "priority": 60
+  },
+  "video-doc-weekly-orchestrator": {
+    "categories": [
+      "video",
+      "documents",
+      "lark",
+      "automation"
+    ],
+    "triggers": [
+      "每周周报",
+      "视频周报",
+      "补全链接",
+      "联网找链接",
+      "写入飞书",
+      "放到指定目录",
+      "避免重复文档",
+      "自动制作周报"
+    ],
+    "patterns": [
+      "(每周|本周).*(视频|周报).*(链接|飞书|目录)",
+      "周报.*(补链|补全链接|联网搜索)",
+      "(视频|直播回放).*(写入|发布到|归档到)飞书"
+    ],
+    "priority": 40
+  },
+  "talking-head-production": {
+    "categories": [
+      "video-production",
+      "automation",
+      "remotion"
+    ],
+    "triggers": [
+      "????????",
+      "??????",
+      "??????",
+      "????",
+      "??????",
+      "????"
+    ],
+    "patterns": [
+      "??.*(????|??|??|??|??|??)",
+      "(??|??).*(??|??)"
+    ],
+    "aliases": [
+      "talking head production",
+      "talking-head video"
+    ],
+    "priority": 35
+  }
+}

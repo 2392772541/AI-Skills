@@ -1,28 +1,12 @@
 ---
 name: lark-shared
 version: 1.0.0
-description: "Use when first setting up lark-cli, running auth login, switching user/bot identity (--as), handling permission denied or scope errors, needing to update lark-cli, or seeing _notice in JSON output."
+description: "Use for lark-cli setup/auth tasks: auth login/status/logout, user vs bot identity, business-domain permissions (--domain, including all/docs/drive), missing scopes, revoking authorization, or handling _notice JSON."
 ---
 
 # lark-cli 共享规则
 
 本技能指导你如何通过lark-cli操作飞书资源, 以及有哪些注意事项。
-
-## Hermes 上下文检测绕过
-
-lark-cli 在 Hermes 环境中运行时会检测 `HERMES_HOME` 环境变量，拒绝未绑定的操作。如果 `config bind` 因缺少 `FEISHU_APP_SECRET` 而卡住，可以用 `HOME=` 临时绕过检测：
-
-```bash
-# 绕过 Hermes 上下文检测，直接操作已有的 lark-cli 配置
-HOME=/c/Users/win10/temp_profile lark-cli profile list
-HOME=/c/Users/win10/temp_profile lark-cli auth login --recommend --no-wait --json
-```
-
-这允许在不修改 `.env` 的情况下使用已有的 lark-cli 配置（如 `~/.lark-cli/config.json` 中已配置的应用）。适用于用户已有飞书应用但 Hermes `.env` 中缺少凭据的场景。
-
-**注意**：`feishu` CLI 的 cookies 不能用于 `lark-cli`。两者使用完全不同的认证机制：
-- `feishu` CLI = Web session cookies（只能访问 Web 页面）
-- `lark-cli` = OAuth2 App credentials（可访问所有 OpenAPI）
 
 ## 配置初始化
 
@@ -30,14 +14,7 @@ HOME=/c/Users/win10/temp_profile lark-cli auth login --recommend --no-wait --jso
 
 当你帮用户初始化配置时，使用background方式使用下面的命令发起配置应用流程，启动后读取输出，从中提取授权链接并发给用户。
 
-**`--force-init` 必须项**：在 Agent 上下文（Hermes / OpenClaw）中运行时，`config init` 会因检测到 Agent workspace 而拒绝。**必须加 `--force-init`**：
-
-```bash
-# 发起配置（Agent 上下文必须加 --force-init）
-lark-cli config init --new --force-init
-```
-
-**URL 转发规则**：当命令输出 `verification_url`、`verification_uri_complete`、`console_url` 等 URL 字段时：**必须生成二维码**：你必须调用 `lark-cli auth qrcode` 将 URL 转为二维码并展示给用户，这是必须步骤，不要跳过。优先生成 PNG 二维码（--output）；仅当用户明确要求时才使用 ASCII（--ascii）。**如果 `lark-cli auth qrcode` 不可用**（CLI 未绑定或报错），用 Python 生成：`python -c "import qrcode; qrcode.make('<url>').save('qr.png')"` 然后用 `vision_analyze` 展示。**URL 输出规则**：将 URL 视为不可修改的 opaque string，不要做任何修改（包括 URL 编码/解码、添加空格或标点、重新拼接 query），二维码和链接请一起展示给用户。
+**URL 转发规则**：当命令输出 `verification_url`、`verification_uri_complete`、`console_url` 等 URL 字段时：**必须生成二维码**：你必须调用 `lark-cli auth qrcode` 将 URL 转为二维码并展示给用户，这是必须步骤，不要跳过。优先生成 PNG 二维码（--output）；仅当用户明确要求时才使用 ASCII（--ascii）。**URL 输出规则**：将 URL 视为不可修改的 opaque string，不要做任何修改（包括 URL 编码/解码、添加空格或标点、重新拼接 query），二维码和链接请一起展示给用户。
 
 ```bash
 # 发起配置（该命令会阻塞直到用户打开链接并完成操作或过期）
@@ -45,6 +22,28 @@ lark-cli config init --new
 ```
 
 ## 认证
+
+### 认证任务速查
+
+认证、scope、业务域、登录态、退出登录态、撤销授权问题都走本技能。
+
+| 用户意图 | 首选命令 / 回答 |
+|---|---|
+| 获取全部权限 | `lark-cli auth login --domain all --no-wait --json` |
+| 按业务域授权 | `lark-cli auth login --domain docs --domain drive --no-wait --json`；`--domain` 可重复，也可用逗号分隔 |
+| 指定单个 scope 授权 | `lark-cli auth login --scope "<scope>" --no-wait --json` |
+| 检查当前登录态、是谁登录、token 是否有效 | `lark-cli auth status --json --verify`；回答时引用 `identity`、`verified`、`identities.user.status`、`identities.user.userName`、`identities.user.openId`（用户 open id）、`identities.user.tokenStatus`、`identities.user.scope` |
+| 快速查看当前身份状态 | `lark-cli whoami`；实际生效的那一个身份 |
+| 退出当前机器的用户登录态 | `lark-cli auth logout --json`；`loggedOut:true` 表示注销成功 |
+| bot 缺少权限 | 不要执行 `auth login`；引导用户在开发者后台开通 bot scope，优先复用错误里的 `console_url` |
+| 取消用户对应用的全部服务端授权 | `auth logout` 只清本机登录态；服务端授权需用户在飞书授权管理页取消 |
+| 只取消一个 scope | CLI 不支持单独撤销一个已授予 scope；可重新走最小 scope 授权，或让用户在授权管理页处理 |
+
+机器读取 JSON 时，为减少 `_notice` 干扰，可在命令前加：
+
+```bash
+LARKSUITE_CLI_NO_UPDATE_NOTIFIER=1 LARKSUITE_CLI_NO_SKILLS_NOTIFIER=1 lark-cli auth status --json --verify
+```
 
 ### 身份类型
 
@@ -70,7 +69,7 @@ lark-cli config init --new
 遇到权限相关错误时，**根据当前身份类型采取不同解决方案**。
 
 错误响应中包含关键信息：
-- `permission_violations`：列出缺失的 scope (N选1)
+- `missing_scopes`：列出缺失的 scope (N选1)
 - `console_url`：飞书开发者后台的权限配置链接
 - `hint`：建议的修复命令
 
@@ -131,18 +130,39 @@ lark-cli auth login --device-code <device_code>
 
 lark-cli 命令执行后，如果检测到新版本，JSON 输出中会包含 `_notice.update` 字段（含 `message`、`command` 等）。
 
-**当你在输出中看到 `_notice.update` 时，完成用户当前请求后，主动提议帮用户更新**：
+除非用户正在询问更新、版本或 notice，否则不要把 `_notice` 原样复制为当前任务的主要答案，也不要为了 notice 中断当前任务去反复查 help。
 
-1. 告知用户当前版本和最新版本号
-2. 提议执行更新（同时更新 CLI 和 Skills）：
-   ```bash
-   lark-cli update
-   ```
-3. 更新完成后提醒用户：**退出并重新打开 AI Agent** 以加载最新 Skills
+需要稳定 JSON 给脚本或机器读取时，可以在命令前设置：
+
+```bash
+LARKSUITE_CLI_NO_UPDATE_NOTIFIER=1 LARKSUITE_CLI_NO_SKILLS_NOTIFIER=1 <lark-cli command>
+```
+
+当你在输出中看到 `_notice.update` 时，先完成用户当前请求；如仍相关，再简短告知可运行：
+
+```bash
+lark-cli update
+```
 
 **重要**：始终使用 `lark-cli update` 更新，它会同时更新 CLI 和 AI Skills。
 
-**规则**：不要静默忽略更新提示。即使当前任务与更新无关，也应在完成用户请求后补充告知。
+## JSON 输出契约
+
+`--format json`（默认）下，成功与错误的信封结构不同：
+
+成功信封写入 **stdout**（退出码 0）：
+
+```json
+{ "ok": true, "identity": "user", "data": { "guid": "..." }, "meta": { "count": 1 } }
+```
+
+错误信封写入 **stderr**（退出码非 0）：
+
+```json
+{ "ok": false, "identity": "user", "error": { "type": "authorization", "subtype": "missing_scope", "code": 99991679, "message": "...", "hint": "...", "missing_scopes": ["..."] } }
+```
+
+**判断成功必须用 `ok == true`（或进程退出码 0），不要用 `code == 0`**：成功信封没有顶层 `code` / `msg` 字段，`code` 只出现在错误信封的 `error` 内，含义是上游 OpenAPI 的 numeric code。按 OpenAPI 老格式 `{"code": 0, "msg": "ok"}` 判断会把所有成功调用误判为失败；封装写入类命令（如 `task +create`）时尤其危险，误判会绕过幂等逻辑导致重复创建。
 
 ## 安全规则
 
@@ -158,22 +178,22 @@ lark-cli 对高风险写操作（`risk: "high-risk-write"`）有强制确认门�
 ```json
 {
   "ok": false,
+  "identity": "bot",
   "error": {
-    "type": "confirmation_required",
+    "type": "confirmation",
+    "subtype": "confirmation_required",
     "message": "drive +delete requires confirmation",
     "hint": "add --yes to confirm",
-    "risk": {
-      "level": "high-risk-write",
-      "action": "drive +delete"
-    }
+    "risk": "high-risk-write",
+    "action": "drive +delete"
   }
 }
 ```
 
 **遇到这种情况，不要当普通错误放弃。** 按以下流程处理：
 
-1. **识别**：看到子进程 exit code = `10` 且 stderr JSON 里 `error.type == "confirmation_required"`
-2. **向用户确认**：把 `error.risk.action` 和关键参数展示给用户，明确告知"这是高风险操作"，等待用户显式同意
+1. **识别**：看到子进程 exit code = `10` 且 stderr JSON 里 `error.type == "confirmation"`、`error.subtype == "confirmation_required"`
+2. **向用户确认**：把 `error.action`、`error.risk` 和关键参数展示给用户，明确告知"这是高风险操作"，等待用户显式同意
 3. **用户同意** → 在你**原始 argv 的末尾追加 `--yes`** 后重试
 4. **用户拒绝** → 终止流程，不要擅自改写参数或跳过门禁
 

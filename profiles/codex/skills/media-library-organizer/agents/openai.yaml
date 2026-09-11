@@ -1,0 +1,4 @@
+interface:
+  display_name: "音视频图片素材整理"
+  short_description: "统一识别、分段、标注并维护整洁的音频视频图片素材库"
+  default_prompt: "Use $media-library-organizer to organize, segment, tag, rebuild, tidy, and verify the audio, video, and images in this portable media library."

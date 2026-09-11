@@ -1,0 +1,79 @@
+{
+  "name": "讲解增强-五卡展示",
+  "fps": 30,
+  "width": 960,
+  "height": 540,
+  "tracks": [
+    {
+      "id": "kit-demo",
+      "name": "讲解增强",
+      "clips": [
+        {
+          "id": "kit-demo-0",
+          "cardId": "kit-object-continuity",
+          "start": 0,
+          "duration": 270,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {}
+        },
+        {
+          "id": "kit-demo-1",
+          "cardId": "kit-flow-split",
+          "start": 270,
+          "duration": 240,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {}
+        },
+        {
+          "id": "kit-demo-2",
+          "cardId": "kit-waterfall",
+          "start": 510,
+          "duration": 240,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {}
+        },
+        {
+          "id": "kit-demo-3",
+          "cardId": "kit-slope",
+          "start": 750,
+          "duration": 240,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {}
+        },
+        {
+          "id": "kit-demo-4",
+          "cardId": "kit-quadrant",
+          "start": 990,
+          "duration": 240,
+          "inOffset": 0,
+          "speed": 1,
+          "opacity": 1,
+          "scale": 1,
+          "x": 0,
+          "y": 0,
+          "props": {}
+        }
+      ]
+    }
+  ]
+}
