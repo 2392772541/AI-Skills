@@ -50,5 +50,12 @@ class PortableTests(unittest.TestCase):
         config=p.read(self.config);config['codex']=str(self.root/'missing');p.dump(self.config,config)
         with self.assertRaisesRegex(ValueError,'Missing source'):p.export(self.config)
         self.assertFalse((self.repo/'skills').exists())
+    def test_vendor_gitignore_cannot_drop_manifest_assets(self):
+        p.export(self.config)
+        p.git('init')
+        (self.repo/'.gitignore').write_text('skills/\nprofiles/\n')
+        p.stage_manifest()
+        tracked=set(p.git('ls-files','-z').split('\0'))
+        self.assertTrue(set(p.read(self.repo/'portable/manifest.json')['files']).issubset(tracked))
 
 if __name__=='__main__':unittest.main()

@@ -5477,10 +5477,6 @@
       "sha256": "40354d99ca66f16a8bd92b0e6b315b4cd773ebcb8a6348a70398a4b787b86213",
       "bytes": 11283
     },
-    "skills/quarkclouddrive/.quarkclouddrive/codex/.log/probe-marker.json": {
-      "sha256": "80f3d90666804a9335821cdb40782458835ffedaef33088bd1dc5eb3ef85ce61",
-      "bytes": 20
-    },
     "skills/quarkclouddrive/codex/config.json": {
       "sha256": "8d3cce2e230b6c271b2e8d32d9f21ce2077e2b3d9530e7ed4108783dd3a50c39",
       "bytes": 1223
@@ -64365,10 +64361,6 @@
       "sha256": "225d3f0ee5b7d7c3af06d8133db7779287edb4caa865c45d143b98f0a9f96c82",
       "bytes": 529
     },
-    "profiles/codex/skills/video-talkcraft/workbench/tsconfig.tsbuildinfo": {
-      "sha256": "8ce895392b141d91ca812b0a2f6fa2157b5d41827d6b0a9f45a86942f27ca828",
-      "bytes": 6770
-    },
     "profiles/codex/skills/video-talkcraft/workbench/vite.config.ts": {
       "sha256": "9acdd4efaa5fa0a71cf314505de3041fd7e63e6bdfb18b3d12562b003a3abefd",
       "bytes": 8167
@@ -66530,12 +66522,18 @@
     {
       "path": "profiles/codex/skills/video-talkcraft/workbench/dev-server.out.log",
       "reason": "runtime-or-generated-artifact"
+    },
+    {
+      "path": "profiles/codex/skills/video-talkcraft/workbench/tsconfig.tsbuildinfo",
+      "reason": "runtime-or-generated-artifact"
     }
   ],
   "excluded_directory_names": [
     ".cache",
     ".git",
+    ".log",
     ".pytest_cache",
+    ".quarkclouddrive",
     ".venv",
     "__pycache__",
     "build",
@@ -66556,8 +66554,8 @@
     ".system/skill-installer/SKILL.md"
   ],
   "groups": {
-    "shared": 1652,
-    "codex": 14441,
+    "shared": 1651,
+    "codex": 14440,
     "cursor": 511,
     "governance-scripts": 12,
     "governance-tests": 2,

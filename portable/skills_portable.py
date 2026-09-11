@@ -18,11 +18,11 @@ from functools import lru_cache
 from datetime import datetime, timezone
 
 REPO = Path(__file__).resolve().parents[1]
-SKIP_DIRS = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', '.cache',
+SKIP_DIRS = {'.git', 'node_modules', '__pycache__', '.venv', 'venv', '.cache', '.log', '.quarkclouddrive',
              'dist', 'build', 'exports', 'output', 'outputs', 'projects', '.pytest_cache'}
 PRIVATE_NAMES = {'.env', 'auth.json', 'credentials.json', 'cookies.json', 'cookies.txt',
                  'token.json', 'tokens.json', '.npmrc', '.pypirc', '.ds_store', 'thumbs.db'}
-SKIP_SUFFIXES = {'.pyc', '.pyo', '.log', '.db', '.sqlite', '.sqlite3', '.psd',
+SKIP_SUFFIXES = {'.pyc', '.pyo', '.log', '.tsbuildinfo', '.db', '.sqlite', '.sqlite3', '.psd',
                  '.zip', '.7z', '.exe', '.msi', '.key', '.pem', '.p12'}
 TOKEN_PATTERNS = [
     ('private-key', re.compile(r'-----BEGIN (?:RSA |OPENSSH |EC )?PRIVATE KEY-----')),
@@ -140,8 +140,10 @@ def verify():
     issues=[]
     for rel,entry in manifest['files'].items():
         p=checked_path(REPO,rel)
-        if not p.is_file() or sha(p.read_bytes())!=entry['sha256']: issues.append(rel)
-        elif reviewed_findings(rel,p.read_bytes()): issues.append(rel+' (secret)')
+        if not p.is_file():issues.append(rel);continue
+        data=p.read_bytes()
+        if sha(data)!=entry['sha256']: issues.append(rel)
+        elif reviewed_findings(rel,data): issues.append(rel+' (secret)')
     expected=set(manifest['files'])
     actual={p.relative_to(REPO).as_posix() for top in ('skills','profiles','governance') for p in (REPO/top).rglob('*') if p.is_file()}
     issues.extend(sorted(actual-expected))
@@ -197,6 +199,16 @@ def restore(target, relocate):
 
 def git(*args):
     return subprocess.check_output(['git','-C',str(REPO),*args],text=True,encoding='utf-8').strip()
+def stage_manifest():
+    """Nested vendor ignore rules must not drop reviewed, hash-listed assets."""
+    manifest=read(REPO/'portable/manifest.json')
+    path_list=REPO/'.local/manifest-paths.nul'
+    path_list.parent.mkdir(parents=True,exist_ok=True)
+    path_list.write_bytes(b''.join(rel.encode('utf-8')+b'\0' for rel in manifest['files']))
+    git('add','--force','--pathspec-from-file='+str(path_list),'--pathspec-file-nul')
+    tracked=set(git('ls-files','-z').split('\0'))
+    missing=set(manifest['files'])-tracked
+    if missing:raise ValueError('Manifest files absent from Git index: '+str(sorted(missing)[:5]))
 def install(bundle, user_root):
     """Activate an already verified bundle; never overwrite a differing file."""
     bundle=bundle.resolve();user_root=user_root.absolute()
@@ -240,6 +252,7 @@ def publish(config):
     if not info.get('private'):raise ValueError('Publish refused: repository must be private')
     # No add -A across unreviewed local outputs: only these managed paths.
     git('add','--','skills','profiles','governance','portable','README.md','.gitignore','.gitattributes')
+    stage_manifest()
     # -z preserves Unicode paths verbatim; Git otherwise quotes them by default.
     staged=git('diff','--cached','--name-only','-z','--diff-filter=ACMRT').split('\0')
     for rel in staged:
