@@ -20,7 +20,7 @@ python "D:\AI-Skills\scripts\skillctl.py" git-verify
 
 ## 换电脑恢复
 
-先安装 Git、Python 和需要使用的 AI 工具，并登录有权限读取本私有仓库的 GitHub 账号。
+先安装 Git、Python 和需要使用的 AI 工具，并登录有权限读取本私有仓库的 GitHub 账号。发布更新还需要 GitHub CLI（gh）登录。
 
 ```powershell
 git clone https://github.com/2392772541/AI-Skills.git D:\AI-Skills-Portable
