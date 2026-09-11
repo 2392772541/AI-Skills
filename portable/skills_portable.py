@@ -97,6 +97,7 @@ def export(config_path):
     manifest={'schema':1,'files':{},'excluded':[],'excluded_directory_names':sorted(SKIP_DIRS),'native_managed':[], 'groups':{}, 'relocations':config.get('relocations',[])}
     findings=[]
     for key,src,dest in source_groups(config):
+        print('capturing='+key,flush=True)
         if not src.is_dir(): raise ValueError('Missing source: '+str(src))
         count=0
         for p,rel in walk(src):
@@ -145,7 +146,7 @@ def verify():
     actual={p.relative_to(REPO).as_posix() for top in ('skills','profiles','governance') for p in (REPO/top).rglob('*') if p.is_file()}
     issues.extend(sorted(actual-expected))
     if issues: raise ValueError(f'Verification failed: {len(issues)} entries; first paths: {issues[:5]}')
-    print(f'verified files={len(expected)}')
+    print(f'verified files={len(expected)}',flush=True)
 
 def replacements(target, manifest):
     result=[]
@@ -239,10 +240,13 @@ def publish(config):
     if not info.get('private'):raise ValueError('Publish refused: repository must be private')
     # No add -A across unreviewed local outputs: only these managed paths.
     git('add','--','skills','profiles','governance','portable','README.md','.gitignore','.gitattributes')
-    staged=git('diff','--cached','--name-only','--diff-filter=ACMRT').splitlines()
+    # -z preserves Unicode paths verbatim; Git otherwise quotes them by default.
+    staged=git('diff','--cached','--name-only','-z','--diff-filter=ACMRT').split('\0')
     for rel in staged:
+        if not rel:continue
         p=checked_path(REPO,rel)
-        if p.is_file() and reviewed_findings(rel,p.read_bytes()):raise ValueError('Publish blocked by secret scan: '+rel)
+        if not p.is_file():raise ValueError('Cannot scan staged file: '+rel)
+        if reviewed_findings(rel,p.read_bytes()):raise ValueError('Publish blocked by secret scan: '+rel)
     if git('diff','--cached','--name-only'):
         git('commit','-m','Update portable skills and verified restore tooling')
     subprocess.run(['git','-C',str(REPO),'push','origin','HEAD:main'],check=True)
