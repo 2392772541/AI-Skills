@@ -1,29 +1,15 @@
-# Weekly Issue Ledger
+# 问题账本与维护边界
 
-Store machine-readable state at `.weekly-report-state/issue-ledger.json` in the active workspace. Keep this human-readable schema beside the skill so a fresh installation can reconstruct the checks.
+以每期 `run.json`、证据目录、`events.jsonl` 与 `audit/delivery.json` 为事实来源；不再维护互相矛盾的“制作成功/抖音成功/B站成功”三份状态。旧 `.weekly-report-state/issue-ledger.json` 只作线索，旧success不能迁移为当前已核验。
 
-## Entry Schema
+每个重复问题记录：真实症状、证据文件、原因或待证假设、预防门禁、回归测试、是否做过线上验收。一次网络故障不宣布永久删除；未执行的平台写入不写success。
 
-```json
-{
-  "date": "YYYY-MM-DD",
-  "symptom": "what went wrong",
-  "root_cause": "why it happened",
-  "prevention": "the concrete check or script assertion",
-  "verification": "command or live evidence",
-  "status": "open|fixed|regression"
-}
-```
+新版固定回归：
+- 完整结构包含前言/引语/快讯与必要原图，不能只数编号；左右目录分离从本期实测，不硬编码x=530。
+- 原作身份与可访问性分开；短ID/相似候选拒绝；B站code0失效壳拒绝。
+- 当前账号+唯一目标夹+原始字符串ID；分页终止和两轮逐ID验收。
+- 所有写入先持久化checkpoint，任何未知结果先读后续；旧成功不继承。
+- 生成、飞书回读、收藏、跨期索引共用同一条目key和作品ID。
+- 同一期重复文档不自动移走或删除；中途人工改动不覆盖。
 
-## Required Categories
-
-- `destination`: folder token resolved before write; final folder listing verified.
-- `duplicate_docs`: same-title search before create; incomplete copies moved to `维护`.
-- `source_ownership`: URL bound only to owning frame/item, never nearest text.
-- `web_supplement`: exact-title/platform search tuple and rejection log.
-- `fallback_media`: unique crop, timestamp, evidence boundary, and live block order.
-- `clean_publish`: no temporary paths, no malformed Douyin URLs, no unresolved items unless explicitly accepted.
-
-## Promotion Rule
-
-When the same symptom occurs twice, add a deterministic gate or script assertion before the next weekly run. Do not merely add prose.
+维护时只改影响本任务的文件，先备份正式技能；候选在扫描根外，测试后晋级。禁止用新规则绕过真实业务失败。没有真实生产回归时分别报告离线通过/只读证据/未测写入，不包装成端到端生产成功。

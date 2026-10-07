@@ -1,108 +1,69 @@
 ---
 name: video-doc-weekly-orchestrator
-description: Orchestrate a recurring weekly report workflow from local screen-recorded videos into one verified Feishu document in a user-specified Drive folder, with persistent issue memory, deep link recovery, duplicate-document prevention, screenshot fallbacks, and post-publish location/content verification. Use when the user says 每周周报、视频周报、补全链接、联网找链接、写入飞书、放到指定目录、避免重复文档, or asks to make the weekly process automatic and stop repeating prior corrections.
+description: "水球泡/且曼周报一条龙：从录屏还原完整周报、核验原作品链接、发布飞书后串行收藏抖音和B站，并建立跨期可搜索索引。也用于已有内刊视频补链、批量收藏和断点续跑；不用于一般工作汇报或视频上传下载。"
 ---
 
-# Weekly Report Orchestrator
+# 水球泡周报一条龙聚合技能
 
-This is an orchestration layer. It composes the existing `video-doc-weekly-ocr`, `agent-reach`, `lark-doc`, and `lark-drive` skills. It does not copy their OCR, web-search, document, or Drive syntax.
+**一个入口、一份状态、同一套证据。** 制作完成后继续自动收藏，不拆成三个聊天，不重新从旧文档复制未经核对的链接表。
 
-## Use / Do Not Use
+这是 **Codex 执行型 Skill**：Agent 按下列流程调用已安装的 OCR、飞书、搜索与受支持浏览器工具。附带 Python 负责状态、去重、证据门禁与索引，**不是脱离 Codex 的后台收藏机器人**，不会自行登录或绕过风控。
 
-Use for recurring weekly reports reconstructed from one or more local videos and published to Feishu. Use when the user expects prior mistakes to be remembered and prevented.
 
-Do not use for a one-off transcript summary, ordinary meeting minutes, or editing an already-finished Feishu document without new source videos. Route those to the narrower skill.
+## 技能聚合背景与四大核心能力
 
-## Fixed Contract
+本技能深度融合了原先割裂的三个独立会话与流程（周报制作、抖音批量收藏、B站批量收藏），针对过去频繁出现的痛点提供了系统化解法：
 
-Inputs:
+1. **周报制作与轻量提取（第一阶段）**：
+   - 遵从系统负载规范：默认单 OCR worker、最多 2 CPU 线程、按需分段，绝不占满机器影响用户其他任务；
+   - 严格分离目录与正文，精准提取标题、作者、正文、时间戳和初始 URL，生成结构化 `run.json`。
 
-- current week's video files or source screenshots;
-- the destination Drive folder, resolved by name or supplied URL;
-- prior issue ledger and any existing same-week Feishu documents.
+2. **缺失视频智能检索三道防线（彻底解决视频找不到）**：
+   - **第一道防线：右侧 ChatGPT 联网与知识深度反查**：优先在右侧 ChatGPT 会话中，输入提取到的标题、文案金句、作者线索，深度检索出处（如本期成功找回混剪晓佳《艺术的共鸣 part4》`BV16sYx6oEPJ`、鹤灵Healing《“不好意思，活错了。”》`BV1cRao6yEJS`）；
+   - **第二道防线：平台站内精确搜索**：在 In-app Browser 针对抖音与 B站站内，按作者名和精准标题进行搜索验证；
+   - **第三道防线：原录像时间戳截图对照与严格互斥门禁**：
+     - **门禁铁律**：凡是有明确原视频/文章/工具链接的条目，坚决不放截图！
+     - 仅且仅有经过多渠道搜索后**确实无独立原视频链接**的条目（口播概括、二次随笔），自动从原始录像对应时间戳（`timestamp_seconds`）提取高清视频截图，嵌入周报文档作为读者对照依据；
+     - 严格禁止“找不到就算了”或“用相似链接冒充”。
 
-Outputs:
+3. **双平台自动化真实入夹与全量对账（彻底解决“说完成但在文件夹里看不到”）**：
+   - **B 站自动化入库**：调用 B 站真实收藏接口，将视频加入指定公开/私密收藏夹（如“水球泡周报视频” fid `4103329683`），写后通过公开 API 全量回读该收藏夹列表对账；
+   - **抖音真实两阶段入夹**：
+     - **阶段 1（播放页收藏）**：循环打开视频播放页，通过标准定位器 `.o2tLobnl.nth(2)`（视频）或 `[data-e2e="video-player-collect"]`（图文 note）点击收藏，验证数字增加和状态变更；
+     - **阶段 2（文件夹内批量添加）**：导航至用户主页“水球泡视频周报”收藏夹，点击“添加视频”打开弹窗，通过定位器 `ul[data-e2e="scroll-list"] li .NWh9vMMV` 批量全选新增卡片，点击“确定”提交；
+     - **阶段 3（全量回读与对账）**：全量回读该收藏夹视频列表（标题与 ID），与本周清单做逐项对账，确认 0 遗漏，杜绝任何假完成与本地 mock 回执！
 
-- one local `weekly_YYYY_MM_DD/report/document.md`;
-- one `document_feishu_paste.md`, XML, media manifest, and audit;
-- one Feishu docx in the requested folder;
-- a post-publish verification record containing document token, revision, folder token, item/link counts, fallback count, and duplicate checks.
+4. **飞书文档同步与跨期索引**：
+   - 自动维护飞书云文档（`lark-cli docs`）：正文排版规范，精准嵌入 8 个无链接条目的原录像对照图片，拥有明确链接的条目全部纯文本排版无冗余图片；
+   - 输出交付审计、单期及跨期 HTML / SQLite 索引，形成完整闭环。
 
-## Mandatory Order
 
-1. **Preflight and memory**
-   - Read this skill, `video-doc-weekly-ocr`, `agent-reach`, `lark-doc`, and `lark-drive`.
-   - Load `.weekly-report-state/issue-ledger.json` if present; otherwise create it.
-   - Record the current week's source paths and hash/size metadata. Never reuse older week's OCR as content.
-   - Resolve the destination folder before any document create/update. Store `folder_token` and canonical folder URL.
+## 选择模式与范围
 
-2. **Duplicate guard**
-   - Search Drive by the weekly title and inspect all same-title docx results.
-   - If a complete same-week doc exists, update that token; do not create another.
-   - If multiple exist, choose the one with the newest verified content and move incomplete duplicates to a reversible `维护` subfolder. Never delete without explicit user confirmation.
+| 请求 | 模式 | 实际交付 |
+|---|---|---|
+| 制作水球泡周报/周报一条龙 | `full` | 完整本地稿 → 飞书回读 → 双平台真实收藏入夹 → 索引 |
+| 只制作/只发布，不收藏 | `publish` | 制作与发布，尊重明确缩小的范围 |
+| 收藏已有飞书周报/内刊 | `collect` | 新鲜读取原文、核验、真实收藏入夹；仅单平台时先过滤 |
+| 检查旧一期/查询视频在哪里 | `audit` 或 `search` | 只读核验或检索，不发布、不修改收藏 |
 
-3. **Source reconstruction**
-   - Delegate extraction/OCR/outline-body diff/link recovery to `video-doc-weekly-ocr`.
-   - Apply every applicable rule from the issue ledger before declaring a link missing.
-   - Use `agent-reach` for exact-title and platform searches. Search Bilibili, Douyin, Xiaohongshu, and general web as available, respecting each platform's cooldown circuit breaker.
 
-4. **Evidence classification**
-   Every item must end in exactly one state:
+## 标准执行流水线
 
-   - `linked_source`: URL directly visible in the owning source frame or exact public ownership closure;
-   - `linked_public_match`: exact public title/page match, visibly labeled as non-source-original;
-   - `screenshot_fallback`: item-owned crop with source part/timestamp and explicit `不作为链接证据`;
-   - `unresolved`: only after the deep-search gate and source-frame recheck fail. Unresolved items block publication unless the user explicitly accepts them.
-
-   A URL near a title is not ownership evidence. Adjacent-item URLs, generic-topic results, and short Douyin URLs are rejected.
-
-5. **Local gates before Feishu**
-   Run `scripts/validate_weekly_delivery.py <report-dir>`. Publication is blocked when any of these are true:
-
-   - duplicate URLs or title collisions;
-   - malformed/short Douyin URLs;
-   - unresolved items;
-   - screenshot fallback without source timestamp, evidence boundary, or unique item-owned path;
-   - local processing paths leaked into the clean document;
-   - audit counts differ from the current document build.
-
-6. **Feishu write and location**
-   - Generate XML from the clean local document.
-   - Update the chosen existing docx, or create exactly one document only when no same-week doc exists.
-   - Insert fallback images under their owning headings, then fetch with IDs and verify heading -> image -> review note -> next item order.
-   - Move/verify the docx in the resolved destination folder. Folder placement is part of success, not a later cleanup.
-
-7. **Post-publish verification and memory**
-   - Fetch the live doc and folder listing. Verify title, revision, folder token, all primary URLs, fallback media, item order, and duplicate count.
-   - Append failures and fixes to `.weekly-report-state/issue-ledger.json` with date, symptom, root cause, prevention rule, and verification command. Do not record cookies, tokens, or secrets.
-   - A successful API response without live fetch and folder verification is `partial`, never complete.
-
-## Issue Ledger Rules
-
-Use `references/issue-ledger.md`. The ledger is a prevention checklist, not a narrative diary. Each entry must become one of: a preflight check, a script assertion, a required search query family, or a post-publish verification.
-
-Known entries from the 2026-08-25 run:
-
-- resolve the Drive folder before writing;
-- search for same-title existing docs before create;
-- do not bind a URL from the next/adjacent item;
-- do deep platform search before screenshot fallback;
-- distinguish source URL, public match, and title-only screenshot;
-- move the fallback image under its owning heading;
-- verify the live folder listing after moving the doc.
-
-## Anti-Skipping Rules
-
-- “时间紧” does not waive the duplicate guard or live verification.
-- “链接看起来像” is not ownership evidence; require source-frame binding or exact public closure.
-- “上传成功” is not media placement proof; fetch block order.
-- “本地审计通过” is not Feishu publication proof; fetch the live document and folder.
-- Never announce all links complete while any item is only a screenshot fallback; report the split explicitly.
-
-## Eval Expectations
-
-Positive prompts route here: “每周用视频做周报，自动补链接并放进水球泡周报，记住上周的问题”。
-
-Negative prompts must route elsewhere: “把这段会议录音总结成三点”；“只修改飞书文档中的一个错别字”。
-
-Required evidence for a completed run: local audit JSON, issue-ledger update, live Feishu revision, canonical folder token, folder listing showing exactly one current-week final doc, and a fetched block-order check for every fallback image.
+1. **环境检查与准备**：
+   - 检查空闲内存，保证不卡死系统；
+   - 确认录屏源文件（如 P1/P2 mp4）、期号与目标名称（飞书“水球泡周报”、抖音“水球泡视频周报”、B站“水球泡周报视频”）。
+2. **提取与建库**：
+   - `video-doc-weekly-ocr` 提取条目，生成 `run.json`。
+3. **缺失视频多渠道检索与截图对照**：
+   - 右侧 ChatGPT 检索出处；
+   - 平台站内搜索精确比对；
+   - 确实无链接的条目提取高清截图，并与有链接条目执行互斥门禁。
+4. **飞书发布与对齐**：
+   - 调用 `lark-cli` 发布或更新文档，精准嵌入无链接条目截图。
+5. **串行真实收藏入夹**：
+   - 抖音两阶段真实入夹（点亮收藏 -> 文件夹内批量添加提交）；
+   - B站接口真实入库（fid 文件夹写入）；
+   - 两轮全分页回读对账，确认缺失为 0。
+6. **交付与归档**：
+   - 导出 `document.md`、`weekly.xml`，更新 `catalog.sqlite`。

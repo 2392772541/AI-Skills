@@ -1,23 +1,9 @@
-# Eval Cases
+# 路由与行为验收
 
-## Positive routing
+正向：制作水球泡周报并收藏双平台；从飞书内刊批量收藏抖音；收藏周报中的B站视频；继续上期周报补链收藏；查本期收藏视频对应原链接。
 
-`每周用本周两个视频制作周报，联网补全缺失链接，写入水球泡周报目录，并自动避免上周的重复文档和错绑链接问题。`
+负向：普通项目工作周报；抖音上传；下载B站单视频；会议录音总结；修改飞书错别字。不能被聚合技能误吞。
 
-Expected: route to `video-doc-weekly-orchestrator`; require folder preflight, duplicate guard, deep-search gate, local audit, live Feishu fetch.
+行为：tests/test_workflow.py为完全离线合成fixture、零平台写入，覆盖完整双平台状态机、重复保护、链接身份、恢复、媒体归属、分页、未知写入、两轮回读、索引与只读模式。真实Vol295回放另保存在交付报告目录，历史不可信状态必须仍是needs_review/partial。
 
-## Negative routing
-
-`把这段会议录音总结成三条行动项。`
-
-Expected: route to meeting/transcript skill, not this orchestrator.
-
-`只把飞书文档里的一个错别字改掉。`
-
-Expected: route to lark-doc, not this orchestrator.
-
-## Behavior regression
-
-Fixture: `weekly_2026_08_25/report`.
-
-Expected observable result: validator exits 0 and reports 62 items, 61 linked items, 1 screenshot fallback; malformed links, unresolved items, duplicate URLs, temporary path leaks all equal zero.
+不虚报：关键词route不等于模型实际调用成功；本轮未新增周报、未改历史收藏。新一期真实端到端验收需要授权和登录态下实跑。
