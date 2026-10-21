@@ -89,8 +89,8 @@ git clone https://github.com/2392772541/video-doc-weekly-orchestrator.git ~/.cod
 ### C. 运行回归测试验证
 ```bash
 cd video-doc-weekly-orchestrator
-python -m unittest discover -s tests -p "test_*.py"
-# 预期输出：Ran 47 tests ... OK
+pytest tests/test_workflow.py -q
+# 预期输出：67 passed ... [100%]
 ```
 
 ---
@@ -132,10 +132,19 @@ python scripts/weekly.py end-write --run ./workflow --attempt-id <attempt_id> --
 python scripts/weekly.py reconcile --run ./workflow --platform douyin
 python scripts/weekly.py reconcile --run ./workflow --platform bilibili
 
-# 10. 完成归档入库与跨期索引更新
+# 10. 终末收尾：飞书文档蓝色链接转原生可交互视频预览 (Iframe)
+python scripts/weekly.py convert-preview --doc "<doc_id>"
+
+# 11. 飞书大纲侧边栏重构与二级小标题还原 (H3 二级分类 + H4 编号条目)
+python scripts/weekly.py sync-sidebar --doc "<doc_id>"
+
+# 12. 从已有飞书周报逆向提取视频清单 (支持书签与 iframe 播放器穿透)
+python scripts/weekly.py extract-feishu --doc "<doc_id>" --out ./manifest.json
+
+# 13. 完成归档入库与跨期索引更新
 python scripts/weekly.py finish --run ./workflow --catalog ~/.weekly-library/catalog.sqlite
 
-# 11. 跨期总库检索
+# 14. 跨期总库检索
 python scripts/weekly.py search --catalog ~/.weekly-library/catalog.sqlite --query "快乐发生"
 ```
 
@@ -144,3 +153,13 @@ python scripts/weekly.py search --catalog ~/.weekly-library/catalog.sqlite --que
 ## 5. 开源协议与维护
 - Maintainer: 2392772541
 - License: MIT / Private Personal Automation Pipeline
+
+## 自动识链自愈与截图扫描 (Auto-Heal Engine)
+针对周报制作过程中“原视频画面印有链接但文字排版截断或漏识”的问题，本技能集成了基于 RapidOCR 的自动识链与互斥排版自愈能力：
+```bash
+# 扫描截图中印制的完整链接并自动补全升级条目，清除多余图片块
+python scripts/weekly.py auto-heal --run <run_dir>
+
+# 仅扫描图片中的视频链接
+python scripts/weekly.py scan-screenshots --run <run_dir>
+```
