@@ -176,7 +176,7 @@ def evaluate_candidate_match(item_title: str, item_author: str, candidate_title:
         if clean_cand_auth and len(clean_cand_auth) >= 2 and clean_cand_auth in b_tokens:
             body_bonus = True
             author_bonus = True
-        if clean_cand and any(clean_cand[i:i+6] in b_tokens for i in range(len(clean_cand) - 5)):
+        if c_cand and any(c_cand[i:i+6] in b_tokens for i in range(len(c_cand) - 5)):
             body_bonus = True
 
     if has_core_token and (ratio >= 0.4 or body_bonus):
@@ -513,7 +513,10 @@ def find_item_in_video_timeline(
                 ys = [p[1] for p in best_box]
                 x1 = max(0, int(min(xs)) - 35)
                 y1 = max(0, int(min(ys)) - 25)
-                x2 = min(w, int(max(xs)) + 450)
+                if min(xs) < 650 and max(xs) <= 650:
+                    x2 = min(645, max(int(max(xs)) + 15, x1 + 100))
+                else:
+                    x2 = min(w, int(max(xs)) + 450)
                 y2 = min(h, int(max(ys)) + 45)
                 crop_img = img.crop((x1, y1, x2, y2))
                 card_out = Path(card_output_path)
