@@ -1,0 +1,219 @@
+{
+  "_使用说明": [
+    "三维场景 JSON 母版。复制一份到 .previz/epNN-sXX-cN.json，把所有 {{}} 换成本条的实际值，删掉用不到的可选字段与本说明块，即可渲染。",
+    "渲染：python3 .claude/skills/previz/scripts/previz.py .previz/epNN-sXX-cN.json -m play|grid|keyframes|plan|stage|cut [-o 输出.html] [--cols N]",
+    "六模式：play=视频条提示词 · grid=宫格控制图 · keyframes=关键帧序列控制图 · plan=站位图控制图 · stage=场记平面图（工作视图，垂直俯视看全部机位覆盖）· cut=接缝检查（工作视图，逐缝审越轴与跳切）。同一份 JSON 六模式都能渲，选错重跑即可。",
+    "陈设 kind 词表（引擎 SOLID_KINDS）：wall floor door window curtain pillar stairs platform mirror frame rug / counter table desk chair stool bench sofa bed shelf cabinet screen lamp / plant tree rock vat car cabin streetlamp animal slat block；基元 sphere cylinder cone dome fog water statue 用来拼词表没有的东西，任何陈设可加 opacity 半透明与 glow 发光，floor 的 tone 定地面色；常用叫法 fridge tv bar railing crate couch photo carpet cat 等按别名表自动折到预制件。每个 kind 是一个固定预制件，跨场、跨模型长得一样；rot 给绕竖轴的角度；给 id 就能被 look / facing / gaze / axis 引用、被 moves 挪动（猫沿墙头走）。词表外的 kind 按灰盒子画并在自检里报出来。",
+    "人偶姿态：figures 可写 pose（stand / sit / kneel / crouch / lie 仰卧 / prone 俯卧）与 arms（down / forward / hold / up / cross 抱胸 / back 背手 / akimbo 叉腰 / point 指），左右不同写 armL / armR，sit 可加 seat 座面高度（席地写 0）；焦点物可写 shape（disc / box / ball / stick）与 s 尺寸；镜头表写了蹲坐跪卧就写，不写默认站姿。某一镜里的变化（站直、回头看窗）写进该镜的 figures 覆盖 {\"id\": {\"pose\": ..., \"arms\": ..., \"facing\": ..., \"gaze\": ...}}，只写变了的项，不改母项。",
+    "轴线两端可以是人、焦点物、带 id 的陈设，或直接写点 [x, y, z]；镜头表明写了轴上镜 / 骑轴中性镜的镜写 onAxis: true，没标的不写。facing / gaze / look 同样接受 id 或点。",
+    "画面在浏览器里用 three.js 实时渲染：previz.py 同目录有 three.min.js 就内嵌、离线可开；没有就走 cdnjs、打开 HTML 时需联网。plan 与 stage 是 SVG 图解，不需要联网。",
+    "只有一套坐标系，0–100 的三维网格：x 左右、y 高度（0 就是地面）、z 进深（大 = 靠近默认机位一侧）。位置写 p:[x,y,z]，尺寸写 s:[宽,高,深]。二维版那两套要人工对齐的坐标系已经不存在——俯视图与画面是同一份数据的两次投影，对不上在物理上就不可能。",
+    "填法三步。第一步抽空间：solids / figures / focus / axis 全部从 03-shots/epNN-shots.md 本场场头的场级空间地图块抽，只抽决定空间关系的与镜头表点了名的，不搬整屋陈设。",
+    "第二步抽镜：shots 从逐镜六字段抽；镜头语言原文整句抄进 lens，一个字不改（页面把它与译出的摄影机数据并排显示，就是给人核对翻译用的）；title 抄这一镜的标题、move 抄运镜的一句话标签、at 是关键帧页的帧标——这三样是页面上的字幕，不填就是空白或引擎兜底的话；导演意图的情感行压一句进 intent。镜头表没写的字段整项删掉，并在 meta.note 记一句，不猜。",
+    "第三步翻运镜：读镜头语言原文再译成摄影机数据，顺序不许反。摄影机只有三种形态——静止写 cam+look+fov；两点插值再加 to / lookTo / fovTo 与 moveEase；环绕写 orbit{center,r,from,to,y}+look。推拉摇移升降不是五种特例，是同一套插值的不同分量在动。镜头表写锁定机位就只留 cam+look+fov。",
+    "fov 是水平视场角、单位度，不是焦段毫米数。镜头语言写焦段时按全画幅换算 fov = 2·arctan(18/焦段)：24mm→74° · 35mm→55° · 50mm→40° · 85mm→24° · 135mm→15°。照抄毫米数当 fov 是本母版最贵的错——fov:85 是超广角，与 85mm 长焦正好相反，而且渲得出图、不报错。",
+    "数值位要写成裸数字、去掉引号。留着 {{}} 字符串不会渲出一张错的草图——引擎的数据健康自检会把它们标成 [拦下]，退出码 2 停在渲染之前，已有产物一个字不动。meta.aspect 留着占位符同样以退出码 2 拒渲。",
+    "必填，缺了会崩或会让自检空转：meta.aspect（值写错以退出码 2 拒渲；整项删掉却不崩，静默按 9:16 渲——横幅项目一旦漏写，全片构图判断都是错的）· shots 非空 · 每镜要么 cam+look 要么 orbit+look · 每镜 fov 是裸数字 · 两人以上的对手戏必须声明 axis 且两个 id 在 figures 里找得到。",
+    "上面这些漏了不用自己记：跑一次就有数据健康自检逐条报出来，会崩的标 [拦下]、只是让自检空转的不标。它报的是这份 JSON 写漏了、不是镜头表错了，就在本站补完即可——三项自检里只有它不回流。",
+    "填完先验 JSON 合法：python3 -c \"import json,sys;json.load(open(sys.argv[1]))\" .previz/epNN-sXX-cN.json",
+    "渲完把终端三项自检逐条读完：数据健康那段要是空的；轴线那行读到「未声明轴线」而本条明明是双人对视，说明检查根本没跑；接缝夹角低于 30° 的缝会单独列出来。",
+    "逐字段判据看 ../references/scene-data-method.md；填好的整体长什么样看 ../examples/scene-example.json，那份第 6 镜是环绕；外景、蹲姿、逐镜覆盖与轴上镜看 ../examples/scene-exterior.json。本说明块引擎不读，交付前删掉。"
+  ],
+  "meta": {
+    "id": "{{epNN-sXX-cN}}",
+    "title": "{{本条在镜头表里的标题原文}}",
+    "track": "{{分波字母}}",
+    "aspect": "{{9:16 或 16:9，取自 visual-style 定的分波画幅}}",
+    "note": "{{数据取自哪个文件哪一版 + 哪些字段镜头表没写所以没填}}"
+  },
+  "solids": [
+    {
+      "kind": "floor",
+      "p": [
+        50,
+        -1,
+        50
+      ],
+      "s": [
+        104,
+        2,
+        104
+      ]
+    },
+    {
+      "kind": "wall",
+      "p": [
+        50,
+        30,
+        4
+      ],
+      "s": [
+        104,
+        60,
+        3
+      ],
+      "label": "{{后墙，可删}}"
+    },
+    {
+      "kind": "slat",
+      "p": [
+        "{{x}}",
+        "{{高度}}",
+        "{{进深}}"
+      ],
+      "s": [
+        "{{宽}}",
+        "{{厚}}",
+        "{{深}}"
+      ],
+      "slats": {
+        "step": 6,
+        "gap": [
+          "{{窄口起点 x}}",
+          "{{窄口终点 x}}"
+        ]
+      },
+      "label": "{{齐眉木栅一类的栅条陈设。slats.step 是栅条间距；slats.gap 是递物窄口的两个 x 坐标 [起, 止]，那一段的栅条会自动缩短。不要窄口就删掉 gap，不要栅条就整个删掉 slats 并把 kind 改回 counter}}"
+    },
+    {
+      "kind": "shelf",
+      "p": [
+        "{{x}}",
+        "{{高度}}",
+        "{{进深}}"
+      ],
+      "s": [
+        "{{宽}}",
+        "{{高}}",
+        "{{深}}"
+      ],
+      "label": "{{镜头表点了名的陈设}}"
+    }
+  ],
+  "figures": [
+    {
+      "id": "{{短串，全场唯一}}",
+      "label": "{{可视特征代称，取自 04-assets/reference-index.md；那份缺就写镜头表里的代称，不写 @编号}}",
+      "tone": "amber",
+      "p": [
+        "{{x}}",
+        0,
+        "{{进深}}"
+      ],
+      "h": "{{身高}}",
+      "stand": 0,
+      "_姿态": "可选：pose 取 stand / sit / kneel / crouch / lie / prone，arms 取 down / forward / hold / up / cross / back / akimbo / point（左右不同写 armL / armR），sit 可加 seat 座面高度；站着的人不写，本说明键引擎不读、交付前删掉",
+      "facing": "{{朝向谁——写另一个 id，不写角度}}",
+      "gaze": "{{视线落在谁身上——可与 facing 不同，躯干朝柜台眼睛瞟门口是一句话读得懂的表演信息}}"
+    },
+    {
+      "id": "{{短串，全场唯一}}",
+      "label": "{{可视特征代称}}",
+      "tone": "blue",
+      "p": [
+        "{{x}}",
+        0,
+        "{{进深}}"
+      ],
+      "h": "{{身高}}",
+      "stand": "{{站立面高度——台阶或踏板；站在地上写 0。这是高度不是纵深，纵深在 p 的第三个数}}",
+      "facing": "{{另一个 id}}",
+      "gaze": "{{另一个 id}}"
+    }
+  ],
+  "focus": [
+    {
+      "id": "{{短串}}",
+      "label": "{{被镜头表点名要拍的那件小物}}",
+      "tone": "gold",
+      "p": [
+        "{{x}}",
+        "{{高度}}",
+        "{{进深}}"
+      ],
+      "r": 1.4
+    }
+  ],
+  "axis": [
+    "{{figures 里第一个人的 id}}",
+    "{{figures 里第二个人的 id}}"
+  ],
+  "shots": [
+    {
+      "n": 1,
+      "title": "{{这一镜在镜头表里的标题；页面用它当字幕，不填就是空的}}",
+      "framing": "{{景别，抄镜头表原话}}",
+      "dur": "{{秒，裸数字}}",
+      "pace": "{{节奏}}",
+      "beat": "{{台词或音效时点}}",
+      "move": "{{运镜的一句话标签，放映页侧栏显示——如「锁定机位 · 无漂移」「绕行 100°」。不填时引擎按有没有 orbit / to 自己兜底，兜出来的话没有镜头表的原话准}}",
+      "at": "{{关键帧页的帧标，如「第 1 帧」；不填按镜号兜底}}",
+      "lens": "{{【镜头语言】整句原文，一个字不改}}",
+      "intent": "{{【导演意图】的情感行压成一句}}",
+      "cam": [
+        "{{机位 x}}",
+        "{{机位高度}}",
+        "{{机位进深}}"
+      ],
+      "look": [
+        "{{看点 x}}",
+        "{{看点高度}}",
+        "{{看点进深}}"
+      ],
+      "fov": "{{水平视场角，度；不是焦段毫米数}}",
+      "moves": [
+        {
+          "who": "{{谁在动——figures 或 focus 的 id}}",
+          "from": [
+            0,
+            0,
+            0
+          ],
+          "to": [
+            "{{x 位移}}",
+            0,
+            "{{z 位移}}"
+          ],
+          "t": [
+            0,
+            0.55
+          ],
+          "_": "偏移是相对这个人自己的 p 的位移，不是绝对坐标。只做移动不做表演——抬手转头皱眉一概不写。整镜不动就删掉 moves。"
+        }
+      ],
+      "_静止": "这一镜是静止机位的写法：只有 cam + look + fov。要运镜就加 to / lookTo / fovTo 与 moveEase，见下一镜。"
+    },
+    {
+      "n": 2,
+      "title": "{{这一镜在镜头表里的标题；页面用它当字幕，不填就是空的}}",
+      "framing": "{{景别}}",
+      "dur": "{{秒}}",
+      "pace": "{{节奏}}",
+      "beat": "{{时点}}",
+      "move": "{{运镜的一句话标签，放映页侧栏显示——如「锁定机位 · 无漂移」「绕行 100°」。不填时引擎按有没有 orbit / to 自己兜底，兜出来的话没有镜头表的原话准}}",
+      "at": "{{关键帧页的帧标，如「第 2 帧」；不填按镜号兜底}}",
+      "lens": "{{整句原文}}",
+      "intent": "{{一句}}",
+      "orbit": {
+        "center": [
+          "{{绕谁转——圆心 x}}",
+          "{{圆心高度}}",
+          "{{圆心进深}}"
+        ],
+        "r": "{{半径}}",
+        "from": "{{起始角度，度}}",
+        "to": "{{终止角度，度}}",
+        "y": "{{摄影机高度}}"
+      },
+      "look": [
+        "{{看点 x}}",
+        "{{看点高度}}",
+        "{{看点进深}}"
+      ],
+      "fov": "{{度}}",
+      "moveEase": "out",
+      "_环绕": "环绕是三维化的直接理由——二维画不出来。不要手写一串插值点冒充环绕：角度算不准，接缝检查也读不出这是运动镜。",
+      "_两点插值": "不环绕而要推拉摇移时删掉 orbit，改回 cam + look + fov，再按需加 to（机位终点）/ lookTo（看点终点）/ fovTo（视场角终点）。moveEase 给速度质感：linear 匀速 · out 先快后缓 · 不写则两头缓中间快。"
+    }
+  ]
+}
