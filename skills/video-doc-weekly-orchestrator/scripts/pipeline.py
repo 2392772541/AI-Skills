@@ -8,6 +8,7 @@ import json
 import os
 import subprocess
 import time
+import re
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
 import weekly_core as w
@@ -61,7 +62,9 @@ def run_pipeline(run_dir: Path | str, manifest_path: Path | str, mode: str = "fu
     for it in seed_data.get("items", []):
         k = it["key"]
         sid = it.get("source_id", "src-video-p1")
-        sec = it.get("timestamp_seconds", 0)
+        sec = it.get("timestamp_seconds")
+        if sec is None:
+            sec = it.get("source", {}).get("timestamp_seconds")
         url = it.get("url") or it.get("canonical_url", "")
         kind = it.get("kind", "video")
         title = it["title"]
@@ -134,27 +137,36 @@ def run_pipeline(run_dir: Path | str, manifest_path: Path | str, mode: str = "fu
                 "evidence_files": [f"evidence/ver_{k}.json"]
             })
         else:
-            # Plain text entry without external link -> extract timestamp frame
+            # Plain text entry without external link -> extract timestamp frame ONLY if verified timestamp >= 30.0s
             sc_img = screenshots_dir / f"{k}.jpg"
-            if not sc_img.exists() and sid in sources_dict and Path(ffmpeg).exists():
-                v_path = sources_dict[sid]["path"]
-                cmd = [
-                    ffmpeg, "-ss", str(sec), "-i", v_path,
-                    "-vframes", "1", "-q:v", "2", "-threads", "1",
-                    str(sc_img), "-y"
-                ]
+            valid_sec = sec is not None and isinstance(sec, (int, float)) and sec >= 30.0
+            if valid_sec and sid in sources_dict and Path(ffmpeg).exists():
+                if not sc_img.exists():
+                    v_path = sources_dict[sid]["path"]
+                    cmd = [
+                        ffmpeg, "-ss", str(sec), "-i", v_path,
+                        "-vframes", "1", "-q:v", "2", "-threads", "1",
+                        str(sc_img), "-y"
+                    ]
+                    try:
+                        subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    except Exception:
+                        pass
+            elif sc_img.exists():
+                # Delete any stale or 0s frame for items that have no valid timestamp or have links
                 try:
-                    subprocess.run(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                    sc_img.unlink()
                 except Exception:
                     pass
 
+            has_real_img = sc_img.exists() and valid_sec
             exc_ev = evidence_dir / f"exc_{k}.json"
             exc_ev.write_text(json.dumps({
                 "key": k,
                 "title": title,
-                "reason": "口播与随笔感悟，无独立外部视频链接，提供录像对应时间戳截图作为读者对照依据",
-                "screenshot": str(sc_img.relative_to(run_path)) if sc_img.exists() else "",
-                "timestamp_seconds": sec
+                "reason": "口播与随笔感悟，无独立外部视频链接，提供录像对应时间戳截图作为读者对照依据" if has_real_img else "口播与随笔感悟，纯文本展示，不盲目填充0秒封面图",
+                "screenshot": str(sc_img.relative_to(run_path)) if has_real_img else "",
+                "timestamp_seconds": sec if valid_sec else None
             }, ensure_ascii=False, indent=2), encoding="utf-8")
 
             events.append({
@@ -224,7 +236,22 @@ def run_pipeline(run_dir: Path | str, manifest_path: Path | str, mode: str = "fu
     # Apply all events
     state = w.apply_events(state, run_path, events)
 
-    # 3. Screenshot OCR Auto-Heal (Line printed on recording)
+    # 3. Progressive 3-Pass Video Frame Extraction & Link Recovery (Coarse -> Dense Gap -> Tail Sweep)
+    video_sources = {
+        s["source_id"]: s["path"]
+        for s in seed_data.get("sources", [])
+        if Path(s.get("path", "")).is_file()
+    }
+    multi_extract_summary = None
+    if video_sources:
+        try:
+            multi_extract_summary = multi_search_resolver.run_three_pass_video_extraction(
+                video_sources, state, run_path, coarse_step=12.0, dense_step=1.0, tail_step=2.0
+            )
+        except Exception as ex:
+            multi_extract_summary = {"error": str(ex)}
+
+    # Fallback to screenshot OCR auto-heal for any remaining candidate files
     heal_res = resolve_links.auto_heal_from_screenshots(run_path, state)
 
     # 4. Multi-Channel Search Recovery (Bilibili API search & ChatGPT prompt export)
@@ -419,7 +446,24 @@ def run_pipeline(run_dir: Path | str, manifest_path: Path | str, mode: str = "fu
     if target_doc_id:
         try:
             import sync_feishu_sidebar
-            sidebar_sync_result = sync_feishu_sidebar.sync_document_sidebar(target_doc_id, temp_dir=evidence_dir)
+            # Dynamically derive subsections and their anchor items from items list
+            dynamic_subs = []
+            seen_subs = set()
+            for it in state.get("items", []):
+                sub = it.get("subsection")
+                sec = it.get("section", "")
+                if sub and sub not in seen_subs and any(k in sec for k in ["游戏人生", "自媒体与搞钱", "AI视野", "AI优秀文章"]):
+                    seen_subs.add(sub)
+                    # Extract anchor keyword from the title of the first item in this subsection
+                    clean_kw = re.sub(r"^\d+[\.、\s]+", "", it.get("title", "")).strip()[:14]
+                    if clean_kw:
+                        dynamic_subs.append((sub, clean_kw))
+
+            sidebar_sync_result = sync_feishu_sidebar.sync_document_sidebar(
+                target_doc_id,
+                subsections_config=dynamic_subs or None,
+                temp_dir=evidence_dir
+            )
             (evidence_dir / "feishu_sidebar_sync.json").write_text(
                 json.dumps(sidebar_sync_result, ensure_ascii=False, indent=2), encoding="utf-8"
             )
@@ -454,6 +498,7 @@ def run_pipeline(run_dir: Path | str, manifest_path: Path | str, mode: str = "fu
         "items_count": len(state["items"]),
         "rendered": render_res,
         "auto_healed": heal_res,
+        "three_pass_extraction": multi_extract_summary,
         "search_healed": search_healed,
         "remaining_unresolved": len(rem_unresolved),
         "chatgpt_prompt_file": str(evidence_dir / "chatgpt_search_prompt.txt"),

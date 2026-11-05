@@ -2037,6 +2037,196 @@ Hope this helps!'''
             self.assertLess(crop_img.size[0], 1920)
             self.assertLess(crop_img.size[1], 1080)
 
+    def test_zero_second_timestamp_fallback_prevented(self):
+        import resolve_links
+        with tempfile.TemporaryDirectory() as tmpdir:
+            item_0s = {
+                "key": "test-1",
+                "title": "测试条目",
+                "source": {"source_id": "src-video-p1", "timestamp_seconds": 0.0}
+            }
+            # Should return None because timestamp is < 30s
+            res = resolve_links.capture_item_screenshot(Path(tmpdir), item_0s)
+            self.assertIsNone(res)
+
+            # smart_capture_item_screenshot should also reject 0s
+            smart_res = resolve_links.smart_capture_item_screenshot(Path(tmpdir), item_0s)
+            self.assertIsNone(smart_res.get("screenshot"))
+            self.assertEqual(smart_res.get("reason"), "no_valid_timestamp_found")
+
+    def test_mutual_exclusion_removes_screenshots_when_url_present(self):
+        import resolve_links
+        import weekly_core
+        with tempfile.TemporaryDirectory() as tmpdir:
+            item_with_url = {
+                "key": "test-2",
+                "title": "已验证外链条目",
+                "url": "https://www.douyin.com/video/7699699180269401010",
+                "screenshot": "evidence/screenshots/test-2.jpg",
+                "source": {"source_id": "src-video-p1", "timestamp_seconds": 150.0}
+            }
+            # smart_capture should immediately pop screenshot and return None
+            res = resolve_links.smart_capture_item_screenshot(Path(tmpdir), item_with_url)
+            self.assertIsNone(res.get("screenshot"))
+            self.assertEqual(res.get("reason"), "item_already_has_url")
+            self.assertNotIn("screenshot", item_with_url)
+
+            # Test build_report rendering mutual exclusion
+            state = {
+                "issue": {"title": "周报测试"},
+                "items": [
+                    {
+                        "key": "test-2",
+                        "number": 1,
+                        "title": "已验证外链条目",
+                        "kind": "video",
+                        "url": "https://www.douyin.com/video/7699699180269401010",
+                        "canonical_url": "https://www.douyin.com/video/7699699180269401010",
+                        "screenshot": "evidence/screenshots/test-2.jpg",
+                        "exception": {"reason": "原作品未确认"},
+                        "body": ""
+                    }
+                ],
+                "layout": [
+                    {"type": "item", "key": "test-2"}
+                ]
+            }
+            md, xml = weekly_core.build_report(state)
+            self.assertNotIn("【原录像截图核验参考：", md)
+            self.assertNotIn("原作品未确认", md)
+            self.assertIn("https://www.douyin.com/video/7699699180269401010", md)
+
+    def test_search_resolution_duplicate_url_rejection(self):
+        """Validates that apply_search_resolutions_to_state strictly rejects assigning
+        the exact same URL to two different items, preventing duplicate video cards.
+        """
+        import multi_search_resolver
+        with tempfile.TemporaryDirectory() as tmpdir:
+            state = {
+                "items": [
+                    {"key": "item-1", "title": "视频一", "kind": "video", "canonical_url": "https://www.douyin.com/video/7699060466600938792"},
+                    {"key": "item-2", "title": "视频二", "kind": "video", "exception": {"reason": "未确认"}}
+                ],
+                "layout": []
+            }
+            resolutions = [
+                {"key": "item-2", "title": "视频二", "url": "https://www.douyin.com/video/7699060466600938792"}
+            ]
+            res = multi_search_resolver.apply_search_resolutions_to_state(Path(tmpdir), state, resolutions)
+            self.assertEqual(len(res["applied"]), 0)
+            self.assertEqual(len(res["rejected"]), 1)
+            self.assertEqual(res["rejected"][0]["reason"], "duplicate_url_already_assigned_to_another_item")
+
+    def test_bilibili_browser_script_uses_real_api(self):
+        """Validates that collect_runner generates an authentic Bilibili script with in-page API deal
+        rather than a dummy mock receipt push.
+        """
+        import collect_runner
+        plan = {
+            "plan_id": "plan_test",
+            "folder_id": "4103329683",
+            "folder_name": "水球泡周报视频",
+            "account_id": "test_user",
+            "missing_ids": ["BV1vfHF6EESs"]
+        }
+        js = collect_runner.generate_browser_script(Path("."), "bilibili", plan)
+        self.assertIn("https://api.bilibili.com/x/v3/fav/resource/deal", js)
+        self.assertIn("bili_jct", js)
+        self.assertIn("runBilibiliRealCollection", js)
+
+    def test_three_pass_video_extraction_flow(self):
+        """Validates that run_three_pass_video_extraction executes Pass 1 -> Pass 2 -> Pass 3 in sequence,
+        auto-healing newly uncovered candidates at each pass and persisting three_pass_extraction_summary.json.
+        """
+        import multi_search_resolver
+        from unittest.mock import patch
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmp_p = Path(tmpdir)
+            state = {
+                "items": [
+                    {"key": "it-1", "title": "第一项", "kind": "video", "number": 1, "exception": {"reason": "未确认"}},
+                    {"key": "it-2", "title": "第二项", "kind": "video", "number": 2, "exception": {"reason": "未确认"}},
+                    {"key": "it-3", "title": "第三项", "kind": "video", "number": 3, "exception": {"reason": "未确认"}}
+                ],
+                "layout": []
+            }
+
+            # Pass 1 finds candidate for it-1
+            cand1 = [{"url": "https://www.douyin.com/video/7699060466600938792", "id": "7699060466600938792", "platform": "douyin", "raw": "1. 第一项", "ocr_lines": ["1. 第一项"]}]
+            # Pass 2 (dense gap) finds candidate for it-2
+            cand2 = [{"url": "https://www.douyin.com/video/7701199334364204351", "id": "7701199334364204351", "platform": "douyin", "raw": "2. 第二项", "ocr_lines": ["2. 第二项"]}]
+            # Pass 3 (tail sweep) finds candidate for it-3
+            cand3 = [{"url": "https://www.douyin.com/video/7700912487595560218", "id": "7700912487595560218", "platform": "douyin", "raw": "3. 第三项", "ocr_lines": ["3. 第三项"]}]
+
+            fake_video = tmp_p / "fake_video.mp4"
+            fake_video.write_bytes(b"\x00" * 1024)
+
+            with patch("multi_search_resolver.scan_video_timeline_for_links", return_value=cand1), \
+                 patch("multi_search_resolver.targeted_dense_gap_scan", return_value=cand2), \
+                 patch("multi_search_resolver.tail_section_dense_scan", return_value=cand3):
+
+                summary = multi_search_resolver.run_three_pass_video_extraction(
+                    {"src-p1": fake_video}, state, tmp_p
+                )
+
+                self.assertEqual(summary["pass1_coarse"]["items_healed"], 1)
+                self.assertEqual(summary["pass2_dense_gap"]["items_healed"], 1)
+                self.assertEqual(summary["pass3_tail_sweep"]["items_healed"], 1)
+                self.assertEqual(summary["total_healed"], 3)
+                self.assertEqual(summary["unresolved_remaining"], 0)
+                self.assertTrue((tmp_p / "evidence" / "three_pass_extraction_summary.json").is_file())
+                self.assertTrue((tmp_p / "frame_urls.json").is_file())
+
+                # Check state updated
+                self.assertEqual(state["items"][0]["canonical_url"], "https://www.douyin.com/video/7699060466600938792")
+                self.assertEqual(state["items"][1]["canonical_url"], "https://www.douyin.com/video/7701199334364204351")
+                self.assertEqual(state["items"][2]["canonical_url"], "https://www.douyin.com/video/7700912487595560218")
+
+
+    def test_clean_run_cache_behavior(self):
+        """Validates that clean_run_cache safely purges temporary OCR frames,
+        cleans temporary directories, preserves evidence screenshots by default,
+        and honors dry-run simulation.
+        """
+        import weekly_core as w
+        with tempfile.TemporaryDirectory() as tmpdir:
+            base_p = Path(tmpdir)
+            t_dir = base_p / "timeline"
+            d_dir = base_p / "dense_frames"
+            e_dir = base_p / "evidence" / "screenshots"
+            t_dir.mkdir(parents=True)
+            d_dir.mkdir(parents=True)
+            e_dir.mkdir(parents=True)
+
+            (t_dir / "f1.jpg").write_bytes(b"temp1")
+            (t_dir / "f2.jpg").write_bytes(b"temp2")
+            (d_dir / "d1.jpg").write_bytes(b"dense1")
+            (e_dir / "item1.jpg").write_bytes(b"evidence1")
+            (base_p / "frame_p1_10s.jpg").write_bytes(b"loose1")
+
+            # 1. Dry run
+            dry_res = w.clean_run_cache(base_p, dry_run=True)
+            self.assertTrue(dry_res["dry_run"])
+            self.assertEqual(dry_res["deleted_count"], 4)
+            self.assertEqual(dry_res["preserved_evidence_count"], 1)
+            self.assertTrue((t_dir / "f1.jpg").is_file())
+
+            # 2. Real clean without evidence
+            clean_res = w.clean_run_cache(base_p, include_evidence=False, dry_run=False)
+            self.assertFalse(clean_res["dry_run"])
+            self.assertEqual(clean_res["deleted_count"], 4)
+            self.assertEqual(clean_res["preserved_evidence_count"], 1)
+            self.assertFalse((t_dir / "f1.jpg").is_file())
+            self.assertFalse((d_dir / "d1.jpg").is_file())
+            self.assertFalse((base_p / "frame_p1_10s.jpg").is_file())
+            self.assertTrue((e_dir / "item1.jpg").is_file())  # Preserved!
+
+            # 3. Clean with evidence
+            clean_all_res = w.clean_run_cache(base_p, include_evidence=True, dry_run=False)
+            self.assertEqual(clean_all_res["deleted_count"], 1)
+            self.assertFalse((e_dir / "item1.jpg").is_file())
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

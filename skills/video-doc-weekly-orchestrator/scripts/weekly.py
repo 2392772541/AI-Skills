@@ -78,8 +78,11 @@ def parser():
     scan_v = sub.add_parser("scan-video", help="Scan recording video timeline with RapidOCR to discover on-screen URLs and titles")
     scan_v.add_argument("--run", type=Path, required=True)
     scan_v.add_argument("--video", type=Path, help="Optional path to video file (defaults to sources in run.json)")
-    scan_v.add_argument("--step", type=float, default=15.0, help="Sampling step in seconds (default 15s)")
-    scan_v.add_argument("--max-frames", type=int, default=200, help="Maximum frames to sample per video")
+    scan_v.add_argument("--passes", type=int, default=3, choices=(1, 2, 3), help="Number of progressive passes (1: coarse, 2: +dense gap, 3: +tail sweep, default 3)")
+    scan_v.add_argument("--step", type=float, default=12.0, help="Sampling step in seconds for Pass 1 (default 12s)")
+    scan_v.add_argument("--dense-step", type=float, default=1.0, help="Sampling step for Pass 2 dense gaps (default 1.0s / 1 fps)")
+    scan_v.add_argument("--tail-step", type=float, default=2.0, help="Sampling step for Pass 3 tail sweep (default 2.0s)")
+    scan_v.add_argument("--max-frames", type=int, default=None, help="Maximum frames to sample per video (default None for full duration)")
     heal = sub.add_parser("auto-heal", help="End-to-end auto-heal: OCR screenshots, recover links, remove redundant images, and rebind layout")
     heal.add_argument("--run", type=Path, required=True)
     heal.add_argument("--keys", nargs="*", default=None)
@@ -106,6 +109,10 @@ def parser():
     ext_f.add_argument("--doc", type=str, required=True, help="Feishu Document ID/Token")
     ext_f.add_argument("--out", type=Path, required=True, help="Output manifest JSON path")
     ext_f.add_argument("--platform", choices=sorted(w.VIDEO_PLATFORMS), help="Filter by platform")
+    clean_p = sub.add_parser("clean-cache", help="Clean up extracted video frames and temporary OCR caches")
+    clean_p.add_argument("--dir", type=Path, default=Path("."), help="Target workspace or run directory to scan and clean")
+    clean_p.add_argument("--all", action="store_true", help="Include final evidence screenshots (full purge)")
+    clean_p.add_argument("--dry-run", action="store_true", help="Simulate without deleting files")
     for name in ("apply", "audit", "render", "publish-plan", "published", "snapshot", "plan", "begin-write", "end-write", "reconcile", "status", "finish", "index"):
         s = sub.add_parser(name)
         s.add_argument("--run", type=Path, required=True)
@@ -178,6 +185,10 @@ def main(argv=None):
         res = sync_feishu_sidebar.sync_document_sidebar(args.doc, subsections_config=rules)
         output(res)
         return 0 if res.get("ok") else 2
+    if args.command == "clean-cache":
+        res = w.clean_run_cache(args.dir, include_evidence=args.all, dry_run=args.dry_run)
+        output(res)
+        return 0
     if args.command == "extract-feishu":
         import subprocess, extract_feishu
         cmd = f"lark-cli docs +fetch --doc {args.doc} --detail with-ids"
@@ -193,21 +204,32 @@ def main(argv=None):
         import resolve_links
         run_p = args.run.resolve()
         st = w.read_json(run_p / "run.json")
-        video_paths = []
+        video_sources = {}
         if args.video and args.video.is_file():
-            video_paths.append(args.video.resolve())
+            video_sources["src-cmd"] = args.video.resolve()
         else:
             for sid, sinfo in st.get("sources", {}).items():
                 p = sinfo.get("path")
                 if p and Path(p).is_file():
-                    video_paths.append(Path(p).resolve())
-        all_discovered = []
-        for vp in video_paths:
-            disc = multi_search_resolver.scan_video_timeline_for_links(vp, step_sec=args.step, max_frames=args.max_frames)
-            all_discovered.extend(disc)
-        w.write_json(run_p / "frame_urls.json", all_discovered)
-        heal_res = resolve_links.auto_heal_from_screenshots(run_p, st)
-        output({"scanned_videos": [str(p) for p in video_paths], "discovered_urls_count": len(all_discovered), "auto_healed": heal_res})
+                    video_sources[sid] = Path(p).resolve()
+
+        if args.passes >= 2:
+            summary = multi_search_resolver.run_three_pass_video_extraction(
+                video_sources, st, run_p,
+                coarse_step=args.step,
+                dense_step=args.dense_step,
+                tail_step=args.tail_step
+            )
+            w.write_json(run_p / "run.json", st)
+            output({"scanned_sources": {k: str(v) for k, v in video_sources.items()}, "three_pass_summary": summary})
+        else:
+            all_discovered = []
+            for sid, vp in video_sources.items():
+                disc = multi_search_resolver.scan_video_timeline_for_links(vp, step_sec=args.step, max_frames=args.max_frames)
+                all_discovered.extend(disc)
+            w.write_json(run_p / "frame_urls.json", all_discovered)
+            heal_res = resolve_links.auto_heal_from_screenshots(run_p, st)
+            output({"scanned_videos": [str(p) for p in video_sources.values()], "discovered_urls_count": len(all_discovered), "auto_healed": heal_res})
         return 0
     if args.command == "chatgpt-sheet":
         import multi_search_resolver

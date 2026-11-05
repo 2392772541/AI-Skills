@@ -200,7 +200,9 @@ def initialize(seed, mode="full"):
     require(mode in {"collect", "audit"} or seed.get("scope") != "collection_inventory_only_not_full_report", "video_only_inventory_cannot_publish_full_report")
     items = []
     for n, src in enumerate(seed["items"], 1):
-        raw = src.get("original_url", src.get("url", ""))
+        raw = src.get("original_url") if src.get("original_url") is not None else src.get("url", "")
+        if raw is None:
+            raw = ""
         require(isinstance(raw, str), "original_url_must_be_string")
         try:
             link = normalize_url(raw)
@@ -699,6 +701,7 @@ def build_report(state):
             label = (str(it["number"]) + ". " if it["number"] is not None else "") + it["title"]
             item_level = min(current_level + 1, 6)
             h = ET.SubElement(root, "h" + str(item_level))
+            has_url = bool(it.get("canonical_url") or it.get("url"))
             if it["kind"] == "video":
                 h.text = label
                 md.append("#" * item_level + " " + label)
@@ -706,7 +709,7 @@ def build_report(state):
                 bold = ET.SubElement(h, "b")
                 ET.SubElement(bold, "span", {"text-color": "red"}).text = label
                 md.append("#" * item_level + ' <b><span style="color:#d83931">' + html.escape(label) + '</span></b>')
-            if it.get("exception"):
+            if it.get("exception") and not has_url:
                 notice = "原作品未确认，未替代、未收藏：" + it["exception"]["reason"]
                 ET.SubElement(root, "p").text = notice
                 md.append(notice)
@@ -719,11 +722,12 @@ def build_report(state):
                 p_cand.text = "候选链接（待核验）："
                 ET.SubElement(p_cand, "a", href=it["candidate_url"]).text = it["candidate_url"]
                 md.append(cand_notice)
-            if it.get("screenshot") and b["key"] not in image_owner_keys:
+            # Strict mutual exclusion: items with verified URLs must NEVER display screenshot references
+            if not has_url and it.get("screenshot") and b["key"] not in image_owner_keys:
                 p_shot = ET.SubElement(root, "p")
                 p_shot.text = "【原录像截图核验参考：" + it["screenshot"] + "】"
                 md.append("【原录像截图核验参考：" + it["screenshot"] + "】")
-            if it["canonical_url"] and not it.get("exception"):
+            if it.get("canonical_url") and (not it.get("exception") or has_url):
                 p = ET.SubElement(root, "p")
                 ET.SubElement(p, "a", href=it["canonical_url"]).text = it["canonical_url"]
                 md.append(it["canonical_url"])
@@ -932,3 +936,89 @@ def search_catalog(catalog, query, limit=30):
     uri = Path(catalog).resolve().as_uri() + "?mode=ro"
     with closing(sqlite3.connect(uri, uri=True, timeout=10)) as db:
         return [json.loads(row[0]) for row in db.execute("SELECT payload FROM entries WHERE " + clauses + " ORDER BY rowid DESC LIMIT ?", [*terms, limit])]
+def clean_run_cache(target_dir, include_evidence=False, dry_run=False):
+    target_p = Path(target_dir).resolve()
+    require(target_p.exists(), f"target_not_found: {target_p}")
+
+    temp_dir_names = {
+        "timeline", "dense_frames", "tail_frames", "temp_crops",
+        "p2_end_frames", "samples", "dense_p2_pre_end", "dense_p2_start",
+        "dense_gym", "dense_p1_end", "dense_song", "dense_ai"
+    }
+
+    deleted_files = []
+    cleaned_dirs = []
+    freed_bytes = 0
+    preserved_evidence_files = []
+
+    # 1. Walk directory tree
+    for root, dirs, files in os.walk(target_p):
+        cur_dir = Path(root)
+        dir_name = cur_dir.name.lower()
+        is_evidence_screenshots = (cur_dir.name == "screenshots" and cur_dir.parent.name == "evidence")
+
+        if is_evidence_screenshots:
+            if not include_evidence:
+                for f in files:
+                    if f.lower().endswith((".jpg", ".png", ".jpeg")):
+                        preserved_evidence_files.append(str(cur_dir / f))
+                continue
+
+        is_temp_dir = (
+            dir_name in temp_dir_names
+            or "dense" in dir_name
+            or "frames" in dir_name
+            or "crops" in dir_name
+        )
+
+        if is_temp_dir or (include_evidence and is_evidence_screenshots):
+            dir_had_deletes = False
+            for f in files:
+                if f.lower().endswith((".jpg", ".png", ".jpeg")):
+                    f_path = cur_dir / f
+                    try:
+                        sz = f_path.stat().st_size
+                    except Exception:
+                        sz = 0
+                    freed_bytes += sz
+                    deleted_files.append(str(f_path))
+                    dir_had_deletes = True
+                    if not dry_run:
+                        try:
+                            f_path.unlink()
+                        except Exception:
+                            pass
+            if dir_had_deletes:
+                cleaned_dirs.append(str(cur_dir))
+                if not dry_run:
+                    try:
+                        cur_dir.rmdir()
+                    except Exception:
+                        pass
+
+    # 2. Loose test frames in target directory root
+    loose_prefixes = ("frame_p1_", "tmp_loc_", "test_p1_", "clean_crop_", "test_crop_", "located_", "item25_real_frame_")
+    for f_path in target_p.glob("*.jpg"):
+        if f_path.is_file() and any(f_path.name.startswith(pre) for pre in loose_prefixes):
+            try:
+                sz = f_path.stat().st_size
+            except Exception:
+                sz = 0
+            freed_bytes += sz
+            deleted_files.append(str(f_path))
+            if not dry_run:
+                try:
+                    f_path.unlink()
+                except Exception:
+                    pass
+
+    return {
+        "ok": True,
+        "target_dir": str(target_p),
+        "deleted_count": len(deleted_files),
+        "freed_bytes": freed_bytes,
+        "freed_mb": round(freed_bytes / (1024 * 1024), 2),
+        "cleaned_dirs_count": len(cleaned_dirs),
+        "preserved_evidence_count": len(preserved_evidence_files),
+        "dry_run": dry_run
+    }

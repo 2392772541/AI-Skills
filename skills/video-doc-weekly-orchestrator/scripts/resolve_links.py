@@ -218,13 +218,21 @@ def capture_item_screenshot(run_dir: Path, item: dict, sources: dict | None = No
     Returns relative path within run_dir, e.g., 'evidence/screenshots/life-1_145s.jpg'.
     """
     run_dir = Path(run_dir).resolve()
+    # Mutual exclusion: items with canonical_url or url must NOT have screenshots
+    if item.get("canonical_url") or item.get("url"):
+        item.pop("screenshot", None)
+        return None
+
     src = item.get("source") or {}
     source_id = src.get("source_id")
     if not source_id:
         return None
         
     ts = timestamp if timestamp is not None else src.get("timestamp_seconds")
-    if ts is None or not (isinstance(ts, (int, float)) and ts >= 0):
+    if ts is None:
+        ts = item.get("timestamp_seconds")
+    if ts is None or not (isinstance(ts, (int, float)) and ts >= 30.0):
+        # Strict gate: reject 0-second opening black screen or missing timestamps (< 30s)
         return None
         
     video_path = None
@@ -285,14 +293,24 @@ def smart_capture_item_screenshot(run_dir: Path, item: dict, sources: dict | Non
     Also auto-heals if an on-screen URL is seen, strictly enforcing mutual exclusion.
     """
     run_dir = Path(run_dir).resolve()
-    # Mutual exclusion: items with canonical_url must NOT have screenshots
-    if item.get("canonical_url"):
+    # Mutual exclusion: items with canonical_url or url must NOT have screenshots
+    if item.get("canonical_url") or item.get("url"):
         item.pop("screenshot", None)
+        screen_dir = run_dir / "evidence" / "screenshots"
+        if screen_dir.is_dir():
+            safe_k = re.sub(r"[^\w\-]", "_", item.get("key") or "item")
+            for f in screen_dir.glob(f"{safe_k}*"):
+                try:
+                    f.unlink()
+                except Exception:
+                    pass
         return {"healed": False, "screenshot": None, "key": item.get("key"), "reason": "item_already_has_url"}
 
     src = item.get("source") or {}
     source_id = src.get("source_id")
-    ts = src.get("timestamp_seconds", 0)
+    ts = src.get("timestamp_seconds")
+    if ts is None:
+        ts = item.get("timestamp_seconds")
 
     video_path = None
     if sources and source_id in sources:
@@ -311,13 +329,7 @@ def smart_capture_item_screenshot(run_dir: Path, item: dict, sources: dict | Non
     safe_key = re.sub(r"[^\w\-]", "_", key)
     screen_dir = run_dir / "evidence" / "screenshots"
     screen_dir.mkdir(parents=True, exist_ok=True)
-    for ext in (".png", ".jpg", ".jpeg"):
-        existing = screen_dir / f"{safe_key}{ext}"
-        if existing.is_file():
-            rel = f"evidence/screenshots/{existing.name}"
-            item["screenshot"] = rel
-            return {"healed": False, "screenshot": rel, "key": item.get("key"), "timestamp_seconds": ts}
-    card_target = screen_dir / f"{safe_key}_{int(ts)}s_card.jpg"
+    card_target = screen_dir / f"{safe_key}_{int(ts or 0)}s_card.jpg"
 
     if video_path and Path(video_path).is_file():
         try:
@@ -359,10 +371,13 @@ def smart_capture_item_screenshot(run_dir: Path, item: dict, sources: dict | Non
         except Exception:
             best_sec = ts
 
-    rel_path = capture_item_screenshot(run_dir, item, sources, timestamp=best_sec)
-    if used_timestamps is not None:
-        used_timestamps.add(best_sec)
-    return {"healed": False, "screenshot": rel_path, "key": item.get("key"), "timestamp_seconds": best_sec}
+    if best_sec is not None and isinstance(best_sec, (int, float)) and best_sec >= 30.0:
+        rel_path = capture_item_screenshot(run_dir, item, sources, timestamp=best_sec)
+        if rel_path:
+            if used_timestamps is not None:
+                used_timestamps.add(best_sec)
+            return {"healed": False, "screenshot": rel_path, "key": item.get("key"), "timestamp_seconds": best_sec}
+    return {"healed": False, "screenshot": None, "key": item.get("key"), "reason": "no_valid_timestamp_found"}
 
 
 def attach_search_candidate(item: dict, candidate_url: str, candidate_title: str = "", candidate_author: str = "", screenshot_path: str = None, reason: str = "") -> dict:
@@ -493,10 +508,13 @@ def verify_candidate_for_item(item: dict, candidate: dict, existing_ids: set) ->
     item_title = item.get("title", "")
     clean_item_title = re.sub(r"^\d+[\.、\s]", "", item_title).strip()
     clean_item_title_core = re.sub(r"[^\w\u4e00-\u9fff]", "", clean_item_title)
-    raw = candidate.get("raw", "")
+    raw_components = [candidate.get("raw", "")]
+    if candidate.get("ocr_lines"):
+        raw_components.extend(candidate["ocr_lines"])
+    raw = " ".join(raw_components)
     clean_raw = re.sub(r"[^\w\u4e00-\u9fff]", "", raw)
-    if clean_item_title_core and len(clean_item_title_core) >= 4:
-        if clean_item_title_core in clean_raw or clean_raw in clean_item_title_core:
+    if clean_item_title_core and len(clean_item_title_core) >= 2:
+        if clean_item_title_core in clean_raw or (len(clean_item_title_core) >= 4 and clean_raw in clean_item_title_core):
             return {
                 "matched": True,
                 "method": "screenshot_ocr_title_match",
@@ -506,6 +524,23 @@ def verify_candidate_for_item(item: dict, candidate: dict, existing_ids: set) ->
                 "confidence": 0.9,
                 "reason": f"Screenshot OCR URL near matching title: {clean_item_title}"
             }
+        # Number prefix + core token overlap
+        num_val = item.get("number")
+        if num_val is not None:
+            num_pattern = re.compile(r"(?:^|\s)" + re.escape(str(num_val)) + r"[\.、\s]")
+            if num_pattern.search(raw):
+                overlap = sum(1 for ch in set(clean_item_title_core) if ch in clean_raw)
+                min_needed = 2 if len(clean_item_title_core) <= 3 else min(4, len(clean_item_title_core))
+                if overlap >= min_needed:
+                    return {
+                        "matched": True,
+                        "method": "frame_ocr_number_and_keywords_match",
+                        "resolved_url": candidate["url"],
+                        "platform": plat,
+                        "id": cid,
+                        "confidence": 0.95,
+                        "reason": f"Frame OCR number {num_val} and keywords matched: {clean_item_title[:15]}"
+                    }
 
     return {"matched": False, "reason": "no_prefix_or_title_match"}
 
