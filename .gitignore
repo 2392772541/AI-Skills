@@ -65,3 +65,5 @@ skills/video-doc-weekly-orchestrator/
 skills/anything2explainer/
 skills/nuwa-skill/
 skills/quarkclouddrive/codex/
+*.bak
+*.bak-*
