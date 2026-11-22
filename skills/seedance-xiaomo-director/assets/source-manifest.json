@@ -1,0 +1,493 @@
+{
+  "note": "仅记录来源 Seedance 专业资料原始哈希，融合后文件可能改写。",
+  "files": [
+    {
+      "source": "blocking/SKILL.md",
+      "sha256": "3155a2e3a2ce52ce9baf5f405344040438a02fbaee11e893d86b1f237e1d6b3c"
+    },
+    {
+      "source": "blocking/examples/blocking-example.md",
+      "sha256": "975bcf5f2648eedebbe2f7f7c78f822ba99c136b2f7d5f71f873cc606eff135f"
+    },
+    {
+      "source": "blocking/references/axis-and-coverage.md",
+      "sha256": "601ee9477f8408f13034acca6145d0531a7ac7a0b49fed8630b084da196c890d"
+    },
+    {
+      "source": "blocking/references/master-shot-technique.md",
+      "sha256": "d1c53cce6248e9417deaf37427637aa6201b565819a9123afbf3e5a73d06f3d7"
+    },
+    {
+      "source": "blocking/references/spatial-language.md",
+      "sha256": "e3540dab5ca12ef11e280772367c9a1cd37480f1e0fd6530d4331606bb0a9c76"
+    },
+    {
+      "source": "blocking/templates/blocking-locks-template.md",
+      "sha256": "3cc994723ceab804b685f2573d9a8e71d08dde45c8a9012ab01209ae04fb21ec"
+    },
+    {
+      "source": "camera/SKILL.md",
+      "sha256": "ce9eb4e7d641d73f39e469dd01ee1636d9a77c7148ea40d595d6a629302dceb6"
+    },
+    {
+      "source": "camera/examples/camera-clause-library.md",
+      "sha256": "1526027dd289e16e19f18976c31fe82f061fcf0562201296a709e6c78254917c"
+    },
+    {
+      "source": "camera/references/angle-shot-emotion.md",
+      "sha256": "6becdfa5a7fd534198948d9b0602d25199c3ab14abc072671c5a78ca55df8d06"
+    },
+    {
+      "source": "camera/references/fov-optics.md",
+      "sha256": "872c84c3b856d29aa828d4d86ef1cd8f1325610848c4a504b1f5fdfb69707c5e"
+    },
+    {
+      "source": "camera/references/movement-dictionary.md",
+      "sha256": "bb9acff2f7bd675a6d6544620799d9dfbdd842479308b432196fc28a3bae7b3e"
+    },
+    {
+      "source": "character-design/SKILL.md",
+      "sha256": "0b64fe391d770f48311b993553e93fb1acbebd1230c105a4a1a2c523730b40dd"
+    },
+    {
+      "source": "character-design/examples/character-example.md",
+      "sha256": "17d15c04ae596a2775315baecfdcefa136f862e127749e030213f7b8f67f5dee"
+    },
+    {
+      "source": "character-design/references/seven-dim-formula.md",
+      "sha256": "58b95eddbeb6825ddab476c064114d48b7cd19225626c7766ad847a62fc1d232"
+    },
+    {
+      "source": "character-design/references/three-panel-method.md",
+      "sha256": "76764f18d0cb827f06fdd1b46450c384d9b885e98da9decc4ab641f5f3de1293"
+    },
+    {
+      "source": "character-design/references/variant-and-crowd.md",
+      "sha256": "11f1d717c7b73e522e61ce36792935b8bdacc7e13da1524eff2fa515d5c8fda2"
+    },
+    {
+      "source": "character-design/references/voice-lock.md",
+      "sha256": "7b4ad57b4ce2e82a121036c9745c827c5026afcf3729d5e174528e9001220136"
+    },
+    {
+      "source": "character-design/templates/character-prompt-template.md",
+      "sha256": "24eebc08b8dbfa23eaed1b892042eb7fc61b294c8029354c1c5749d6dc9e227b"
+    },
+    {
+      "source": "continuity/SKILL.md",
+      "sha256": "3c3527aa3bd185b7fcc6381f97ceb10eab8c8478774d84b7589940d661d87753"
+    },
+    {
+      "source": "continuity/references/seam-audit.md",
+      "sha256": "0c48a3dbe3a57dfe70e773094939154dd81fb5cfbea9ed309526aff5958caa53"
+    },
+    {
+      "source": "continuity/references/state-machine-12.md",
+      "sha256": "504b63a7d0ecdd465f1459e68bd90cb8c69bbd529f783c7379095ba49aa3e6fb"
+    },
+    {
+      "source": "continuity/templates/ledger-template.md",
+      "sha256": "231e6482805e61257215ac68ccae603875cbac6553e1b6c15513556424c005e9"
+    },
+    {
+      "source": "control-image/SKILL.md",
+      "sha256": "b9de0f61620cb7cc1712bd8d2c3436496b174155fa31b69c58db2bf8883bdcfc"
+    },
+    {
+      "source": "control-image/examples/control-image-example.md",
+      "sha256": "c96aae8c6ae1f70d16264bd72b627596b4363a3f0a6d0cd9440a587c3f943f65"
+    },
+    {
+      "source": "control-image/references/grid-method.md",
+      "sha256": "b3482b41a63a1e23b520bd793d453b578b7a5f0be87b1007af8fc6c1f85e25b7"
+    },
+    {
+      "source": "control-image/references/keyframe-sequence.md",
+      "sha256": "78a28d3ac89bf05db3a418337a468f442ebc3a5fcdef559fe9bcc86086d91c95"
+    },
+    {
+      "source": "control-image/references/staging-diagram.md",
+      "sha256": "e261d1845e8a5b993d8a660619bb913449c5bb291ac3c21fbcdfaaf15a350ca3"
+    },
+    {
+      "source": "control-image/references/type-selection.md",
+      "sha256": "c781171c3b7e56079e41c953a55a11c9c43e86f550901d0edc5938bee751414d"
+    },
+    {
+      "source": "control-image/references/whitebox-depth.md",
+      "sha256": "6bde9c93591b71f196e7e95d3f5a6324df3ce50ea426b79360733f7fad48f0d5"
+    },
+    {
+      "source": "control-image/templates/control-prompts-template.md",
+      "sha256": "f409a18d3477b49af4e0f4f2b3f023dba05d18a57da11406e83bed1f817a5d57"
+    },
+    {
+      "source": "director-grill/SKILL.md",
+      "sha256": "6838457c44c5cf27fb52a6b2f66b680d36a176d2f95f01fca14528757ec22dd2"
+    },
+    {
+      "source": "director-grill/examples/grill-session-example.md",
+      "sha256": "a6fff221cafc1c8e75e7a5257f65c5dd17106244b6f48a043deffe14a9adea56"
+    },
+    {
+      "source": "director-grill/references/five-elements-audit.md",
+      "sha256": "1f93552dc6bec4cefe94bb7a10ed18a60ad5c0bc0cad510de58e397ddd7b01d4"
+    },
+    {
+      "source": "director-grill/references/interview-principles.md",
+      "sha256": "30066646565a83f032d6445ad8f9ecc6b965bcf3bdb17d8d021d74db79d3fe2e"
+    },
+    {
+      "source": "director-grill/references/question-bank.md",
+      "sha256": "c49e25c8f737a197d4762e62c3f631b955c4fd2bae7327f221d2068ca9421a8e"
+    },
+    {
+      "source": "director-grill/references/visual-style-spec.md",
+      "sha256": "03022993df5b246e6efde0401b1a10267f6933e710e5f39d565345bff2daf241"
+    },
+    {
+      "source": "director-grill/templates/creative-brief-template.md",
+      "sha256": "d93d4512c529a5b5dc2ba367ef0eea4542b13eb7a04729a277803207989619c6"
+    },
+    {
+      "source": "goal-creator/SKILL.md",
+      "sha256": "234037f8a9a2c5815c7948267fd500bc1ac06dfb3220ccf4f8f01d49999661b3"
+    },
+    {
+      "source": "goal-creator/examples/goal-example.md",
+      "sha256": "d54f81cf8115f09cf0797e2b0291f61f07dd3bc4ea99ef174dce0c0dcc77e743"
+    },
+    {
+      "source": "lighting/SKILL.md",
+      "sha256": "3681e4be822f3947ae36835c6494d89796113a54e2a141ea619f7497e1fc4cad"
+    },
+    {
+      "source": "lighting/examples/lighting-example.md",
+      "sha256": "0e1e13e6eb9f76e29809ca48280ea2d0592d15348c5dfed8285d02e6c503656a"
+    },
+    {
+      "source": "lighting/references/light-lock-blocks.md",
+      "sha256": "b87f66f34a22b618459246cc4fdd309d3e7fbb85847f0c976dad83929ec52c52"
+    },
+    {
+      "source": "lighting/references/physics-lock.md",
+      "sha256": "9651bc9f910e4338271c9cdd25b82d11e6d8f4a269d4175080b7ae2d205fef44"
+    },
+    {
+      "source": "motion-compile/SKILL.md",
+      "sha256": "1cb54918f58f5a03ebc19da76f5ced76c6ad4e27ac671d13abfae3537480a087"
+    },
+    {
+      "source": "motion-compile/examples/example-a-narrative.md",
+      "sha256": "57cba25d06ece0877b7c03682fa0c8cc38d86260f3ecae7805619e2d523cb0a9"
+    },
+    {
+      "source": "motion-compile/examples/example-b-dialogue.md",
+      "sha256": "599e5eb1cc73699ccd35fd573923c6b3536feb0198df0d0c0d46df1dff96a935"
+    },
+    {
+      "source": "motion-compile/examples/example-c-longform.md",
+      "sha256": "e18dc50fdae281ecbbc560684dfbae8e23fd1630749fc9069059a75f97731dcc"
+    },
+    {
+      "source": "motion-compile/examples/example-d-oner.md",
+      "sha256": "34eb9328600bba431fb4b4039de35dcbb35f9448166368adec06bf6aec578ddb"
+    },
+    {
+      "source": "motion-compile/references/arbitration.md",
+      "sha256": "05c19dbaf0b511f2397e6ce09272ccb530a70dce26aef44221af26c14b15b994"
+    },
+    {
+      "source": "motion-compile/references/asset-binding.md",
+      "sha256": "743bd323694dbb67f76adf01ddbcd680f65070d8e84ec9945e3bf09b22f616df"
+    },
+    {
+      "source": "motion-compile/references/dual-track.md",
+      "sha256": "8184aed4050a756b1815ba279365908011b17b2dbcbe1ef9022ea25ab881dd6e"
+    },
+    {
+      "source": "motion-compile/references/negative-policy.md",
+      "sha256": "ed34e97bef35323be4a708692c503a15da8fe77fbd7f6c462aabda18b7161598"
+    },
+    {
+      "source": "motion-compile/references/strong-weak-phrasing.md",
+      "sha256": "6899525f9efc4a342b23992ac2a22182c08bea4e160dc05524e5f3ba70f45e0f"
+    },
+    {
+      "source": "motion-compile/references/transition-vocab.md",
+      "sha256": "5743c832ea96b67ccbeb267fc1290ebd8e50025535fbd680349b42d097b6e194"
+    },
+    {
+      "source": "motion-compile/references/ugc-texture.md",
+      "sha256": "297e492efc6081081a15b4fba4885b94688f323d658ab98b766da986bfa2a368"
+    },
+    {
+      "source": "motion-compile/templates/prompt-template-a.md",
+      "sha256": "506fab7fc5b08c8cf78716a6bc60fff197384082e950970686179e563aac7f67"
+    },
+    {
+      "source": "motion-compile/templates/prompt-template-b.md",
+      "sha256": "fa43c5a91b845896d51900562212dbe629eb4a976b43b8e5a543d1bba827a4c1"
+    },
+    {
+      "source": "performance/SKILL.md",
+      "sha256": "f35cfcfab108988c7651987024d546d4fb00ea85c5cc6ccbec8bac0972819744"
+    },
+    {
+      "source": "performance/examples/performance-example.md",
+      "sha256": "21075c9dd917a9e30ad2c207a20ef2da9e77fe2309ebd2eb088b246a7c387066"
+    },
+    {
+      "source": "performance/references/acting-task-method.md",
+      "sha256": "beb57123debc8efe28ad22b03f39bbfd9d647f56df5498267ef2d5888f9f0e76"
+    },
+    {
+      "source": "performance/references/bad-acting-atlas.md",
+      "sha256": "2e21392fdba4b0fdcd01967bdd2058446173abf19456d18eae5d02bddb377d4a"
+    },
+    {
+      "source": "performance/references/master-profile-guide.md",
+      "sha256": "35be1e4aaa3e6cf796d0018216f6ca442d946f2ac74a0e05b2459a0a33e5f8ab"
+    },
+    {
+      "source": "performance/templates/acting-task-template.md",
+      "sha256": "8d203aee1b82c72de502e5d2b24285dd366fce72a0e1a201310af0ac5193bf96"
+    },
+    {
+      "source": "performance/templates/master-profile-template.md",
+      "sha256": "c36f9256fab221b9d6e909bb74b607da9f537899dc71394568a1567f7da61018"
+    },
+    {
+      "source": "previz/SKILL.md",
+      "sha256": "4878bcbfb660234358c0e0b73b9cc66f90084cc27a3735f74e9f7a1708e144c0"
+    },
+    {
+      "source": "previz/examples/scene-example.json",
+      "sha256": "102961c37f3fc1dbfc9108683654912066f4002e2d9145331cf37e78dbd75e86"
+    },
+    {
+      "source": "previz/examples/scene-exterior.json",
+      "sha256": "73ca44aaef5676292f0534ea29404eb650520285a7c6dba028d6ecd6bcf03aaf"
+    },
+    {
+      "source": "previz/references/scene-data-method.md",
+      "sha256": "9111a3565bfcf76e3b31d935ab497233869c81e3b56cab66c4367abb7c6f570f"
+    },
+    {
+      "source": "previz/scripts/previz.py",
+      "sha256": "2856967106e9e2db4408d7c1588f50d27bd1661d4f1143a05a728d50d05363f2"
+    },
+    {
+      "source": "previz/scripts/three.min.js",
+      "sha256": "9274bbcec8d96168626c732b5d31c775aa8cfb7eaa0599bec0c175908a2c1ce2"
+    },
+    {
+      "source": "previz/templates/scene-template.json",
+      "sha256": "f895a25fa54af598a844b873c45ca49a69598734e5112d6f9042b398888e381c"
+    },
+    {
+      "source": "prop-design/SKILL.md",
+      "sha256": "bb57eeeda07716db18d1b3d78d924ca519bfc33183539e4dc502378c24ca9e5e"
+    },
+    {
+      "source": "prop-design/examples/prop-example.md",
+      "sha256": "d3755a6e891a7c03cb847e8aed67afb4a14fb5d3ca9d662993b491eee1232e80"
+    },
+    {
+      "source": "prop-design/references/four-view-method.md",
+      "sha256": "974806243aecc00a6f8466e704ab8d1ac5b7eb22a01f386b2f2dc3f6298fbc05"
+    },
+    {
+      "source": "prop-design/references/intake-grading.md",
+      "sha256": "074198e49374d64517065a4bc4f099ffe592298143613e44783522771f54737f"
+    },
+    {
+      "source": "prop-design/references/state-variants.md",
+      "sha256": "bf546f006d28010a5ec043cd13ce635180e3b1ef43df00940f932a6c8292a208"
+    },
+    {
+      "source": "prop-design/templates/prop-prompt-template.md",
+      "sha256": "0a05f554e68434195311cd2d3b61822e0b6af5bb766080402005d83283dc2b52"
+    },
+    {
+      "source": "retake/SKILL.md",
+      "sha256": "e5e1cd6fb9f2e8d52e3d3b66b971ef5cdd0b53cb47f5e51f65f38c3feae9fb0f"
+    },
+    {
+      "source": "retake/examples/retake-cases.md",
+      "sha256": "6d5113839ee4d0370c665c9109d815cc898bddd12cbc429009523abd407c3591"
+    },
+    {
+      "source": "retake/references/fix-first-cut.md",
+      "sha256": "13620f5eecd543a35768ae3975557bca64254ca2b4e1bd56e6975eb8743ae699"
+    },
+    {
+      "source": "retake/references/image-surgery.md",
+      "sha256": "09294400c043660dd280e18994ba1b09790cc2d8c8c2139281cacd02da514873"
+    },
+    {
+      "source": "retake/references/video-edit-syntax.md",
+      "sha256": "e3947b782062570badf379bcccdf83200e30a8b50c0055b6e8fca7ffdc42bcf9"
+    },
+    {
+      "source": "retake/templates/image-edit-template.md",
+      "sha256": "f405aedff4ab653d5c32f888d22befbb5b7e0870542c96c4fd2c8a8f16aeaef2"
+    },
+    {
+      "source": "retake/templates/video-patch-template.md",
+      "sha256": "f7bdfbfd39a2eab2ee35c872d67ff8f142700ef27979a98be340d5129aad9eb2"
+    },
+    {
+      "source": "review/SKILL.md",
+      "sha256": "e34e8a4085a543379187b07774b93216b7641d6a200f0d953bc6dc2ee009b209"
+    },
+    {
+      "source": "review/references/compliance-checklist.md",
+      "sha256": "1f8e7c9499be8a3435422c5d79b3267cc8b51f6005ba7d3cf6cce01b2cc4d8de"
+    },
+    {
+      "source": "review/references/reflow-routing.md",
+      "sha256": "aaff31cf44b4ae0f81997e4336d038571bace9ddf648abdf8580cf64b501b4b2"
+    },
+    {
+      "source": "review/references/rehearsal-anchors.md",
+      "sha256": "b1189182ae22b04232350bbfda073b1c3479a017dc4efadf65fd808199e1d44a"
+    },
+    {
+      "source": "review/templates/report-template.md",
+      "sha256": "ba1173e8f39fb2aa5de8fd2817397a1450a460ce528e073f38334b9cc3839de9"
+    },
+    {
+      "source": "scene-design/SKILL.md",
+      "sha256": "93bee413fa5850a679859a1e4cf77967b2b62ddcab33dfa1450c39c11b944e3a"
+    },
+    {
+      "source": "scene-design/examples/scene-example.md",
+      "sha256": "916c6373f0757c3e335ec95ad74277ae69cfcf92d4f246bce5ec64a7cefe4f05"
+    },
+    {
+      "source": "scene-design/references/anchored-assets.md",
+      "sha256": "549724debbe0dfdf72525da28ce11f50bef94736fa4eab5c8a84493c5ea90bc5"
+    },
+    {
+      "source": "scene-design/references/angle-coverage.md",
+      "sha256": "5b180ead0d1f6386d437b81d65a411623da408d3837943a5bfe7423a29774ec2"
+    },
+    {
+      "source": "scene-design/references/look-baking.md",
+      "sha256": "280e39b14c27ca217fc2c37fc65a05617f7b35e420b7642d037b0bc3db28afa1"
+    },
+    {
+      "source": "scene-design/templates/scene-prompt-template.md",
+      "sha256": "a15d23a11f1d81d310487d6fa26df1d6c7a230890888c245ae0037bf9a43a963"
+    },
+    {
+      "source": "scene-design/templates/spatial-map-template.md",
+      "sha256": "2404c853e0a50f27595daf38111221ec6eddd24a29dc682f0b298da6b3f219bd"
+    },
+    {
+      "source": "script-adapt/SKILL.md",
+      "sha256": "47aa0a9abd8566f603e53fe255381ee18adf3cd5e004c04a838b78941b71e1fc"
+    },
+    {
+      "source": "script-adapt/examples/adapt-example.md",
+      "sha256": "a75bc95729009e4748fce79bf9b8eda598f2abfc6d67187688de67b2c5e9d640"
+    },
+    {
+      "source": "script-adapt/references/feasibility-checklist.md",
+      "sha256": "abce997cfdd2e439eded2583bb258902fbb8030356a17872ee753f4a1eeeb359"
+    },
+    {
+      "source": "script-adapt/references/three-transforms.md",
+      "sha256": "90aa5daae1f6e3e932cd5cb6b70d8a22b83eff9a32b620584b74754ecad5fa69"
+    },
+    {
+      "source": "script-breakdown/SKILL.md",
+      "sha256": "2228ad3c9933558589ccdc61877f9b952e05e3f90925a1d913583bf2a60a633a"
+    },
+    {
+      "source": "script-breakdown/examples/breakdown-example.md",
+      "sha256": "004276a66b2e4de2082162db92a4f5cef99f65d178962658373cb7c8ee1600e6"
+    },
+    {
+      "source": "script-breakdown/references/beat-splitting.md",
+      "sha256": "2b28102f0457ab7731185693c7ad78da3e179a77a41e0e5eb5da0e51e2a29855"
+    },
+    {
+      "source": "script-breakdown/references/dp-signature-styles.md",
+      "sha256": "a8c0e6f8f2d8bd13717ec83913f00394879714e8d55707f049cfad2f21c6df9f"
+    },
+    {
+      "source": "script-breakdown/references/duration-pacing.md",
+      "sha256": "0bb277ecc1458528cff69c5125b738324d8747d46c8c01f21f39590f9b3bde83"
+    },
+    {
+      "source": "script-breakdown/references/film-stock-color-grades.md",
+      "sha256": "c5f8ff10b9f13506fbee934c6e8855efe088e8ab3d7de60edb3e19f85439a9f4"
+    },
+    {
+      "source": "script-breakdown/templates/breakdown-template.md",
+      "sha256": "5b59e803729b9b992403e1deffba43d860ceb1ae5360e7f1296d71155141cef0"
+    },
+    {
+      "source": "script-breakdown/templates/reference-index-template.md",
+      "sha256": "1b45da2c23d8434fd5d5021b182bbe2f93c1d892254e6505b946c4c3549d9d6a"
+    },
+    {
+      "source": "script-write/SKILL.md",
+      "sha256": "7a2cc4e25f43064510fe9cb271aaf4f12669c0cb327bc8dd42c832f6f072a332"
+    },
+    {
+      "source": "script-write/examples/write-session-example.md",
+      "sha256": "bd1ae37fd4323bfb61ea2e040c61db43774cc8e51f8c2a892fa0dba539ae22a3"
+    },
+    {
+      "source": "script-write/references/five-element-engine.md",
+      "sha256": "3e72180bfc3d0bf17105cb8ba27cf6480e1fe18b27f3461532775fb2e9c27f09"
+    },
+    {
+      "source": "script-write/references/screenplay-format.md",
+      "sha256": "9373fe998fed7dffffeae64cc0e1754fec00dea4952e541cc743ac3f00befbe7"
+    },
+    {
+      "source": "script-write/templates/screenplay-format-template.md",
+      "sha256": "3627afbc597a4e21347df28c67cfcac43c621dfe7b35e3e6c228f62dc610a830"
+    },
+    {
+      "source": "shot-design/SKILL.md",
+      "sha256": "a6f94e3bff86418f9e239a3de5a072466e4f55f4c7a02e49c7d34ab3989d74f1"
+    },
+    {
+      "source": "shot-design/examples/shot-table-example.md",
+      "sha256": "1c35c39103b62a8bede66d3b0d6ca50a59e9e911d813128937ce01c53fbb1454"
+    },
+    {
+      "source": "shot-design/references/master-shot.md",
+      "sha256": "7fcfe6c489f60175a94b46ffa1d83fd9dc462fdc911f00b2fd50a541199c8bee"
+    },
+    {
+      "source": "shot-design/references/shot-table-method.md",
+      "sha256": "8ddaab9264eb205bf4f5ff2395cf8a6c0517dfff5bb74827d53217b424633e3f"
+    },
+    {
+      "source": "shot-design/templates/scene-statement-template.md",
+      "sha256": "06a3195998b0d14938f6c1a4e8333e2f8eb323c786a205c48f6909e5dedb5e58"
+    },
+    {
+      "source": "shot-design/templates/shot-table-template.md",
+      "sha256": "3cc562a7cc04faf1dcd82ab6d94fa5f5f9ded473d6bb9836d9ba0f87634f1fe4"
+    },
+    {
+      "source": "sound-writing/SKILL.md",
+      "sha256": "36a1071a8d2b00ab40e78fd0ed02ffb1569658d942889b35763189f5f38ed1d7"
+    },
+    {
+      "source": "sound-writing/examples/sound-writing-example.md",
+      "sha256": "9f8d303053360eb37c1b251e2ca026493e5771b5c515de44574105396aaa420f"
+    },
+    {
+      "source": "sound-writing/references/sound-lexicon.md",
+      "sha256": "d7aa1958e0510b3ecb8844e5e6c90f4ea14025dcdd87a6e607c1b0fb9d977bbc"
+    }
+  ]
+}

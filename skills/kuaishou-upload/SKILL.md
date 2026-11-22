@@ -1,6 +1,6 @@
 ---
 name: kuaishou-upload
-description: 当 agent 需要通过已安装的 `sau` CLI 完成快手登录、cookie 校验、视频上传或图文发布时使用这个 skill。该 skill 适用于已经安装 `social-auto-upload` 且可调用 `sau` 命令的环境。优先使用这个 skill 进行稳定的命令式快手工作流，而不是一开始就阅读 uploader 源码。
+description: "快手视频自动化上传与发布工具。用于当用户需要发布视频到快手平台、配置视频标题与标签、或进行快手内容分发时自动调用。"
 ---
 
 # 快手上传 Skill

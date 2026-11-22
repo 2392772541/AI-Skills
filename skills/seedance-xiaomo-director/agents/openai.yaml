@@ -1,0 +1,7 @@
+interface:
+  display_name: "分镜导演·人物融合版"
+  short_description: "融合专业分镜、人物原文提取与角色资产管理，逐镜检查身份、装束和动作连续性。"
+  default_prompt: "使用 $seedance-xiaomo-director，把我提供的内容做成人物资产、完整分镜和可复制的视频提示词。"
+
+policy:
+  allow_implicit_invocation: true

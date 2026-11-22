@@ -1,0 +1,24 @@
+{
+  "entries": {
+    "chatcut-app-promo-guide": "60cd7323779dfc06bb61ea92ca4b906240a0a9a9cbeda5e6c3845069c2e5384b",
+    "chatcut-create-motion-graphics": "c039ec2ed00519cd6db1775d269b7bbc398c0616df6288dc7e0f419e046dd9c8",
+    "chatcut-digital-human": "681142a47ebbee3cba5b5ab1d454a36229ead252153b11bc3900a514afe8b050",
+    "chatcut-image-gen": "069d74764eebf40fdaccc0d69ed014cfddc09c6b74a59d04bbca9a8bd21fc0cf",
+    "chatcut-multicam-sync": "88ca88d9ec0410caab2c96ad1a9f1a3646f4ed85d30dc7c71f8b6dfc5f9df811",
+    "chatcut-music": "2637c5d6391822e27b202b78f6b48b2bf51b06ae918f3f7ecca4a2f4fb8acd6d",
+    "chatcut-product-help": "afe128b5e0fb998ce71bc99257d1b382cfcf7ab85a55350c9f7d823eb7d7cf3d",
+    "chatcut-shader-gen": "e2c05e85f83e55aedd52320f8ce139e2c4fc63a98cd4cb56ec30f21e41d71d1c",
+    "chatcut-skill-creator": "68d49faf825b05e767674d20f80e1285903cae51bb3cbbe4816e450c26593d33",
+    "chatcut-talking-head-guide": "e45b8377dd189c90d74eef54bc3090d91de1f35355f3e89f6830ee88eb00df64",
+    "chatcut-transcription": "43c63cfbc0c97b8dd4a078b023492132f73f112c72e31d503293dcf6db0a616a",
+    "chatcut-ugc-ad-guide": "e0a3b0ffb0c199cebcd465636c36dcb6fb5f6a1a8b18b570f417315f0670cc90",
+    "chatcut-video-gen": "3a2af9701577ca1d1042c11292f7222ed53aba6269a5841448227fbfc707bb6b",
+    "chatcut-video-translation": "d7e190e8d1da9e3ecf05cdcdbe77aa00519cdd32f46ebc468772ea66f52cbc6b",
+    "chatcut-visual-analysis": "c93d31d3dc92a46d24b4cfae1da525fba86f42ca198b9d95ac4377768192e639",
+    "chatcut-voice": "582de6fb57795ab3f607808c403da7ce41aa7194785a78451769fe068cf0643f",
+    "chatcut-voice-isolation": "29390d49555edb4256a85d79a458434bdeebad1c0d79127035a4fe01bf28c4f7",
+    "chatcut-web-browser": "09150128fd9033d9b7a8a0d92f6fc8e70629dd3a1a0703410dd06ba19b4bc1fa",
+    "chatcut-widget-forms": "19e88f40a63be7d95cf95100354b7cef6d2f05db7d528f171359fd83387cff3c"
+  },
+  "version": 1
+}

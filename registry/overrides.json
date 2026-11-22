@@ -1,0 +1,424 @@
+{
+  "skill-product-manager": {
+    "categories": [
+      "skill-management",
+      "workflow"
+    ],
+    "triggers": [
+      "创建一个新 Skill",
+      "创建新 Skill",
+      "做一个 Skill",
+      "升级现有 Skill",
+      "升级 Skill",
+      "合并 Skill",
+      "评估 Skill",
+      "技能产品经理",
+      "管理技能库",
+      "技能管家",
+      "帮我管理 Skill"
+    ],
+    "patterns": [
+      "创建.*Skill",
+      "升级.*Skill",
+      "合并.*Skill",
+      "评估.*Skill"
+    ],
+    "aliases": [
+      "skill product manager",
+      "skill manager"
+    ],
+    "priority": 30
+  },
+  "find-skills": {
+    "categories": [
+      "skill-management"
+    ],
+    "triggers": [
+      "找一个 Skill",
+      "查找 Skill",
+      "搜索 Skill",
+      "有没有适合",
+      "寻找技能",
+      "发现技能"
+    ],
+    "patterns": [
+      "(找|查找|搜索).*Skill"
+    ],
+    "priority": 20
+  },
+  "skill-creator": {
+    "categories": [
+      "skill-management"
+    ],
+    "triggers": [
+      "初始化 Skill 脚手架",
+      "编写 SKILL.md"
+    ],
+    "priority": 5
+  },
+  "00-skill-router": {
+    "categories": [
+      "skill-management",
+      "routing"
+    ],
+    "triggers": [
+      "应该用哪个 Skill",
+      "路由任务",
+      "选择技能"
+    ],
+    "patterns": [
+      "用哪个.*Skill"
+    ],
+    "priority": 5
+  },
+  "video-learning-notes-cn": {
+    "categories": [
+      "video",
+      "knowledge"
+    ],
+    "triggers": [
+      "视频学习笔记",
+      "课程视频整理",
+      "视频做成学习笔记",
+      "课程总结"
+    ],
+    "priority": 20
+  },
+  "transcript-learning-system": {
+    "categories": [
+      "knowledge",
+      "documents"
+    ],
+    "triggers": [
+      "转写稿整理",
+      "转录稿学习笔记",
+      "清洗转写稿"
+    ],
+    "priority": 15
+  },
+  "ian-xiaohei-illustrations": {
+    "categories": [
+      "design",
+      "knowledge"
+    ],
+    "triggers": [
+      "小黑插图",
+      "小黑解释图",
+      "正文配图"
+    ],
+    "priority": 20
+  },
+  "remotion-video-replica": {
+    "categories": [
+      "video",
+      "design"
+    ],
+    "triggers": [
+      "复刻这个视频",
+      "仿制视频",
+      "按原片做 Remotion",
+      "高相似度视频复刻",
+      "参考视频复刻"
+    ],
+    "priority": 25
+  },
+  "remotion-video": {
+    "categories": [
+      "video",
+      "development"
+    ],
+    "triggers": [
+      "Remotion 视频",
+      "程序化生成视频",
+      "代码生成视频"
+    ],
+    "priority": 10
+  },
+  "obsidian-markdown": {
+    "categories": [
+      "knowledge",
+      "documents"
+    ],
+    "triggers": [
+      "整理 Obsidian 知识库",
+      "写入 Obsidian",
+      "Obsidian 笔记",
+      "编辑 Obsidian Markdown"
+    ],
+    "priority": 20
+  },
+  "codex-ppt": {
+    "categories": [
+      "design",
+      "documents"
+    ],
+    "triggers": [
+      "做一个 PPT",
+      "制作 PPT",
+      "商业演示文稿",
+      "生成演示文稿"
+    ],
+    "priority": 20
+  },
+  "review-security": {
+    "categories": [
+      "development",
+      "security"
+    ],
+    "triggers": [
+      "安全审查 PR",
+      "检查 PR 安全",
+      "代码安全审查",
+      "安全漏洞审查"
+    ],
+    "priority": 20
+  },
+  "reverse-engineer-anything": {
+    "categories": [
+      "security",
+      "development"
+    ],
+    "triggers": [
+      "分析 ELF 逆向",
+      "逆向二进制",
+      "APK 逆向",
+      "脱壳",
+      "协议逆向"
+    ],
+    "priority": 20
+  },
+  "docx-to-md": {
+    "categories": [
+      "documents"
+    ],
+    "triggers": [
+      "Word 转 Markdown",
+      "DOCX 转 Markdown",
+      "docx 转 md"
+    ],
+    "priority": 15
+  },
+  "bilibili-upload": {
+    "categories": [
+      "video",
+      "automation"
+    ],
+    "triggers": [
+      "上传到 B 站",
+      "发布到哔哩哔哩",
+      "B站上传"
+    ],
+    "priority": 20
+  },
+  "douyin-upload": {
+    "categories": [
+      "video",
+      "automation"
+    ],
+    "triggers": [
+      "上传到抖音",
+      "发布抖音视频"
+    ],
+    "priority": 20
+  },
+  "douyin-favorite-links": {
+    "categories": [
+      "video",
+      "documents",
+      "automation"
+    ],
+    "triggers": [
+      "抖音收藏视频链接",
+      "抖音收藏",
+      "批量收藏抖音",
+      "飞书内刊抖音链接",
+      "Douyin favorite links"
+    ],
+    "patterns": [
+      "(?:飞书|内刊).{0,20}(?:抖音|douyin).{0,20}(?:收藏|favorite)",
+      "(?:抖音|douyin).{0,20}(?:收藏夹|favorite folder)"
+    ],
+    "aliases": [
+      "douyin favorite links",
+      "douyin收藏视频链接"
+    ],
+    "priority": 35
+  },
+  "xiaohongshu-upload": {
+    "categories": [
+      "automation"
+    ],
+    "triggers": [
+      "上传到小红书",
+      "发布小红书",
+      "发布到小红书"
+    ],
+    "priority": 20
+  },
+  "hv-analysis": {
+    "categories": [
+      "documents",
+      "research",
+      "skill-management"
+    ],
+    "triggers": [
+      "横纵分析",
+      "横纵分析法",
+      "深度研究",
+      "系统性研究",
+      "深入调研",
+      "竞品分析",
+      "研究一下这个",
+      "调研一下",
+      "做个研究",
+      "deep research",
+      "deep-research",
+      "hv-analysis"
+    ],
+    "patterns": [
+      "(?i)\\bdeep[- ]research\\b",
+      "(?i)\\bhv[- ]analysis\\b",
+      "(?:深度|系统性|深入|全面|专题|横向|纵向)(?:地)?(?:研究|调研|分析)",
+      "(?:研究|调研|分析).{0,12}(?:产品|公司|项目|概念|技术|人物|竞品|仓库|GitHub|github)"
+    ],
+    "aliases": [
+      "deep research",
+      "deep-research",
+      "hv analysis",
+      "横纵分析法"
+    ],
+    "priority": 60
+  },
+  "video-doc-weekly-orchestrator": {
+    "categories": [
+      "video",
+      "documents",
+      "lark",
+      "automation"
+    ],
+    "triggers": [
+      "水球泡周报",
+      "且曼内刊",
+      "水球泡视频周报",
+      "周报一条龙",
+      "视频周报",
+      "周报补链",
+      "周报中的B站视频",
+      "内刊批量抖音视频"
+    ],
+    "patterns": [
+      "(?:周报|内刊).{0,50}(?:视频|抖音|B站|哔哩哔哩|bilibili).{0,30}(?:收藏|找回|链接|检索|查找|续跑)",
+      "(?:收藏|查找|检索|找回).{0,25}(?:周报|内刊)",
+      "(?:每周|本周).{0,30}(?:视频|录屏|回放).{0,30}(?:周报|内刊)",
+      "(?:周报|内刊).{0,30}(?:补链|补全链接|原视频|联网搜索|一条龙|自动制作)"
+    ],
+    "priority": 40
+  },
+  "talking-head-production": {
+    "categories": [
+      "video-production",
+      "automation",
+      "remotion"
+    ],
+    "triggers": [
+      "????????",
+      "??????",
+      "??????",
+      "????",
+      "??????",
+      "????"
+    ],
+    "patterns": [
+      "??.*(????|??|??|??|??|??)",
+      "(??|??).*(??|??)"
+    ],
+    "aliases": [
+      "talking head production",
+      "talking-head video"
+    ],
+    "priority": 35
+  },
+  "remotion-video-builder": {
+    "categories": [
+      "video",
+      "design"
+    ],
+    "triggers": [
+      "截图复刻动态视频",
+      "页面复刻成视频",
+      "图片转 Remotion",
+      "参考图做动画",
+      "静态海报做动画",
+      "Remotion 工程",
+      "Remotion 项目"
+    ],
+    "priority": 25
+  },
+  "seedance-director": {
+    "categories": [
+      "video-production",
+      "storyboarding",
+      "prompt-engineering"
+    ],
+    "triggers": [
+      "分镜",
+      "分镜师",
+      "废才导演",
+      "废才",
+      "Seedance",
+      "即梦",
+      "即梦提示词",
+      "视频分镜",
+      "镜头表",
+      "剧本分镜",
+      "提示词包",
+      "导演拷问",
+      "动态提示词",
+      "剧本拆解"
+    ],
+    "patterns": [
+      ".*分镜.*",
+      ".*镜头表.*",
+      ".*Seedance.*",
+      ".*即梦.*",
+      ".*废才.*"
+    ],
+    "aliases": [
+      "seedance-director",
+      "分镜师",
+      "feicai-director",
+      "seedance-storyboard"
+    ],
+    "priority": 25
+  },
+  "humanizer-zh": {
+    "categories": [
+      "writing",
+      "text-processing",
+      "refinement"
+    ],
+    "triggers": [
+      "humanizer-zh",
+      "Humanizer-zh",
+      "去AI味",
+      "去套话",
+      "文本润色",
+      "消除模板化表达",
+      "去除空话套话",
+      "文章去套话",
+      "中文文本润色",
+      "使表达自然"
+    ],
+    "patterns": [
+      "(去|去除|消除).*(AI味|套话|空话|模板化)",
+      "(中文|文章|段落|文本).*(润色|改写自然)"
+    ],
+    "aliases": [
+      "humanizer",
+      "humanizer zh",
+      "中文去AI味",
+      "中文润色"
+    ],
+    "priority": 25
+  }
+}

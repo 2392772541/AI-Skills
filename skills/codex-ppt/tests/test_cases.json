@@ -1,0 +1,123 @@
+{
+  "skill_name": "codex-ppt",
+  "generated_cases_count": 13,
+  "cases": [
+    {
+      "id": "POS-001",
+      "category": "positive",
+      "prompt": "Please help me inspect and optimize the current codex ppt setup.",
+      "expected_trigger": true,
+      "rationale": "Core domain positive task",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "POS-002",
+      "category": "positive",
+      "prompt": "Review these files to make sure they follow the proper codex ppt standards.",
+      "expected_trigger": true,
+      "rationale": "Compliance and validation task",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "POS-003",
+      "category": "positive",
+      "prompt": "Run an automated workflow for our new codex ppt assets.",
+      "expected_trigger": true,
+      "rationale": "Automated pipeline task",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "POS-004",
+      "category": "positive",
+      "prompt": "Can you diagnose why our recent changes broke the codex ppt configuration?",
+      "expected_trigger": true,
+      "rationale": "Troubleshooting task",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "POS-005",
+      "category": "positive",
+      "prompt": "Generate the full codex ppt test and execution suite for this project.",
+      "expected_trigger": true,
+      "rationale": "Generation task",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "NEG-001",
+      "category": "negative",
+      "prompt": "Implement a simple binary search tree in TypeScript.",
+      "expected_trigger": false,
+      "rationale": "Generic programming task, should not trigger",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "NEG-002",
+      "category": "negative",
+      "prompt": "Translate this user feedback email into fluent French.",
+      "expected_trigger": false,
+      "rationale": "Translation task, out of scope",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "NEG-003",
+      "category": "negative",
+      "prompt": "Why is my Docker container running out of disk space?",
+      "expected_trigger": false,
+      "rationale": "Infrastructure debugging, out of scope",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "NEG-004",
+      "category": "negative",
+      "prompt": "Generate a photorealistic illustration of a sunset over mountains.",
+      "expected_trigger": false,
+      "rationale": "Image generation, out of scope",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "NEG-005",
+      "category": "negative",
+      "prompt": "Adjust the button hover colors in this CSS file to match the theme.",
+      "expected_trigger": false,
+      "rationale": "Frontend styling, out of scope",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "BND-001",
+      "category": "boundary",
+      "prompt": "I am writing a blog post discussing the history of codex ppt.",
+      "expected_trigger": false,
+      "rationale": "Educational inquiry without execution intent",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "BND-002",
+      "category": "boundary",
+      "prompt": "Compare whether codex ppt or an alternative tool is better for startups.",
+      "expected_trigger": false,
+      "rationale": "Product comparison question",
+      "verified_status": "unverified"
+    },
+    {
+      "id": "BND-003",
+      "category": "boundary",
+      "prompt": "Just check if there is a typo in this single comment line.",
+      "expected_trigger": false,
+      "rationale": "Trivial text edit, should avoid heavy skill overhead",
+      "verified_status": "unverified"
+    }
+  ],
+  "verification_matrix": {
+    "skill_name": "codex-ppt",
+    "level_a_format": "PASS",
+    "level_b_discovery": "PASS",
+    "level_c_explicit": "PASS",
+    "level_d_nl_trigger": "EVALUATED_PASS",
+    "level_e_e2e_exec": "UNVERIFIED",
+    "notes": {
+      "level_a": "0 critical, 0 warnings",
+      "level_d": "Trigger score: 75/100",
+      "level_e": "Pending interactive/end-to-end task run"
+    }
+  }
+}

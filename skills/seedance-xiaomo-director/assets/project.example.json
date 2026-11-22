@@ -1,0 +1,353 @@
+{
+  "schema_version": "1.0",
+  "source_text": "林岚三十二岁，小麦色皮肤，齐耳黑发，左眉尾有一道浅疤，穿深蓝工装；周禾二十四岁，肤色偏白，黑色短发，圆脸，穿灰色工作服。\n两人在厂房检查台前，林岚将密封的样品袋交给周禾，周禾接住并看向标签。\n林岚脱下工装外套，露出浅灰色长袖内搭，周禾继续拿着样品袋。\n两人走到窗边观察样品，周禾把样品袋放在桌上，林岚点头。",
+  "project": {
+    "title": "结构校验示例，并非生成成品",
+    "status": "draft",
+    "target_duration_s": 20,
+    "platform": {
+      "name": "未选择",
+      "model": null,
+      "capabilities_verified": false,
+      "binding_verified": false,
+      "max_duration_s": null,
+      "max_reference_images": null
+    }
+  },
+  "source_segments": [
+    {
+      "id": "src-001",
+      "text": "林岚三十二岁，小麦色皮肤，齐耳黑发，左眉尾有一道浅疤，穿深蓝工装；周禾二十四岁，肤色偏白，黑色短发，圆脸，穿灰色工作服。",
+      "required": true
+    },
+    {
+      "id": "src-002",
+      "text": "两人在厂房检查台前，林岚将密封的样品袋交给周禾，周禾接住并看向标签。",
+      "required": true
+    },
+    {
+      "id": "src-003",
+      "text": "林岚脱下工装外套，露出浅灰色长袖内搭，周禾继续拿着样品袋。",
+      "required": true
+    },
+    {
+      "id": "src-004",
+      "text": "两人走到窗边观察样品，周禾把样品袋放在桌上，林岚点头。",
+      "required": true
+    }
+  ],
+  "characters": [
+    {
+      "id": "char-001",
+      "name": "林岚",
+      "appearance": {
+        "age": "三十二岁",
+        "gender": null,
+        "skin": "小麦色",
+        "hair": "齐耳黑发",
+        "face": "左眉尾浅疤",
+        "costume": "深蓝工装"
+      },
+      "identity_anchors": [
+        "左眉尾浅疤",
+        "齐耳黑发"
+      ],
+      "variants": [
+        {
+          "id": "char-001-v1",
+          "description": "深蓝工装"
+        },
+        {
+          "id": "char-001-v2",
+          "description": "脱下外套、浅灰长袖"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "explicit",
+          "quote": "林岚三十二岁，小麦色皮肤，齐耳黑发，左眉尾有一道浅疤，穿深蓝工装"
+        }
+      ]
+    },
+    {
+      "id": "char-002",
+      "name": "周禾",
+      "appearance": {
+        "age": "二十四岁",
+        "gender": null,
+        "skin": "偏白",
+        "hair": "黑色短发",
+        "face": "圆脸",
+        "costume": "灰色工作服"
+      },
+      "identity_anchors": [
+        "圆脸",
+        "黑色短发"
+      ],
+      "variants": [
+        {
+          "id": "char-002-v1",
+          "description": "灰色工作服"
+        }
+      ],
+      "evidence": [
+        {
+          "kind": "explicit",
+          "quote": "周禾二十四岁，肤色偏白，黑色短发，圆脸，穿灰色工作服"
+        }
+      ]
+    }
+  ],
+  "props": [
+    {
+      "id": "prop-001",
+      "name": "密封样品袋",
+      "initial_owner_id": "char-001"
+    }
+  ],
+  "scenes": [
+    {
+      "id": "scene-001",
+      "name": "厂房检查台与窗边"
+    }
+  ],
+  "references": [
+    {
+      "id": "ref-face-001",
+      "character_id": "char-001",
+      "variant_id": "char-001-v1",
+      "purpose": "identity",
+      "status": "planned",
+      "path": null
+    }
+  ],
+  "shots": [
+    {
+      "id": "S001",
+      "scene_id": "scene-001",
+      "duration_s": 5,
+      "source_ids": [
+        "src-001"
+      ],
+      "purpose": "识别人和环境",
+      "visual_action": "林岚三十二岁，小麦色皮肤，齐耳黑发，左眉尾有一道浅疤，穿深蓝工装；周禾二十四岁，肤色偏白，黑色短发，圆脸，穿灰色工作服。",
+      "start_state": [
+        {
+          "character_id": "char-001",
+          "variant_id": "char-001-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [
+            "prop-001"
+          ],
+          "state": "常态"
+        },
+        {
+          "character_id": "char-002",
+          "variant_id": "char-002-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [],
+          "state": "常态"
+        }
+      ],
+      "end_state": [
+        {
+          "character_id": "char-001",
+          "variant_id": "char-001-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [
+            "prop-001"
+          ],
+          "state": "常态"
+        },
+        {
+          "character_id": "char-002",
+          "variant_id": "char-002-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [],
+          "state": "常态"
+        }
+      ]
+    },
+    {
+      "id": "S002",
+      "scene_id": "scene-001",
+      "duration_s": 5,
+      "source_ids": [
+        "src-002"
+      ],
+      "purpose": "交接样品",
+      "visual_action": "两人在厂房检查台前，林岚将密封的样品袋交给周禾，周禾接住并看向标签。",
+      "start_state": [
+        {
+          "character_id": "char-001",
+          "variant_id": "char-001-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [
+            "prop-001"
+          ],
+          "state": "常态"
+        },
+        {
+          "character_id": "char-002",
+          "variant_id": "char-002-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [],
+          "state": "常态"
+        }
+      ],
+      "end_state": [
+        {
+          "character_id": "char-001",
+          "variant_id": "char-001-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [],
+          "state": "常态"
+        },
+        {
+          "character_id": "char-002",
+          "variant_id": "char-002-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [
+            "prop-001"
+          ],
+          "state": "常态"
+        }
+      ],
+      "continuous_from": "S001"
+    },
+    {
+      "id": "S003",
+      "scene_id": "scene-001",
+      "duration_s": 5,
+      "source_ids": [
+        "src-003"
+      ],
+      "purpose": "表现换装与继续持物",
+      "visual_action": "林岚脱下工装外套，露出浅灰色长袖内搭，周禾继续拿着样品袋。",
+      "start_state": [
+        {
+          "character_id": "char-001",
+          "variant_id": "char-001-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [],
+          "state": "常态"
+        },
+        {
+          "character_id": "char-002",
+          "variant_id": "char-002-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [
+            "prop-001"
+          ],
+          "state": "常态"
+        }
+      ],
+      "end_state": [
+        {
+          "character_id": "char-001",
+          "variant_id": "char-001-v2",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [],
+          "state": "常态"
+        },
+        {
+          "character_id": "char-002",
+          "variant_id": "char-002-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [
+            "prop-001"
+          ],
+          "state": "常态"
+        }
+      ],
+      "continuous_from": "S002"
+    },
+    {
+      "id": "S004",
+      "scene_id": "scene-001",
+      "duration_s": 5,
+      "source_ids": [
+        "src-004"
+      ],
+      "purpose": "观察并结束",
+      "visual_action": "两人走到窗边观察样品，周禾把样品袋放在桌上，林岚点头。",
+      "start_state": [
+        {
+          "character_id": "char-001",
+          "variant_id": "char-001-v2",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [],
+          "state": "常态"
+        },
+        {
+          "character_id": "char-002",
+          "variant_id": "char-002-v1",
+          "position": "检查台",
+          "orientation": "朝向台面",
+          "holding": [
+            "prop-001"
+          ],
+          "state": "常态"
+        }
+      ],
+      "end_state": [
+        {
+          "character_id": "char-001",
+          "variant_id": "char-001-v2",
+          "position": "窗边",
+          "orientation": "朝向台面",
+          "holding": [],
+          "state": "常态"
+        },
+        {
+          "character_id": "char-002",
+          "variant_id": "char-002-v1",
+          "position": "窗边",
+          "orientation": "朝向台面",
+          "holding": [],
+          "state": "常态"
+        }
+      ],
+      "continuous_from": "S003"
+    }
+  ],
+  "generation_units": [
+    {
+      "id": "unit-001",
+      "shot_ids": [
+        "S001",
+        "S002"
+      ],
+      "duration_s": 10,
+      "reference_ids": [
+        "ref-face-001"
+      ],
+      "bindings": []
+    },
+    {
+      "id": "unit-002",
+      "shot_ids": [
+        "S003",
+        "S004"
+      ],
+      "duration_s": 10,
+      "reference_ids": [
+        "ref-face-001"
+      ],
+      "bindings": []
+    }
+  ]
+}

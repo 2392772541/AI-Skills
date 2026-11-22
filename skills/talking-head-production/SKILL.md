@@ -1,6 +1,6 @@
 ---
 name: talking-head-production
-description: 编排口播视频的转写、内容粗剪、受控视觉包装、预览验收与最终渲染。用户提供口播视频或素材目录并要求自动剪辑、删除停顿口癖、生成字幕、添加克制动画或输出竖版/横版时使用。该 Skill 只负责编排，不复制 video-use、chuk-motion 或 Remotion 的实现规则。
+description: "口播视频全流程制作编排工具。涵盖转写、智能粗剪、视觉包装与最终渲染。用于当用户提供口播视频或素材目录，需要自动粗剪、删除停顿口癖、生成字幕与包装渲染输出时自动调用。"
 ---
 
 # Talking Head Production

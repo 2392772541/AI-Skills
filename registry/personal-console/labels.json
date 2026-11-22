@@ -1,0 +1,35 @@
+{
+  "4c2c234ae0f78c93": {
+    "source": "self",
+    "note": "验收：来源标记与收藏持久化",
+    "favorite": true
+  },
+  "8145deb103a0a052": {
+    "source": "unknown",
+    "note": "",
+    "favorite": false,
+    "categories": [
+      "writing",
+      "融合验收"
+    ],
+    "guide_override": {
+      "title": "融合验收用的小技能",
+      "summary": "只验证新技能能加入、分类能保存、说明能修改，不执行其他操作。",
+      "when": "先确认技能的实际用途，再决定是否使用。",
+      "needs": "以原始技能说明为准。",
+      "output": "尚未核对，暂不承诺具体结果。",
+      "example": "先帮我读懂这个技能是做什么的。",
+      "boundary": "暂无核对过的大白话说明，可在右侧补充。"
+    }
+  },
+  "47446576a349ce30": {
+    "source": "unknown",
+    "note": "",
+    "favorite": false
+  },
+  "de02d79b9b45d358": {
+    "source": "unknown",
+    "note": "",
+    "favorite": false
+  }
+}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>本机工作台 · 个人技能</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/personal.css">
+  <script src="/personal.js" defer></script>
+</head>
+<body>
+  <aside class="sidebar">
+    <a class="brand" href="http://127.0.0.1:8787/#ports">
+      <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+      <span class="brand-copy">
+        <strong>本机工作台</strong>
+        <small>项目与技能，都在这里</small>
+      </span>
+    </a>
+
+    <div class="nav-label">项目与服务</div>
+    <nav aria-label="主导航">
+      <a href="http://127.0.0.1:8787/#ports" class="project-nav"><span class="nav-index">01</span><span>我的项目端口</span></a>
+      <a href="http://127.0.0.1:8787/#projects" class="project-nav"><span class="nav-index">02</span><span>项目控制</span></a>
+      <a href="http://127.0.0.1:8787/#activity" class="project-nav"><span class="nav-index">03</span><span>操作记录</span></a>
+
+      <div class="nav-label nav-label-gap">个人技能资产</div>
+      <a href="#/skills" data-nav="skills"><span class="nav-index">04</span><span>我的技能</span></a>
+      <a href="#/categories" data-nav="categories"><span class="nav-index">05</span><span>按用途分类</span></a>
+      <a href="#/favorites" data-nav="favorites"><span class="nav-index">06</span><span>我的收藏</span></a>
+      <a href="#/activity" data-nav="activity"><span class="nav-index">07</span><span>技能变更</span></a>
+      <a href="#/monitor" data-nav="monitor"><span class="nav-index">08</span><span>技能监控</span></a>
+    </nav>
+
+    <div class="sidebar-note">
+      <div class="connection-row"><span class="live-dot"></span><span>本机技能持续同步</span></div>
+      <p>个人安装与自建技能<br>系统目录及缓存已排除</p>
+    </div>
+    <a class="legacy" href="http://127.0.0.1:8765/legacy" target="_blank" rel="noopener">打开治理审计后台 ↗</a>
+  </aside>
+
+  <main>
+    <header>
+      <div class="breadcrumb">个人工作空间 <span>·</span> 技能资产管理</div>
+      <div class="connection" id="connection">正在连接本机服务…</div>
+    </header>
+    <div id="notice" role="status" aria-live="polite"></div>
+    <div id="app"></div>
+    <footer>个人技能资产库 <span>从本机真实目录读取 · 分类标记持久保存 · 不执行任何外部脚本</span></footer>
+  </main>
+</body>
+</html>

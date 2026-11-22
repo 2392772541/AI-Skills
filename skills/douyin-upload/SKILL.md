@@ -1,6 +1,6 @@
 ---
 name: douyin-upload
-description: 当 agent 需要通过已安装的 `sau` CLI 完成抖音登录、cookie 校验、视频上传或图文发布时使用这个 skill。该 skill 适用于已经安装 `social-auto-upload` 且可调用 `sau` 命令的环境。优先使用这个 skill 进行稳定的命令式抖音工作流，而不是一开始就阅读 uploader 源码。
+description: "抖音视频自动化上传与发布工具。用于当用户需要发布视频到抖音平台、配置视频标题标签与话题、或进行抖音内容分发时自动调用。"
 ---
 
 # 抖音上传 Skill

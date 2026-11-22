@@ -1,6 +1,6 @@
 ---
 name: bilibili-upload
-description: 当 agent 需要通过已安装的 `sau` CLI 完成 Bilibili 登录、账号校验或视频上传时使用这个 skill。优先使用 `sau bilibili ...`，程序会自动准备 `biliup`，不要求用户手动安装。
+description: "哔哩哔哩（B站/bilibili）视频自动化上传与发布工具。用于当用户需要发布视频到哔哩哔哩、配置视频标题与标签简介、或进行B站内容分发时自动调用。"
 ---
 
 # Bilibili 上传 Skill

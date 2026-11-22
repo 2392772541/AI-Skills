@@ -1,6 +1,6 @@
 ---
 name: guizang-ppt-skill
-description: 生成"电子杂志 × 电子墨水"风格的横向翻页网页 PPT（单 HTML 文件），含 WebGL 流体背景、衬线标题 + 非衬线正文、章节幕封、数据大字报、图片网格等模板。当用户需要制作分享 / 演讲 / 发布会风格的网页 PPT，或提到"杂志风 PPT"、"horizontal swipe deck"、"editorial magazine"、"e-ink presentation"时使用。
+description: "电子杂志与电子墨水风格横向翻页网页 PPT（单 HTML 文件）制作工具。用于当用户需要制作发布会、demo day、个人演讲风格的网页演示文稿时自动调用；不适用于密集数据表格汇报。"
 ---
 
 # Magazine Web Ppt
@@ -19,7 +19,7 @@ description: 生成"电子杂志 × 电子墨水"风格的横向翻页网页 PPT
 
 这个 skill 的美学不是"商务 PPT"，也不是"消费互联网 UI"——它像 *Monocle* 杂志贴上了代码后的样子。
 
-## 何时使用
+## 适用与不适用场景
 
 **合适的场景**：
 - 线下分享 / 行业内部讲话 / 私享会

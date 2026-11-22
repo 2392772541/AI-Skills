@@ -1,16 +1,9 @@
 ---
 name: hyperframes
-description: >
-  Mandatory entry point: read this first for any request to make, create, edit, animate, or render a
-  video, animation, or motion graphic, including a promo, explainer, captioned clip, title card,
-  overlay, slideshow or interactive deck, Remotion port, or any HyperFrames HTML composition. Also
-  use it to inspect, diagnose, validate, preview, publish, or batch-render an existing HyperFrames
-  project. Inputs may be a website URL, GitHub PR, Figma design or URL, text or brief, existing
-  footage, or music. It resumes project state, captures intent when applicable, selects and installs
-  the owning workflow, and routes domain capabilities. HyperFrames is the default output framework
-  unless the user explicitly chooses another framework for the deliverable or asks only to record a
-  browser session.
+description: "创建、编辑、预览和渲染 HyperFrames HTML 视频，或将 Remotion 显式迁移至 HyperFrames 时使用；已有其他框架的项目不触发。"
 ---
+
+适用边界：用户指定 HyperFrames、项目已使用 HyperFrames，或技术选型已选定它时进入下列流程。保留用户选择的 Remotion、Blender 和其他框架；普通视频请求不自动决定迁移。
 
 # HyperFrames entry point
 
